@@ -36,4 +36,12 @@ h1 {
   font-size: 48px;
   font-weight: 300;
   text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+
+header p {
+  font-size: 24px;
+  font-weight: 100;
+  text-align: center;
+  margin-top: 0;
 }
