@@ -2,8 +2,6 @@
 
 require '../vendor/autoload.php';
 
-$_SERVER['REQUEST_URI'];
-
 switch($_SERVER['REQUEST_URI'])
 {
   case '/'        : home();      break;
