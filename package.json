@@ -1,0 +1,20 @@
+{
+  "name": "catclinic",
+  "version": "0.0.1",
+  "scripts": {
+    "sass": "sass --watch src/scss:public/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bastosh/nfa021.git"
+  },
+  "author": "Sébastien Pereda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bastosh/nfa021/issues"
+  },
+  "homepage": "https://github.com/bastosh/nfa021#readme",
+  "devDependencies": {
+    "foundation-sites": "^6.5.1"
+  }
+}

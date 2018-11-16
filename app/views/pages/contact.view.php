@@ -1,5 +1,3 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
-  <header>
-    <h1>Contact us</h1>
-  </header>
+  <h1>Contact us</h1>
 <?php require __DIR__.'/../partials/footer.php'; ?>

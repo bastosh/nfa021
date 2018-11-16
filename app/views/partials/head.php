@@ -5,5 +5,10 @@
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="/css/app.css">
   </head>
-  <body>
-    <?php include('nav.php'); ?>
+  <body class="grid-y align-middle" style="height: 100vh;">
+
+    <nav class="cell shrink">
+      <?php include('nav.php'); ?>
+    </nav>
+
+    <main class="cell auto grid-y align-center text-center">

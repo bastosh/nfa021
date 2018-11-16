@@ -1,6 +1,4 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
-  <header>
-    <h1>Homepage</h1>
-    <p>Let’s start a project!</p>
-  </header>
+  <h1>Homepage</h1>
+  <p class="lead">Let’s start a project!</p>
 <?php require __DIR__.'/../partials/footer.php'; ?>
