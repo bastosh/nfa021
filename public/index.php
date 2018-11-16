@@ -1,6 +1,6 @@
 <?php
 
-require '../app/helpers.php';
+require '../vendor/autoload.php';
 
 $_SERVER['REQUEST_URI'];
 

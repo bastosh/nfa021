@@ -12,3 +12,4 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 - Ajout du composant var-dumper de Symfony pour faciliter le debug
+- Ajout d’un autoload via composer pour le fichier helpers.php
