@@ -2,13 +2,11 @@
 
 require '../app/helpers.php';
 
-$ex = isset($_REQUEST['ex']) ? $_REQUEST['ex'] : 'home';
-
-switch($ex)
+switch($_SERVER['REQUEST_URI'])
 {
-  case 'home'    : home();      break;
-  case 'about'   : about();     break;
-  case 'contact' : contact();   break;
+  case '/'        : home();      break;
+  case '/about'   : about();     break;
+  case '/contact' : contact();   break;
   default : home();
 }
 
