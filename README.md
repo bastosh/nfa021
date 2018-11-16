@@ -1,5 +1,7 @@
 # NFA021 • Projet CatClinic
 
+[![Deployment Goals](https://consistently.io/g/bastosh/nfa021/badge.svg)](https://consistently.io/g/bastosh/nfa021/)
+
 Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
 
 Le projet est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
