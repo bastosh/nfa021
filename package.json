@@ -1,10 +1,7 @@
 {
   "name": "catclinic",
   "version": "0.0.1",
-  "scripts": {
-    "sass": "sass --watch src/scss:public/css",
-    "postcss": "postcss --config ./ public/css/app.css -o public/css/app.css"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bastosh/nfa021.git"
@@ -16,8 +13,12 @@
   },
   "homepage": "https://github.com/bastosh/nfa021#readme",
   "devDependencies": {
-    "cssnano": "^4.1.7",
+    "autoprefixer": "^9.3.1",
     "foundation-sites": "^6.5.1",
-    "postcss-cli": "^6.0.1"
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "motion-ui": "^2.0.3"
   }
 }
