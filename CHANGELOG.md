@@ -4,6 +4,10 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.0.2 - 2018-11-17
+### Added
+- Ajout script npm cssnano (via postcss-cli)
+
 ## 0.0.1 - 2018-11-16
 ### Changed
 - Remplacement de la classe VHtml par une fonction view() pour renvoyer des vues directement depuis le contrôleur sans instanciation dans la vue (séparation des responsabilités)
@@ -16,3 +20,4 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Ajout d’un fichier README.md
 - Ajout d’un fichier .htaccess dans le dossier public
 - Ajout documentation de la fonction view()
+- Installation de Foundation via npm

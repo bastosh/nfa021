@@ -1,5 +1,5 @@
 .idea/
 .DS_Store
 vendor/
-node_modules
+node_modules/
 dploy.yaml
