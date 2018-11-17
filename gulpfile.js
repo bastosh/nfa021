@@ -38,3 +38,9 @@ gulp.task('nano', () => {
         .pipe($.cssnano())
         .pipe(gulp.dest('public/css'))
 });
+
+gulp.task('watch', () => {
+    gulp.watch('src/scss/*.scss', ['sass']);
+});
+
+gulp.task('default', ['sass', 'watch']);

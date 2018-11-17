@@ -9,16 +9,30 @@ Le projet est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
 - Télécharger ou cloner le repository
-- Une fois dans le dossier, lancer la commande :
+- Une fois dans le dossier, lancer les commandes :
 ```
 $ composer install
 $ npm install
+$ gulp
+$ npm run serve
 ```
 
 ## Outils
+- Browsersync (nécessite configuration proxy):
+```
+$ npm run serve
+```
 - Compilation Foundation :
 ```
 $ gulp sass
+```
+- Surveilance scss et compilation automatique :
+```
+$ gulp watch
+```
+- Compilation et surveillance :
+```
+$ gulp
 ```
 - Suppression des classes inutilisées :
 ```

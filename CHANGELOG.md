@@ -8,6 +8,8 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - Ajout d’un fichier gulpfile.js pour compiler Foundation plus finement
 - Ajout gulp task 'purgecss' pour supprimer toutes les classes inutilisées
+- Ajout gulp task 'watch' et 'default'
+- Ajout script npm 'serve' (browsersync)
 
 ### Removed
 - Suppression des scripts dans le fichier package.json

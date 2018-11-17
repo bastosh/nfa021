@@ -1,7 +1,9 @@
 {
   "name": "catclinic",
-  "version": "0.0.1",
-  "scripts": {},
+  "version": "0.0.2",
+  "scripts": {
+    "serve": "browser-sync start --proxy 'catclinic.test' --files 'public'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bastosh/nfa021.git"
