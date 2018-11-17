@@ -7,17 +7,34 @@ let sassPaths = [
     'node_modules/motion-ui/src'
 ];
 
-function sass() {
-    return gulp.src('src/scss/app.scss')
+gulp.task('sass', () => {
+    return gulp
+        .src('src/scss/app.scss')
         .pipe($.sass({
             includePaths: sassPaths,
-            outputStyle: 'compressed'
+            // outputStyle: 'compressed'
         })
             .on('error', $.sass.logError))
         .pipe($.postcss([
             autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] })
         ]))
         .pipe(gulp.dest('public/css'))
-}
+});
 
-gulp.task('sass', sass);
+gulp.task('purgecss', () => {
+    return gulp
+        .src('public/css/app.css')
+        .pipe(
+            $.purgecss({
+                content: ['app/views/pages/*.php', 'app/views/partials/*.php']
+            })
+        )
+        .pipe(gulp.dest('public/css'))
+});
+
+gulp.task('nano', () => {
+    return gulp
+        .src('public/css/app.css')
+        .pipe($.cssnano())
+        .pipe(gulp.dest('public/css'))
+});

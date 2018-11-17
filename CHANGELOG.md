@@ -7,6 +7,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 0.0.3 - 2018-11-17
 ### Added
 - Ajout d’un fichier gulpfile.js pour compiler Foundation plus finement
+- Ajout gulp task 'purgecss' pour supprimer toutes les classes inutilisées
 
 ### Removed
 - Suppression des scripts dans le fichier package.json
