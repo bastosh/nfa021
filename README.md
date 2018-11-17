@@ -12,6 +12,25 @@ Le projet est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 - Une fois dans le dossier, lancer la commande :
 ```
 $ composer install
+$ npm install
+```
+
+## Outils
+- Compilation Foundation :
+```
+$ gulp sass
+```
+- Suppression des classes inutilisées :
+```
+$ gulp purgecss
+```
+- Minification du css :
+```
+$ gulp nano
+```
+- Déploiement (nécessite dploy installé globalement et un fichier de configuration dploy.yaml – non versionné)
+```
+$ dploy
 ```
 
 ## En cours
