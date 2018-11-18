@@ -17,3 +17,17 @@ function view($name, $data = []) {
   $parts = explode('.', $name);
   return require "../app/views/{$parts[0]}/{$parts[1]}.view.php";
 }
+
+function connectToDb() {
+  try {
+    return $pdo = new PDO(DATABASE, LOGIN, PASSWORD);
+  } catch(PDOException $e) {
+    die($e->getMessage());
+  }
+}
+
+function fetchAllFeatures($pdo) {
+  $statement = $pdo->prepare('SELECT * FROM features');
+  $statement->execute();
+  return $statement->fetchAll(PDO::FETCH_CLASS, 'Feature');
+}
