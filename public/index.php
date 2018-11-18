@@ -31,7 +31,7 @@ function contact()
 
 function features()
 {
-  $pdo = connectToDb();
+  $pdo = Connection::make();
   $features = fetchAllFeatures($pdo);
   $title = 'Features';
   return view('pages.features', compact('title', 'features'));
