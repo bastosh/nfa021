@@ -32,7 +32,8 @@ function contact()
 function features()
 {
   $pdo = Connection::make();
-  $features = fetchAllFeatures($pdo);
+  $query = new QueryBuilder($pdo);
+  $features = $query->selectAll('features');
   $title = 'Features';
   return view('pages.features', compact('title', 'features'));
 }

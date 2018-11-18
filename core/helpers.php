@@ -17,9 +17,3 @@ function view($name, $data = []) {
   $parts = explode('.', $name);
   return require "../app/views/{$parts[0]}/{$parts[1]}.view.php";
 }
-
-function fetchAllFeatures($pdo) {
-  $statement = $pdo->prepare('SELECT * FROM features');
-  $statement->execute();
-  return $statement->fetchAll(PDO::FETCH_CLASS, 'Feature');
-}
