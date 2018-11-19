@@ -5,9 +5,9 @@
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="/css/app.css">
   </head>
-  <body class="grid-y align-middle" style="height: 100vh;">
+  <body class="grid-container grid-y" style="height: 100vh;">
 
-    <nav class="cell shrink">
+    <nav class="cell shrink grid-x align-justify">
       <?php include('nav.php'); ?>
     </nav>
 
