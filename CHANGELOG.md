@@ -7,6 +7,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 0.0.6 - 2018-11-19
 ### Added
 - core/App.php (dependency injection container)
+- fonction redirect($path) dans core/helpers.php
 
 ### Changed
 - Passage à des classes Controller

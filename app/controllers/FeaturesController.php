@@ -16,7 +16,7 @@ class FeaturesController
       'description' => $_POST['description']
     ]);
 
-    header('Location: /features');
+    return redirect('features');
   }
 
 }

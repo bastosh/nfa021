@@ -17,3 +17,7 @@ function view($name, $data = []) {
   $parts = explode('.', $name);
   return require "../app/views/{$parts[0]}/{$parts[1]}.view.php";
 }
+
+function redirect($path) {
+  header("Location: /{$path}");
+}
