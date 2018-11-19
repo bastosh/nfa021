@@ -1,6 +1,6 @@
 <?php
 
-$query->insert('features', [
+App::get('database')->insert('features', [
   'title' => $_POST['title'],
   'description' => $_POST['description']
 ]);

@@ -4,11 +4,16 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.0.6 - 2018-11-19
+### Added
+- core/App.php (dependency injection container)
+
 ## 0.0.5 - 2018-11-19
 ### Added
 - app/controllers
 - Création d’une classe Router pour gérer le routing
 - Création d’une classe Request pour gérer la requête (uri)
+- Création d’une méthode insert générique
 
 ## 0.0.4 - 2018-11-19
 ### Added
