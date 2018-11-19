@@ -1,6 +1,6 @@
 <?php
 
-require '../core/bootstrap.php';
+$query = require '../core/bootstrap.php';
 
 switch($_SERVER['REQUEST_URI'])
 {
@@ -31,9 +31,8 @@ function contact()
 
 function features()
 {
-  $pdo = Connection::make();
-  $query = new QueryBuilder($pdo);
-  $features = $query->selectAll('features');
+  global $query;
+  $features = $query->selectAll('features', 'Feature');
   $title = 'Features';
   return view('pages.features', compact('title', 'features'));
 }
