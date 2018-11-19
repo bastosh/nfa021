@@ -1,9 +1,9 @@
 <?php
 
-$router->define([
-  '' => '../app/controllers/home.php',
-  'about' => '../app/controllers/about.php',
-  'contact' => '../app/controllers/contact.php',
-  'features' => '../app/controllers/features.php',
-  'admin' => '../app/controllers/admin.php'
-]);
+$router->get('', '../app/controllers/home.php');
+$router->get('about', '../app/controllers/about.php');
+$router->get('contact', '../app/controllers/contact.php');
+$router->get('features', '../app/controllers/features.php');
+$router->get('admin', '../app/controllers/admin.php');
+
+$router->post('features', '../app/controllers/add-feature.php');
