@@ -4,9 +4,13 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.0.5 - 2018-11-19
+### Added
+- app/controllers
+
 ## 0.0.4 - 2018-11-19
 ### Added
-- app/model
+- app/models
 - core/database
 - config.php
 - classe Connection

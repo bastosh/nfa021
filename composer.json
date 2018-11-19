@@ -3,7 +3,7 @@
     "symfony/var-dumper": "^4.1"
   },
   "autoload" : {
-    "classmap": ["app/models", "core/database"],
+    "classmap": ["app/models", "core"],
     "files": ["core/helpers.php"]
   }
 }
