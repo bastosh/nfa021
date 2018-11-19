@@ -1,9 +1,10 @@
 <?php
 
-$router->get('', '../app/controllers/home.php');
-$router->get('about', '../app/controllers/about.php');
-$router->get('contact', '../app/controllers/contact.php');
-$router->get('features', '../app/controllers/features.php');
-$router->get('admin', '../app/controllers/admin.php');
+$router->get('', 'PagesController@home');
+$router->get('about', 'PagesController@about');
+$router->get('contact', 'PagesController@contact');
 
-$router->post('features', '../app/controllers/add-feature.php');
+$router->get('features', 'FeaturesController@index');
+$router->post('features', 'FeaturesController@store');
+
+$router->get('admin', 'AdminController@dashboard');

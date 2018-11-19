@@ -8,6 +8,9 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - core/App.php (dependency injection container)
 
+### Changed
+- Passage à des classes Controller
+
 ## 0.0.5 - 2018-11-19
 ### Added
 - app/controllers
