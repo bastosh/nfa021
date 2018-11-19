@@ -4,6 +4,14 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.0.4 - 2018-11-19
+### Added
+- app/model
+- core/database
+- config.php
+- classe Connection
+- classe QueryBuilder avec méthode générique selectAll($table, $model)
+
 ## 0.0.3 - 2018-11-17
 ### Added
 - Ajout d’un fichier gulpfile.js pour compiler Foundation plus finement
