@@ -7,6 +7,8 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 0.0.5 - 2018-11-19
 ### Added
 - app/controllers
+- Création d’une classe Router pour gérer le routing
+- Création d’une classe Request pour gérer la requête (uri)
 
 ## 0.0.4 - 2018-11-19
 ### Added
