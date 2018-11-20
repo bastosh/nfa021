@@ -1,7 +1,13 @@
 <?php
 
 return [
-  'database' => [
+  'prod' => [
+    'dsn' => 'mysql:host={host};dbname={database}',
+    'login' => '{username}',
+    'password' => '{password}',
+    'options' => []
+  ],
+  'dev' => [
     'dsn' => 'mysql:host=localhost;dbname=simple',
     'login' => 'root',
     'password' => 'root',
@@ -9,8 +15,8 @@ return [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
   ],
-  'security' => [
-    'username' => 'admin',
-    'password' => 'root',
+  'admin' => [
+    'username' => 'mvc',
+    'password' => 'cnampaca',
   ]
 ];

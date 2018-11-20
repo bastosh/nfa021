@@ -17,7 +17,7 @@ class AdminController
   {
 
     // Check if the user is already logged in
-    if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
 
       $title = 'Administration';
       $features = App::get('database')->selectAll('features');
@@ -29,9 +29,9 @@ class AdminController
     // If not ask for credentials
     elseif (
       !isset($_POST['username'])
-      OR $_POST['username'] != App::get('config')['security']['username']
+      OR $_POST['username'] != App::get('config')['admin']['username']
       OR !isset($_POST['password'])
-      OR $_POST['password'] != App::get('config')['security']['password']
+      OR $_POST['password'] != App::get('config')['admin']['password']
     )
     {
 
