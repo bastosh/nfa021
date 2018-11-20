@@ -33,9 +33,22 @@ class FeaturesController
     return redirect('admin');
   }
 
+  public function edit($id)
+  {
+    $feature = App::get('database')->select('features', $id);
+    $title = 'Edit';
+    return view('features.edit', compact('title', 'feature'));
+  }
+
+  public function update($id)
+  {
+    App::get('database')->update('features', $id);
+    return redirect('admin');
+  }
+
   public function destroy($id)
   {
-    App::get('database')->destroy('features', $id);
+    App::get('database')->delete('features', $id);
 
     return redirect('admin');
   }

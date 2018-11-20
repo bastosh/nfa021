@@ -41,7 +41,21 @@ class QueryBuilder
     }
   }
 
-  public function destroy($table, $id) {
+  public function update($table, $id) {
+    $query = "UPDATE {$table} SET title = :title, description = :description WHERE id = :id";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute([
+        'title' => $_POST['title'],
+        'description' => $_POST['description'],
+        'id' => $id
+      ]);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+  }
+
+  public function delete($table, $id) {
     $query = "DELETE FROM {$table} WHERE id = {$id}";
     $statement = $this->pdo->prepare($query);
     $statement->execute();

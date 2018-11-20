@@ -8,8 +8,8 @@
   <body class="grid-container">
       <h1 class="text-center padding-vertical-3">Administration</h1>
       <div class="grid-x grid-margin-x grid-padding-x">
-        <div class="cell medium-6">
-          <h2>All features</h2>
+        <div class="cell large-6">
+          <h2>Features</h2>
           <table>
             <thead>
             <tr>
@@ -25,7 +25,7 @@
                 <td><?= $feature->title; ?></td>
                 <td>
                   <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
-                  <a class="button warning" href="">Modifiy</a>
+                  <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
                   <form class="display-inline" action="/features/<?= $feature->id; ?>/delete" method="POST">
                     <button type="submit" class="button alert">Delete</button>
                   </form>
@@ -35,7 +35,7 @@
             </tbody>
           </table>
         </div>
-        <div class="cell medium-6">
+        <div class="cell large-6">
           <h2>Add a feature</h2>
           <form action="/features" method="POST">
             <label>Title

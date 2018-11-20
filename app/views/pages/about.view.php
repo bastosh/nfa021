@@ -1,5 +1,5 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
-  <h1 class="margin-bottom-2">About</h1>
+  <h1 class="text-center margin-bottom-2">About</h1>
   <div class="grid-x">
     <div class="cell small-10 small-offset-1 medium-8 medium-offset-2">
       <p class="lead">This is a PHP starter project for educational purpose or small projects.</p>

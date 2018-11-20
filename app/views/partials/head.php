@@ -11,4 +11,4 @@
       <?php include('nav.php'); ?>
     </nav>
 
-    <main class="cell auto grid-y align-center text-center">
+    <main class="cell auto grid-y align-center">

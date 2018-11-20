@@ -7,6 +7,13 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 0.0.8 - 2018-11-20
 ### Added
 - Namespace
+- Méthode delete dans QueryBuilder.php
+- Méthode destroy() dans FeaturesController.php
+- Route POST features/{id}/delete
+- Méthode update dans QueryBuilder.php
+- Méthode edit() dans FeaturesController.php
+- Méthode update() dans FeaturesController.php
+- Route POST features/{id}
 
 ## 0.0.7 - 2018-11-20
 ### Added
