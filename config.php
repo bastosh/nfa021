@@ -16,7 +16,7 @@ return [
     ]
   ],
   'admin' => [
-    'username' => 'mvc',
-    'password' => 'cnampaca',
+    'username' => '{username}',
+    'password' => '{password}',
   ]
 ];
