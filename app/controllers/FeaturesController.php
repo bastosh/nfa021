@@ -10,6 +10,7 @@ class FeaturesController
   {
     $features = App::get('database')->selectAll('features');
     $title = 'Features';
+
     return view('features.index', compact('title', 'features'));
   }
 
@@ -20,6 +21,7 @@ class FeaturesController
       $title = 'Show feature';
       return view('features.show', compact('title', 'feature'));
     }
+
     return view('pages.error');
   }
 
@@ -42,7 +44,12 @@ class FeaturesController
 
   public function update($id)
   {
-    App::get('database')->update('features', $id);
+    App::get('database')
+      ->update('features', [
+        'title' => $_POST['title'],
+        'description' => $_POST['description']
+      ], $id);
+
     return redirect('admin');
   }
 

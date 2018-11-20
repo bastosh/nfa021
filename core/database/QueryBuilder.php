@@ -20,9 +20,9 @@ class QueryBuilder
   }
 
   public function select($table, $id) {
-    $query = "SELECT * FROM {$table} WHERE id = {$id}";
+    $query = "SELECT * FROM {$table} WHERE id = :id";
     $statement = $this->pdo->prepare($query);
-    $statement->execute();
+    $statement->execute(['id' => $id]);
     return $statement->fetch(\PDO::FETCH_OBJ);
   }
 
@@ -41,24 +41,32 @@ class QueryBuilder
     }
   }
 
-  public function update($table, $id) {
-    $query = "UPDATE {$table} SET title = :title, description = :description WHERE id = :id";
+  public function update($table, $params, $id)
+  {
+    $data = [];
+    $columns = '';
+
+    foreach ($params as $key => $value) {
+      $columns .= $key. " = :".$key.", ";
+      $data[":".$key] = $value;
+    }
+    $columns = rtrim($columns,", ");
+
+    $query = "UPDATE {$table} SET $columns WHERE id = {$id}";
+
     try {
       $statement = $this->pdo->prepare($query);
-      $statement->execute([
-        'title' => $_POST['title'],
-        'description' => $_POST['description'],
-        'id' => $id
-      ]);
+      $statement->execute($data);
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
+
   }
 
   public function delete($table, $id) {
-    $query = "DELETE FROM {$table} WHERE id = {$id}";
+    $query = "DELETE FROM {$table} WHERE id = :id";
     $statement = $this->pdo->prepare($query);
-    $statement->execute();
+    $statement->execute(['id' => $id]);
   }
 
 }
