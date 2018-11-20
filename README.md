@@ -4,7 +4,7 @@
 
 Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
 
-Une démo est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
+Une démo est consultable à l’adresse suivante : http://simple.bastoche.fr/
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
