@@ -5,5 +5,7 @@
   "autoload" : {
     "classmap": ["app", "core"],
     "files": ["core/helpers.php"]
+  },
+  "require": {
   }
 }

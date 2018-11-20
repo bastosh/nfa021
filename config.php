@@ -2,11 +2,15 @@
 
 return [
   'database' => [
-    'dsn' => 'mysql:host=localhost;dbname=mvc',
+    'dsn' => 'mysql:host=localhost;dbname=catclinic',
     'login' => 'root',
     'password' => 'root',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
+  ],
+  'security' => [
+    'username' => 'admin',
+    'password' => 'root',
   ]
 ];
