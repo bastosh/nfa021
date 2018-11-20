@@ -5,55 +5,58 @@
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="/css/app.css">
   </head>
-  <body>
+  <body class="grid-container">
+
+      <nav class="cell shrink grid-x align-justify">
+        <?php require __DIR__ . '/../partials/nav.php'; ?>
+      </nav>
+
+      <h1 class="text-center padding-vertical-1">Administration</h1>
 
       <?php require __DIR__ . '/../partials/message.php'; ?>
-      <div class="grid-container">
 
-        <h1 class="text-center padding-vertical-3">Administration</h1>
-        <div class="grid-x grid-margin-x grid-padding-x">
-          <div class="cell large-6">
-            <h2>Features</h2>
-            <table>
-              <thead>
+      <div class="grid-x grid-margin-x grid-padding-x">
+        <div class="cell large-6">
+          <h2>Features</h2>
+          <table>
+            <thead>
+            <tr>
+              <th>id</th>
+              <th>Title</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($features as $feature) : ?>
               <tr>
-                <th>id</th>
-                <th>Title</th>
-                <th>Action</th>
+                <td><?= $feature->id; ?></td>
+                <td><?= $feature->title; ?></td>
+                <td>
+                  <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
+                  <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
+                  <form class="display-inline" action="/features/<?= $feature->id; ?>" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="button alert">Delete</button>
+                  </form>
+                </td>
               </tr>
-              </thead>
-              <tbody>
-              <?php foreach ($features as $feature) : ?>
-                <tr>
-                  <td><?= $feature->id; ?></td>
-                  <td><?= $feature->title; ?></td>
-                  <td>
-                    <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
-                    <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
-                    <form class="display-inline" action="/features/<?= $feature->id; ?>" method="POST">
-                      <input type="hidden" name="_method" value="DELETE">
-                      <button type="submit" class="button alert">Delete</button>
-                    </form>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-          <div class="cell large-6">
-            <h2>Add a feature</h2>
-            <form action="/features" method="POST">
-              <label>Title
-                <input name="title" type="text" placeholder="Title of the feature">
-              </label>
-              <label>Description
-                <textarea name="description" placeholder="Description of the feature" rows="3"></textarea>
-              </label>
-              <input type="submit" class="button" value="Submit">
-            </form>
-          </div>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
         </div>
-
+        <div class="cell large-6">
+          <h2>Add a feature</h2>
+          <form action="/features" method="POST">
+            <label>Title
+              <input name="title" type="text" placeholder="Title of the feature">
+            </label>
+            <label>Description
+              <textarea name="description" placeholder="Description of the feature" rows="3"></textarea>
+            </label>
+            <input type="submit" class="button" value="Submit">
+          </form>
+        </div>
       </div>
+
   </body>
 </html>

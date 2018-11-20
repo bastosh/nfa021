@@ -7,6 +7,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 0.1.1 - 2018-11-20
 ### Added
 - Protection de la page d’administration par un mot de passe
+- Session administrateur
 
 ## 0.1.0 - 2018-11-20
 ### Changed
