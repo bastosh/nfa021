@@ -30,7 +30,14 @@ class FeaturesController
       'description' => $_POST['description']
     ]);
 
-    return redirect('features');
+    return redirect('admin');
+  }
+
+  public function destroy($id)
+  {
+    App::get('database')->destroy('features', $id);
+
+    return redirect('admin');
   }
 
 }

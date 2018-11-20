@@ -39,7 +39,12 @@ class QueryBuilder
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
+  }
 
+  public function destroy($table, $id) {
+    $query = "DELETE FROM {$table} WHERE id = {$id}";
+    $statement = $this->pdo->prepare($query);
+    $statement->execute();
   }
 
 }

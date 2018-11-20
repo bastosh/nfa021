@@ -7,17 +7,46 @@
   </head>
   <body class="grid-container">
       <h1 class="text-center padding-vertical-3">Administration</h1>
-      <div class="cell medium-6 medium-offset-3">
-        <h2>Add a feature</h2>
-        <form action="/features" method="POST">
-          <label>Title
-            <input name="title" type="text" placeholder="Title of the feature">
-          </label>
-          <label>Description
-            <textarea name="description" placeholder="Description of the feature" rows="3"></textarea>
-          </label>
-          <input type="submit" class="button" value="Submit">
-        </form>
+      <div class="grid-x grid-margin-x grid-padding-x">
+        <div class="cell medium-6">
+          <h2>All features</h2>
+          <table>
+            <thead>
+            <tr>
+              <th>id</th>
+              <th>Title</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($features as $feature) : ?>
+              <tr>
+                <td><?= $feature->id; ?></td>
+                <td><?= $feature->title; ?></td>
+                <td>
+                  <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
+                  <a class="button warning" href="">Modifiy</a>
+                  <form class="display-inline" action="/features/<?= $feature->id; ?>/delete" method="POST">
+                    <button type="submit" class="button alert">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="cell medium-6">
+          <h2>Add a feature</h2>
+          <form action="/features" method="POST">
+            <label>Title
+              <input name="title" type="text" placeholder="Title of the feature">
+            </label>
+            <label>Description
+              <textarea name="description" placeholder="Description of the feature" rows="3"></textarea>
+            </label>
+            <input type="submit" class="button" value="Submit">
+          </form>
+        </div>
       </div>
   </body>
 </html>
