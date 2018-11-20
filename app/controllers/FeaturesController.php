@@ -1,9 +1,9 @@
 <?php
 
-namespace Mvc\App\Controllers;
+namespace Simple\App\Controllers;
 
-use Mvc\Core\App;
-use Mvc\Core\Flash;
+use Simple\Core\App;
+use Simple\Core\Flash;
 
 class FeaturesController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mvc\Core;
+namespace Simple\Core;
 
 class Request
 {

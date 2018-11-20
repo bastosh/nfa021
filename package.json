@@ -1,5 +1,5 @@
 {
-  "name": "mvc",
+  "name": "simple-mvc",
   "version": "0.1.0",
   "scripts": {
     "serve": "browser-sync start --proxy 'catclinic.test' --files 'public'"

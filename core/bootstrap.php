@@ -2,9 +2,9 @@
 
 session_start();
 
-use Mvc\Core\App;
-use Mvc\Core\Database\QueryBuilder;
-use Mvc\Core\Database\Connection;
+use Simple\Core\App;
+use Simple\Core\Database\QueryBuilder;
+use Simple\Core\Database\Connection;
 
 App::bind('config', require '../config.php');
 

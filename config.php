@@ -2,7 +2,7 @@
 
 return [
   'database' => [
-    'dsn' => 'mysql:host=localhost;dbname=catclinic',
+    'dsn' => 'mysql:host=localhost;dbname=simple',
     'login' => 'root',
     'password' => 'root',
     'options' => [

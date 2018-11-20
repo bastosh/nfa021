@@ -1,6 +1,6 @@
 <?php
 
-namespace Mvc\App\Controllers;
+namespace Simple\App\Controllers;
 
 class PagesController
 {

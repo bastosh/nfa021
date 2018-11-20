@@ -1,10 +1,10 @@
-# NFA021 • Projet CatClinic
+# Simple MVC
 
 [![Deployment Goals](https://consistently.io/g/bastosh/nfa021/badge.svg)](https://consistently.io/g/bastosh/nfa021/)
 
 Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
 
-Le projet est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
+Une démo est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
@@ -56,9 +56,4 @@ $ gulp nano
 ```
 $ dploy
 ```
-
-## En cours
-- Mise en place de l’architecture MVC selon les principes vus en cours
-- Création des mockups avec Balsamiq
-
-Voir le fichier [CHANGELOG.md](https://github.com/bastosh/nfa021/blob/master/CHANGELOG.md) pour suivre l’avancée détaillée du projet.
+Détails des évolutions dans le fichier [CHANGELOG.md](https://github.com/bastosh/nfa021/blob/master/CHANGELOG.md).

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mvc\App\Models;
+namespace Simple\App\Models;
 
 class Feature
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mvc\Core\Database;
+namespace Simple\Core\Database;
 
 class Connection
 {
