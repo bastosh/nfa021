@@ -9,7 +9,14 @@ Le projet est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
 - Télécharger ou cloner le repository
-- Une fois dans le dossier, lancer les commandes :
+
+### Base de données
+- Créer une base de données
+- Utiliser le fichier mvc.sql pour alimenter la base avec la table fournie en exemple
+- Adapter le fichier config.php en fonction de sa propre configuration
+
+### Projet
+- Une fois dans le dossier depuis le Terminal, lancer les commandes :
 ```
 $ composer install
 $ npm install

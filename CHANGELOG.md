@@ -7,6 +7,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 0.0.9 - 2018-11-20
 ### Added
 - session_start() et messages flash
+- Mise à disposition d’un fichier mvc.sql pour démo
 
 ## 0.0.8 - 2018-11-20
 ### Added
