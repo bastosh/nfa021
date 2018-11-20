@@ -56,4 +56,6 @@ $ gulp nano
 ```
 $ dploy
 ```
+
+## Changelog
 Détails des évolutions dans le fichier [CHANGELOG.md](https://github.com/bastosh/nfa021/blob/master/CHANGELOG.md).

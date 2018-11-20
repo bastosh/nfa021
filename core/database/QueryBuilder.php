@@ -2,6 +2,14 @@
 
 namespace Simple\Core\Database;
 
+
+/**
+ * Provide generic methods to
+ * interact with the database
+ *
+ * Class QueryBuilder
+ * @package Simple\Core\Database
+ */
 class QueryBuilder
 {
 
@@ -12,6 +20,13 @@ class QueryBuilder
     $this->pdo = $pdo;
   }
 
+  /**
+   * Select all the items
+   * form a given table
+   *
+   * @param $table
+   * @return array
+   */
   public function selectAll($table) {
     $query = "SELECT * FROM {$table}";
     $statement = $this->pdo->prepare($query);
@@ -19,6 +34,14 @@ class QueryBuilder
     return $statement->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  /**
+   * Select a given item
+   * from a given table
+   *
+   * @param $table
+   * @param $id
+   * @return mixed
+   */
   public function select($table, $id) {
     $query = "SELECT * FROM {$table} WHERE id = :id";
     $statement = $this->pdo->prepare($query);
@@ -26,12 +49,19 @@ class QueryBuilder
     return $statement->fetch(\PDO::FETCH_OBJ);
   }
 
+  /**
+   * Insert a new item
+   * into a given table
+   *
+   * @param $table
+   * @param $parameters
+   */
   public function insert($table, $parameters) {
     $query = sprintf(
       "INSERT INTO %s (%s) VALUES (%s)",
       $table,
-      implode(', ', array_keys($parameters)),
-      ':'.implode(', :', array_keys($parameters))
+      implode(', ', array_keys($parameters)),     // Get 'title, description'
+      ':'.implode(', :', array_keys($parameters)) // Get ':title, :description'
     );
     try {
       $statement = $this->pdo->prepare($query);
@@ -41,18 +71,28 @@ class QueryBuilder
     }
   }
 
+  /**
+   * Update a given item
+   * form a given table
+   *
+   * @param $table
+   * @param $params
+   * @param $id
+   */
   public function update($table, $params, $id)
   {
-    $data = [];
-    $columns = '';
 
+    $data = []; // Initialize an array with values
+    $columns = ''; // Initialize a string with "fieldname = :placeholder" pairs
+
+    // Loop over the params
     foreach ($params as $key => $value) {
-      $columns .= $key. " = :".$key.", ";
-      $data[":".$key] = $value;
+      $columns .= $key. " = :".$key.", "; // 'title = :title, description = :description,'
+      $data[":".$key] = $value; // [:title => $value, :description => $value]
     }
-    $columns = rtrim($columns,", ");
+    $columns = rtrim($columns,", "); // Remove the last ,
 
-    $query = "UPDATE {$table} SET $columns WHERE id = {$id}";
+    $query = "UPDATE {$table} SET {$columns} WHERE id = {$id}";
 
     try {
       $statement = $this->pdo->prepare($query);
@@ -63,6 +103,13 @@ class QueryBuilder
 
   }
 
+  /**
+   * Delete a given item
+   * from a given table
+   *
+   * @param $table
+   * @param $id
+   */
   public function delete($table, $id) {
     $query = "DELETE FROM {$table} WHERE id = :id";
     $statement = $this->pdo->prepare($query);

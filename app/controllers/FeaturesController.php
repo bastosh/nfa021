@@ -7,6 +7,13 @@ use Simple\Core\Flash;
 
 class FeaturesController
 {
+  /**
+   * GET /features
+   * Show all the features
+   *
+   * @return mixed
+   * @throws \Exception
+   */
   public function index()
   {
     $features = App::get('database')->selectAll('features');
@@ -15,6 +22,14 @@ class FeaturesController
     return view('features.index', compact('title', 'features'));
   }
 
+  /**
+   * GET /features/{id}
+   * Show a given feature
+   *
+   * @param $id
+   * @return mixed
+   * @throws \Exception
+   */
   public function show($id)
   {
     $feature = App::get('database')->select('features', $id);
@@ -26,6 +41,12 @@ class FeaturesController
     return view('pages.error');
   }
 
+  /**
+   * POST /features
+   * Store a feature into the database
+   *
+   * @throws \Exception
+   */
   public function store()
   {
     App::get('database')->insert('features', [
@@ -38,6 +59,14 @@ class FeaturesController
     return redirect('admin');
   }
 
+  /**
+   * GET /features/{id}/edit
+   * Show a form to edit a given feature
+   *
+   * @param $id
+   * @return mixed
+   * @throws \Exception
+   */
   public function edit($id)
   {
     $feature = App::get('database')->select('features', $id);
@@ -45,6 +74,13 @@ class FeaturesController
     return view('features.edit', compact('title', 'feature'));
   }
 
+  /**
+   * PUT /features/{id}
+   * Update a given feature
+   *
+   * @param $id
+   * @throws \Exception
+   */
   public function update($id)
   {
     App::get('database')
@@ -58,6 +94,13 @@ class FeaturesController
     return redirect('admin');
   }
 
+  /**
+   * DELETE /features/{id}
+   * Delete a given feature
+   *
+   * @param $id
+   * @throws \Exception
+   */
   public function destroy($id)
   {
     App::get('database')->delete('features', $id);

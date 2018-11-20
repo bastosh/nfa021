@@ -16,6 +16,10 @@ class Router {
     'PUT' => []
   ];
 
+  /**
+   * @param $file
+   * @return static
+   */
   public static function load($file)
   {
     $router = new static;
@@ -67,11 +71,24 @@ class Router {
     $this->routes['PUT'][$uri] = $controller;
   }
 
+  /**
+   * Remove any numbers from the URI so the route matches
+   *
+   * @param $uri
+   * @return null|string|string[]
+   */
   public function parseUri($uri)
   {
     return preg_replace("|([0-9]+)(?=[^\/]*)|", "{id}", $uri);
   }
 
+  /**
+   * Load the requested URI’s associated controller method.
+   *
+   * @param $uri
+   * @param $requestMethod
+   * @throws \Exception
+   */
   public function direct($uri, $requestMethod)
   {
     $id = explode('/', $uri);
@@ -93,6 +110,15 @@ class Router {
     );
   }
 
+  /**
+   * Load and call the relevant controller action
+   *
+   * @param $controller
+   * @param $action
+   * @param array $params
+   * @return mixed
+   * @throws \Exception
+   */
   protected function callAction($controller, $action, $params = [])
   {
 

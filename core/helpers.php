@@ -18,6 +18,12 @@ function view($name, $data = []) {
   return require "../app/views/{$parts[0]}/{$parts[1]}.view.php";
 }
 
+/**
+ * Helper function to redirect
+ * to a given path
+ *
+ * @param $path
+ */
 function redirect($path) {
   header("Location: /{$path}");
 }

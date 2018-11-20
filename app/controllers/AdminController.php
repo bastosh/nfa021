@@ -6,9 +6,17 @@ use Simple\Core\App;
 
 class AdminController
 {
+  /**
+   * Access to the dashboard if already logged
+   * or if the credentials are correct
+   *
+   * @return mixed
+   * @throws \Exception
+   */
   public function dashboard()
   {
 
+    // Check if the user is already logged in
     if (isset($_SESSION['username'])) {
 
       $title = 'Administration';
@@ -18,6 +26,7 @@ class AdminController
 
     }
 
+    // If not ask for credentials
     elseif (
       !isset($_POST['username'])
       OR $_POST['username'] != App::get('config')['security']['username']
@@ -29,6 +38,7 @@ class AdminController
       $title = 'Login';
       return view('admin.login', compact('title'));
 
+      // Log the user if the credentials are correct
     } else {
 
       $_SESSION['username'] = $_POST['username'];
@@ -43,6 +53,9 @@ class AdminController
 
   }
 
+  /**
+   * Log out the current user
+   */
   public function logout()
   {
     session_unset();

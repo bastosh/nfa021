@@ -6,7 +6,7 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Hôte: 127.0.0.1 (MySQL 5.5.5-10.3.7-MariaDB)
-# Base de données: mvc
+# Base de données: simple
 # Temps de génération: 2018-11-20 12:12:36 +0000
 # ************************************************************
 
