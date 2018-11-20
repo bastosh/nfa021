@@ -4,6 +4,12 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## // TODO : sécurisation administration
+
+## 0.1.0 - 2018-11-20
+### Changed
+- Mise à jour README
+
 ## 0.0.9 - 2018-11-20
 ### Added
 - session_start() et messages flash

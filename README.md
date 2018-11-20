@@ -21,6 +21,9 @@ Le projet est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 $ composer install
 $ npm install
 $ gulp
+```
+Et dans une autre fenêtre
+```
 $ npm run serve
 ```
 
