@@ -3,6 +3,7 @@
 namespace Mvc\App\Controllers;
 
 use Mvc\Core\App;
+use Mvc\Core\Flash;
 
 class FeaturesController
 {
@@ -32,6 +33,8 @@ class FeaturesController
       'description' => $_POST['description']
     ]);
 
+    Flash::message('success', 'Feature successfully created.');
+
     return redirect('admin');
   }
 
@@ -50,12 +53,16 @@ class FeaturesController
         'description' => $_POST['description']
       ], $id);
 
+    Flash::message('success', 'Feature successfully updated.');
+
     return redirect('admin');
   }
 
   public function destroy($id)
   {
     App::get('database')->delete('features', $id);
+
+    Flash::message('success', 'Feature successfully deleted.');
 
     return redirect('admin');
   }

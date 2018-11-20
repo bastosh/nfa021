@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use Mvc\Core\App;
 use Mvc\Core\Database\QueryBuilder;
 use Mvc\Core\Database\Connection;
