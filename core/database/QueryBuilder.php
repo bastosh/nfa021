@@ -1,11 +1,13 @@
 <?php
 
+namespace Mvc\Core\Database;
+
 class QueryBuilder
 {
 
   protected $pdo;
 
-  public function __construct(PDO $pdo)
+  public function __construct(\PDO $pdo)
   {
     $this->pdo = $pdo;
   }
@@ -14,14 +16,14 @@ class QueryBuilder
     $query = "SELECT * FROM {$table}";
     $statement = $this->pdo->prepare($query);
     $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_OBJ);
+    return $statement->fetchAll(\PDO::FETCH_OBJ);
   }
 
   public function select($table, $id) {
     $query = "SELECT * FROM {$table} WHERE id = {$id}";
     $statement = $this->pdo->prepare($query);
     $statement->execute();
-    return $statement->fetch(PDO::FETCH_OBJ);
+    return $statement->fetch(\PDO::FETCH_OBJ);
   }
 
   public function insert($table, $parameters) {
@@ -34,7 +36,7 @@ class QueryBuilder
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute($parameters);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
 

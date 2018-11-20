@@ -1,5 +1,7 @@
 <?php
 
+namespace Mvc\Core;
+
 class Request
 {
   /**

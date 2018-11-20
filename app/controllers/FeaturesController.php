@@ -1,5 +1,9 @@
 <?php
 
+namespace Mvc\App\Controllers;
+
+use Mvc\Core\App;
+
 class FeaturesController
 {
   public function index()

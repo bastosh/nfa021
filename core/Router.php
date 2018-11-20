@@ -1,5 +1,7 @@
 <?php
 
+namespace Mvc\Core;
+
 class Router {
 
   /**
@@ -93,10 +95,12 @@ class Router {
 
   protected function callAction($controller, $action, $params = [])
   {
+
+    $controller =  "Mvc\\App\\Controllers\\{$controller}";
     $controller = new $controller;
 
     if (! method_exists($controller, $action)) {
-      throw new Exception("Controller does not respond to the action {$action}.");
+      throw new \Exception("Controller does not respond to the action {$action}.");
     }
 
     if ($params) {

@@ -1,5 +1,6 @@
 <?php
 
+namespace Mvc\App\Controllers;
 
 class AdminController
 {

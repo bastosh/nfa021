@@ -1,5 +1,7 @@
 <?php
 
+namespace Mvc\App\Models;
+
 class Feature
 {
 
