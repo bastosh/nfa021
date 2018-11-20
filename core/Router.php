@@ -45,6 +45,28 @@ class Router {
     $this->routes['POST'][$uri] = $controller;
   }
 
+  /**
+   * Register a DELETE route.
+   *
+   * @param  string $uri
+   * @param  string $controller
+   */
+  public function delete($uri, $controller)
+  {
+    $this->routes['DELETE'][$uri] = $controller;
+  }
+
+  /**
+   * Register a PUT route.
+   *
+   * @param  string $uri
+   * @param  string $controller
+   */
+  public function put($uri, $controller)
+  {
+    $this->routes['PUT'][$uri] = $controller;
+  }
+
   public function parseUri($uri)
   {
     return preg_replace("|([0-9]+)(?=[^\/]*)|", "{id}", $uri);

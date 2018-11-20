@@ -3,6 +3,7 @@
 <div class="grid-x">
   <div class="cell small-8 small-offset-2 medium-6 medium-offset-3">
     <form action="/features/<?= $feature->id; ?>" method="POST">
+      <input type="hidden" name="_method" value="PUT">
       <label>Title
         <input name="title" type="text" placeholder="Title of the feature" value="<?= $feature->title; ?>">
       </label>

@@ -8,7 +8,7 @@ $router->get('features', 'FeaturesController@index');
 $router->get('features/{id}', 'FeaturesController@show');
 $router->post('features', 'FeaturesController@store');
 $router->get('features/{id}/edit', 'FeaturesController@edit');
-$router->post('features/{id}', 'FeaturesController@update');
-$router->post('features/{id}/delete', 'FeaturesController@destroy');
+$router->put('features/{id}', 'FeaturesController@update');
+$router->delete('features/{id}', 'FeaturesController@destroy');
 
 $router->get('admin', 'AdminController@dashboard');

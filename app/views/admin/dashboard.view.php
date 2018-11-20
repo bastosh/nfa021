@@ -26,7 +26,8 @@
                 <td>
                   <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
                   <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
-                  <form class="display-inline" action="/features/<?= $feature->id; ?>/delete" method="POST">
+                  <form class="display-inline" action="/features/<?= $feature->id; ?>" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="button alert">Delete</button>
                   </form>
                 </td>
