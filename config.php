@@ -16,7 +16,7 @@ return [
     ]
   ],
   'admin' => [
-    'username' => '{username}',
-    'password' => '{password}',
+    'username' => '',
+    'password' => '',
   ]
 ];

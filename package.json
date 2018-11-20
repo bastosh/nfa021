@@ -24,5 +24,8 @@
     "gulp-purgecss": "^1.1.1",
     "gulp-sass": "^4.0.2",
     "motion-ui": "^2.0.3"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }
