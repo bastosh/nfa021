@@ -4,6 +4,17 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.0.7 - 2018-11-20
+### Added
+- Ajout d’une méthode select() dans le QueryBuilder
+- Ajout d’une page 404
+- Création d’un dossier dédié dans les vues pour les features pour mise en place d’un CRUD d’exemple
+- Création de la vue features/show.view.php
+
+### Changed
+- Amélioration du router (gestion de l’id pour les méthodes show)
+- Vue pages/features.view.php changée en features/show.view.php
+
 ## 0.0.6 - 2018-11-19
 ### Added
 - core/App.php (dependency injection container)

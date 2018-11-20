@@ -4,9 +4,19 @@ class FeaturesController
 {
   public function index()
   {
-    $features = App::get('database')->selectAll('features', 'Feature');
+    $features = App::get('database')->selectAll('features');
     $title = 'Features';
-    return view('pages.features', compact('title', 'features'));
+    return view('features.index', compact('title', 'features'));
+  }
+
+  public function show($id)
+  {
+    $feature = App::get('database')->select('features', $id);
+    if ($feature) {
+      $title = 'Show feature';
+      return view('features.show', compact('title', 'feature'));
+    }
+    return view('pages.error');
   }
 
   public function store()
