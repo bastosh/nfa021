@@ -4,6 +4,12 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.0 - 2018-11-22
+### Added
+- Ajout sécurisation de la page edit
+- Ajout de contrôle au moment du login
+- Renvoi vers une page d’erreur lorsque la route n’existe pas
+
 ## 1.0.0 - 2018-11-20
 ### Added
 - Protection de la page d’administration par un mot de passe
