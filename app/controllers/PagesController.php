@@ -36,4 +36,14 @@ class PagesController
     $title = 'Contact';
     return view('pages.contact', compact('title'));
   }
+
+  /**
+   * Show the 404 page
+   *
+   * @return mixed
+   */
+  public function error()
+  {
+    return view('pages.error');
+  }
 }

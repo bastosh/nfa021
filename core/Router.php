@@ -96,7 +96,7 @@ class Router {
     $uri = $this->parseUri($uri);
 
     if ( ! array_key_exists($uri, $this->routes[$requestMethod])) {
-      throw new \Exception("No route defined for this URI.");
+      return $this->callAction('PagesController', 'error');
     }
 
     $params = explode('@', $this->routes[$requestMethod][$uri]);
