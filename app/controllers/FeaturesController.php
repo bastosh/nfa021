@@ -69,9 +69,26 @@ class FeaturesController
    */
   public function edit($id)
   {
-    $feature = App::get('database')->select('features', $id);
-    $title = 'Edit';
-    return view('features.edit', compact('title', 'feature'));
+    // Check if the user is already logged in
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+
+      $feature = App::get('database')->select('features', $id);
+      $title = 'Edit';
+      return view('features.edit', compact('title', 'feature'));
+
+    }
+
+    // If not ask for credentials
+    else
+    {
+
+      $title = 'Connexion';
+      return view('admin.login', compact('title'));
+
+    }
   }
 
   /**

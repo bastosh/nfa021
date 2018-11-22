@@ -16,8 +16,11 @@ class AdminController
   public function dashboard()
   {
 
-    // Check if the user is already logged in
-    if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
 
       $title = 'Administration';
       $features = App::get('database')->selectAll('features');
