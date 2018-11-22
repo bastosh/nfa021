@@ -1,10 +1,10 @@
-# Simple MVC
+# NFA021 • Projet Catclinic
 
 [![Deployment Goals](https://consistently.io/g/bastosh/nfa021/badge.svg)](https://consistently.io/g/bastosh/nfa021/)
 
 Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
 
-Une démo est consultable à l’adresse suivante : http://simple.bastoche.fr/
+Une démo est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine

@@ -1,19 +1,19 @@
 {
-  "name": "simple-mvc",
+  "name": "nfa021",
   "version": "1.0.0",
   "scripts": {
-    "serve": "browser-sync start --proxy 'simple.test' --files 'public'"
+    "serve": "browser-sync start --proxy 'catclinic.test' --files 'public'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simple-mvc/simple.git"
+    "url": "git+https://github.com/bastosh/nfa021.git"
   },
   "author": "Sébastien Pereda",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/simple-mvc/simple/issues"
+    "url": "https://github.com/bastosh/nfa021/issues"
   },
-  "homepage": "https://github.com/simple-mvc/simple#readme",
+  "homepage": "https://github.com/bastosh/nfa021#readme",
   "devDependencies": {
     "autoprefixer": "^9.3.1",
     "foundation-sites": "^6.5.1",

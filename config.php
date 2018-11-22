@@ -8,7 +8,7 @@ return [
     'options' => []
   ],
   'dev' => [
-    'dsn' => 'mysql:host=localhost;dbname=simple',
+    'dsn' => 'mysql:host=localhost;dbname=catclinic',
     'login' => 'root',
     'password' => 'root',
     'options' => [
