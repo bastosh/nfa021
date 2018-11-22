@@ -36,4 +36,13 @@ class PagesController
     $title = 'Contact';
     return view('pages.contact', compact('title'));
   }
+
+  /**
+   * @return mixed
+   */
+  public function error()
+  {
+    $title = 'Page not found';
+    return view('pages.error', compact('title'));
+  }
 }
