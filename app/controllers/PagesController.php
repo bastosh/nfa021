@@ -44,6 +44,7 @@ class PagesController
    */
   public function error()
   {
-    return view('pages.error');
+    $title = 'Page not found';
+    return view('pages.error', compact('title'));
   }
 }
