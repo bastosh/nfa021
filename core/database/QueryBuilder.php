@@ -2,7 +2,6 @@
 
 namespace Simple\Core\Database;
 
-
 /**
  * Provide generic methods to
  * interact with the database
@@ -29,9 +28,13 @@ class QueryBuilder
    */
   public function selectAll($table) {
     $query = "SELECT * FROM {$table}";
-    $statement = $this->pdo->prepare($query);
-    $statement->execute();
-    return $statement->fetchAll(\PDO::FETCH_OBJ);
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
+      return $statement->fetchAll(\PDO::FETCH_OBJ);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
   }
 
   /**
@@ -44,9 +47,13 @@ class QueryBuilder
    */
   public function select($table, $id) {
     $query = "SELECT * FROM {$table} WHERE id = :id";
-    $statement = $this->pdo->prepare($query);
-    $statement->execute(['id' => $id]);
-    return $statement->fetch(\PDO::FETCH_OBJ);
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute(['id' => $id]);
+      return $statement->fetch(\PDO::FETCH_OBJ);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
   }
 
   /**
@@ -93,7 +100,6 @@ class QueryBuilder
     $columns = rtrim($columns,", "); // Remove the last ,
 
     $query = "UPDATE {$table} SET {$columns} WHERE id = {$id}";
-
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute($data);
@@ -112,8 +118,12 @@ class QueryBuilder
    */
   public function delete($table, $id) {
     $query = "DELETE FROM {$table} WHERE id = :id";
-    $statement = $this->pdo->prepare($query);
-    $statement->execute(['id' => $id]);
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute(['id' => $id]);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
   }
 
 }
