@@ -8,21 +8,42 @@ Une démo est consultable à l’adresse suivante : http://simple.bastoche.fr/
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
-- Télécharger ou cloner le repository
 
-### Base de données
-- Créer une base de données
-- Utiliser le fichier mvc.sql pour alimenter la base avec la table fournie en exemple
-- Adapter le fichier config.php en fonction de sa propre configuration
-
-### Projet
-- Une fois dans le dossier depuis le Terminal, lancer les commandes :
+### 1. Téléchargement
+- Télécharger ou cloner le repository :
+```
+$ git clone https://github.com/simple-mvc/simple.git my-new-project
+$ cd my-new-project
+```
+- Démarrer un nouveau projet Git :
+```
+$ rm -rf .git && git init
+```
+- Installer les dépendances :
 ```
 $ composer install
 $ npm install
-$ gulp
 ```
-Et dans une autre fenêtre
+- Compiler le CSS :
+```
+$ gulp sass
+```
+
+### 2. Base de données
+- Créer une base de données
+- Utiliser le fichier mvc.sql pour alimenter la base avec la table fournie en exemple
+
+### 3. Configuration
+- Adapter le fichier config.php en fonction de sa propre configuration
+    - Renseigner les champs requis pour l’accès à la base de données
+    - Renseigner identifiant et mot de passe pour l’accès à l’administration (par défaut, entrée libre)
+
+### 4. Browsersync (optionnel)
+- Adapter le script npm du package.json en fonction de sa configuration :
+```
+browser-sync start --proxy 'my-new-project.test' --files 'public'
+```
+- Lancer Browsersync :
 ```
 $ npm run serve
 ```
@@ -36,7 +57,7 @@ $ npm run serve
 ```
 $ gulp sass
 ```
-- Surveilance scss et compilation automatique :
+- Surveillance scss et compilation automatique :
 ```
 $ gulp watch
 ```
@@ -51,10 +72,6 @@ $ gulp purgecss
 - Minification du css :
 ```
 $ gulp nano
-```
-- Déploiement (nécessite dploy installé globalement et un fichier de configuration dploy.yaml – non versionné)
-```
-$ dploy
 ```
 
 ## Changelog
