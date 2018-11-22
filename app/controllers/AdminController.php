@@ -16,17 +16,20 @@ class AdminController
   public function dashboard()
   {
 
-    // Check if the user is already logged in
-    if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+        && ($_SESSION['username'] === App::get('config')['admin']['username'])
+        && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
 
       $title = 'Administration';
-      $features = App::get('database')->selectAll('features');
+      $projects = App::get('database')->selectAll('projects');
 
-      return view('admin.dashboard', compact('title', 'features'));
+      return view('admin.dashboard', compact('title', 'projects'));
 
     }
 
-    // If not ask for credentials
+    // Show the form as long as the credentials are wrong
     elseif (
       !isset($_POST['username'])
       OR $_POST['username'] != App::get('config')['admin']['username']
@@ -35,7 +38,7 @@ class AdminController
     )
     {
 
-      $title = 'Login';
+      $title = 'Connexion';
       return view('admin.login', compact('title'));
 
       // Log the user if the credentials are correct
@@ -45,9 +48,9 @@ class AdminController
       $_SESSION['password'] = $_POST['password'];
 
       $title = 'Administration';
-      $features = App::get('database')->selectAll('features');
+      $projects = App::get('database')->selectAll('projects');
 
-      return view('admin.dashboard', compact('title', 'features'));
+      return view('admin.dashboard', compact('title', 'projects'));
 
     }
 
