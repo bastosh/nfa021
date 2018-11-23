@@ -18,12 +18,12 @@
       <div class="grid-x grid-margin-x grid-padding-x">
         <div class="cell large-6">
           <h2>Features</h2>
-          <table>
+          <table class="text-center">
             <thead>
             <tr>
-              <th>id</th>
-              <th>Title</th>
-              <th>Action</th>
+              <th class="text-center">id</th>
+              <th class="text-center">Title</th>
+              <th class="text-center">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -34,10 +34,7 @@
                 <td>
                   <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
                   <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
-                  <form class="display-inline" action="/features/<?= $feature->id; ?>" method="POST">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="button alert">Delete</button>
-                  </form>
+                  <button data-open="deleteModal" class="button alert margin-bottom-0">Delete</button>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -57,6 +54,18 @@
           </form>
         </div>
       </div>
+
+      <div class="reveal" id="deleteModal" data-reveal>
+        <p>La suppression est définitive</p>
+        <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="button alert margin-bottom-0">Je suis sûr de vouloir supprimer cet item</button>
+        </form>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
     <?php require __DIR__.'/../partials/scripts.php'; ?>
   </body>
 </html>
