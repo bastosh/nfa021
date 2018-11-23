@@ -83,10 +83,9 @@ class Router {
   }
 
   /**
-   * Load the requested URI’s associated controller method.
-   *
    * @param $uri
    * @param $requestMethod
+   * @return mixed
    * @throws \Exception
    */
   public function direct($uri, $requestMethod)
@@ -105,7 +104,7 @@ class Router {
       $params[] = $id[1];
     }
 
-    $this->callAction(
+    return $this->callAction(
       ...$params
     );
   }
