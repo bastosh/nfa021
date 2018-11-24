@@ -5,6 +5,9 @@ Le format adopté est celui proposé par [Keep a Changelog](https://keepachangel
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 1.3.0 - 2018-11-24
+### Added
+- Ajout d’un fichier robots.txt dans le dossier public/
+
 ### Changed
 - Séparation du sytle principal et du style de l’adminisatration pour optimisation des fichiers CSS
 - Amélioration visuelle des messages flash
