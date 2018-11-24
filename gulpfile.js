@@ -21,6 +21,20 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('public/css'))
 });
 
+gulp.task('sass-admin', () => {
+    return gulp
+        .src('src/scss/admin.scss')
+        .pipe($.sass({
+            includePaths: sassPaths,
+            // outputStyle: 'compressed'
+        })
+            .on('error', $.sass.logError))
+        .pipe($.postcss([
+            autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] })
+        ]))
+        .pipe(gulp.dest('public/css'))
+});
+
 gulp.task('purgecss', () => {
     return gulp
         .src('public/css/app.css')

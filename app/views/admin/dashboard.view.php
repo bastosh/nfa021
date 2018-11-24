@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/admin.css">
   </head>
   <body class="grid-container">
 
@@ -32,8 +32,8 @@
                 <td><?= $feature->id; ?></td>
                 <td><?= $feature->title; ?></td>
                 <td>
-                  <a class="button" href="/features/<?= $feature->id; ?>">Show</a>
-                  <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
+                  <a class="button m  margin-bottom-0" href="/features/<?= $feature->id; ?>">Show</a>
+                  <a class="button warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">Edit</a>
                   <button data-open="deleteModal" class="button alert margin-bottom-0">Delete</button>
                 </td>
               </tr>
