@@ -9,7 +9,7 @@
         <?php require __DIR__ . '/../partials/message.php'; ?>
 
         <div class="grid-x grid-margin-x grid-padding-x margin-top-2">
-          <div class="cell large-6">
+          <div class="cell xlarge-6">
             <table class="text-center">
               <thead>
               <tr>
@@ -33,7 +33,7 @@
               </tbody>
             </table>
           </div>
-          <div class="cell large-6">
+          <div class="cell xlarge-6">
             <h3>New feature</h3>
             <form action="/features" method="POST">
               <label>Title
