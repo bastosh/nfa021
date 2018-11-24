@@ -53,7 +53,7 @@ $ npm run serve
 ```
 $ npm run serve
 ```
-- Compilation Foundation :
+- Compilation CSS principal :
 ```
 $ gulp sass
 ```
@@ -64,6 +64,10 @@ $ gulp watch
 - Compilation et surveillance :
 ```
 $ gulp
+```
+- Compilation CSS administration :
+```
+$ gulp sass-admin
 ```
 - Suppression des classes inutilisées :
 ```
