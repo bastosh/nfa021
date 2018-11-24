@@ -31,7 +31,7 @@ $ gulp sass
 
 ### 2. Base de données
 - Créer une base de données
-- Utiliser le fichier mvc.sql pour alimenter la base avec la table fournie en exemple
+- Utiliser le fichier simple.sql pour alimenter la base avec la table fournie en exemple
 
 ### 3. Configuration
 - Adapter le fichier config.php en fonction de sa propre configuration
