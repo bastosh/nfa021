@@ -67,4 +67,36 @@ class AdminController
     return redirect('');
   }
 
+  /**
+   * GET admin-features/{id}
+   * Show a given feature
+   * in the administration
+   *
+   * @param $id
+   * @return mixed
+   * @throws \Exception
+   */
+  public function showFeature($id)
+  {
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password']))) {
+
+      $feature = App::get('database')->select('features', $id);
+      if ($feature) {
+        $title = 'Show feature';
+        return view('admin.feature', compact('title', 'feature'));
+      }
+
+      return view('pages.error');
+
+    } // If not ask for credentials
+    else {
+      $title = 'Connexion';
+      return view('admin.login', compact('title'));
+    }
+
+  }
+
 }

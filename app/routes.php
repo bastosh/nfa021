@@ -17,3 +17,4 @@ $router->delete('features/{id}', 'FeaturesController@destroy');
 $router->get('admin', 'AdminController@dashboard');
 $router->post('admin', 'AdminController@dashboard');
 $router->get('logout', 'AdminController@logout');
+$router->get('admin-features/{id}', 'AdminController@showFeature');

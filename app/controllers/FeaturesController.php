@@ -80,14 +80,11 @@ class FeaturesController
       return view('features.edit', compact('title', 'feature'));
 
     }
-
     // If not ask for credentials
     else
     {
-
       $title = 'Connexion';
       return view('admin.login', compact('title'));
-
     }
   }
 
