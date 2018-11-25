@@ -27,3 +27,11 @@ function view($name, $data = []) {
 function redirect($path) {
   header("Location: /{$path}");
 }
+
+
+function clean($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}

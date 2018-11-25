@@ -24,7 +24,7 @@
                   <td><?= $feature->id; ?></td>
                   <td><?= $feature->title; ?></td>
                   <td>
-                    <a class="button m  margin-bottom-0" href="/admin-features/<?= $feature->id; ?>">Show</a>
+                    <a class="button margin-bottom-0" href="/admin-features/<?= $feature->id; ?>">Show</a>
                     <a class="button warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">Edit</a>
                     <button data-open="deleteModal" class="button alert margin-bottom-0">Delete</button>
                   </td>

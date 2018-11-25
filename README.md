@@ -1,10 +1,8 @@
 # Simple MVC
 
-[![Deployment Goals](https://consistently.io/g/bastosh/nfa021/badge.svg)](https://consistently.io/g/bastosh/nfa021/)
+Simple MVC est un micro-framework PHP. Documentation à venir.
 
-Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
-
-Une démo est consultable à l’adresse suivante : http://simple.bastoche.fr/
+http://simple.bastoche.fr/
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine

@@ -3,6 +3,8 @@
   <!-- CONTENT -->
   <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
 
+    <a href="/admin"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+
     <h2 class="text-center">Edit <?= $feature->title; ?></h2>
     <hr>
 

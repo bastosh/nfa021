@@ -49,9 +49,10 @@ class FeaturesController
    */
   public function store()
   {
+
     App::get('database')->insert('features', [
-      'title' => $_POST['title'],
-      'description' => $_POST['description']
+      'title' => clean($_POST['title']),
+      'description' => clean($_POST['description'])
     ]);
 
     Flash::message('success', 'Feature successfully created.');
@@ -99,8 +100,8 @@ class FeaturesController
   {
     App::get('database')
       ->update('features', [
-        'title' => $_POST['title'],
-        'description' => $_POST['description']
+        'title' => clean($_POST['title']),
+        'description' => clean($_POST['description'])
       ], $id);
 
     Flash::message('success', 'Feature successfully updated.');
