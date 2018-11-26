@@ -37,6 +37,17 @@ class QueryBuilder
     }
   }
 
+  public function selectAllPublished($table) {
+    $query = "SELECT * FROM {$table} WHERE published = 1";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
+      return $statement->fetchAll(\PDO::FETCH_OBJ);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+  }
+
   /**
    * Select a given item
    * from a given table
@@ -124,6 +135,32 @@ class QueryBuilder
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
+  }
+
+  public function publish($table, $id)
+  {
+
+    $query = "UPDATE {$table} SET published = 1 WHERE id = {$id}";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute($data);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+
+  }
+
+  public function unpublish($table, $id)
+  {
+
+    $query = "UPDATE {$table} SET published = 0 WHERE id = {$id}";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute($data);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+
   }
 
 }

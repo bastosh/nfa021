@@ -17,7 +17,7 @@ class FeaturesController extends Controller
   public function index()
   {
 
-    $features = App::get('database')->selectAll('features');
+    $features = App::get('database')->selectAllPublished('features');
     $title = 'Features';
 
     return view('features.index', compact('title', 'features'));
@@ -109,13 +109,46 @@ class FeaturesController extends Controller
     }
   }
 
+
+  public function publish($id)
+  {
+
+    App::get('database')->publish('features', $id);
+
+    Flash::message('success', 'Feature successfully published.');
+
+    return redirect('admin');
+
+  }
+
+  public function unpublish($id)
+  {
+
+    App::get('database')->unpublish('features', $id);
+
+    Flash::message('success', 'Feature successfully unpublished.');
+
+    return redirect('admin');
+
+  }
+
+
   /**
-   * PUT /features/{id}
-   * Update a given feature
+   * DELETE /features/{id}
+   * Delete a given feature
    *
    * @param $id
    * @throws \Exception
    */
+  public function destroy($id)
+  {
+    App::get('database')->delete('features', $id);
+
+    Flash::message('success', 'Feature successfully deleted.');
+
+    return redirect('admin');
+  }
+
   public function update($id)
   {
 
@@ -146,22 +179,6 @@ class FeaturesController extends Controller
       return redirect('admin');
 
     }
-  }
-
-  /**
-   * DELETE /features/{id}
-   * Delete a given feature
-   *
-   * @param $id
-   * @throws \Exception
-   */
-  public function destroy($id)
-  {
-    App::get('database')->delete('features', $id);
-
-    Flash::message('success', 'Feature successfully deleted.');
-
-    return redirect('admin');
   }
 
 }

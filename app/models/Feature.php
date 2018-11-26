@@ -7,5 +7,6 @@ class Feature
 
   public $title;
   public $description;
+  public $published;
 
 }

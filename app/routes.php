@@ -12,6 +12,8 @@ $router->post('features', 'FeaturesController@store');
 $router->get('features/{id}/edit', 'FeaturesController@edit');
 $router->put('features/{id}', 'FeaturesController@update');
 $router->delete('features/{id}', 'FeaturesController@destroy');
+$router->put('features/{id}/publish', 'FeaturesController@publish');
+$router->put('features/{id}/unpublish', 'FeaturesController@unpublish');
 
 // Routes for the administration
 $router->get('admin', 'AdminController@dashboard');

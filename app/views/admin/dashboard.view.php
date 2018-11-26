@@ -8,13 +8,15 @@
         <?php require __DIR__ . '/../partials/message.php'; ?>
 
         <div class="grid-x grid-margin-x grid-padding-x margin-top-2">
-          <div class="cell xlarge-6">
-            <table class="text-center">
+          <div class="cell xlarge-8">
+            <table class="hover text-center">
               <thead>
               <tr>
                 <th class="text-center">id</th>
                 <th class="text-center">Title</th>
-                <th class="text-center">Action</th>
+                <th class="text-center show-for-medium">Status</th>
+                <th class="text-center">&nbsp;</th>
+                <th class="text-center">&nbsp;</th>
               </tr>
               </thead>
               <tbody>
@@ -22,17 +24,40 @@
                 <tr>
                   <td><?= $feature->id; ?></td>
                   <td><?= $feature->title; ?></td>
+                  <?php if ($feature->published === "1") :?>
+                    <td class="show-for-medium">Published</td>
+                    <td class="show-for-medium">
+                      <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/unpublish" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <button type="submit" class="button tiny warning margin-bottom-0">Unpublish</button>
+                      </form>
+                    </td>
+                  <?php else: ?>
+                    <td class="show-for-medium">Unpublished</td>
+                    <td class="show-for-medium">
+                      <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/publish" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <button type="submit" class="button tiny margin-bottom-0">Publish</button>
+                      </form>
+                    </td>
+                  <?php endif; ?>
                   <td>
-                    <a class="button margin-bottom-0" href="/admin-features/<?= $feature->id; ?>">Show</a>
-                    <a class="button warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">Edit</a>
-                    <button data-open="deleteModal" class="button alert margin-bottom-0">Delete</button>
+                    <a class="button small margin-bottom-0" href="/admin-features/<?= $feature->id; ?>">
+                      <i class="fas fa-eye"></i>
+                    </a>
+                    <a class="button small warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <button data-open="deleteModal" class="button small alert margin-bottom-0">
+                      <i class="fas fa-trash"></i>
+                    </button>
                   </td>
                 </tr>
               <?php endforeach; ?>
               </tbody>
             </table>
           </div>
-          <div class="cell xlarge-6">
+          <div class="cell xlarge-4">
             <h3>New feature</h3>
             <?php if (isset($_SESSION['errors'])) : ?>
               <?php $errors = $_SESSION['errors']; unset($_SESSION['errors']);
