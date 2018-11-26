@@ -16,6 +16,7 @@ class FeaturesController
    */
   public function index()
   {
+
     $features = App::get('database')->selectAll('features');
     $title = 'Features';
 
@@ -50,14 +51,38 @@ class FeaturesController
   public function store()
   {
 
-    App::get('database')->insert('features', [
-      'title' => clean($_POST['title']),
-      'description' => clean($_POST['description'])
-    ]);
+    $errors = [];
 
-    Flash::message('success', 'Feature successfully created.');
+    if (empty($_POST["title"])) {
+      $errors[] = "Title is required";
+    } else {
+      $title = clean($_POST["title"]);
+    }
 
-    return redirect('admin');
+    if (empty($_POST["description"])) {
+      $errors[] = "Description is required";
+    } else {
+      $description = clean($_POST["description"]);
+    }
+
+    if (count($errors)) {
+
+      $_SESSION['errors'] = $errors;
+
+      Flash::message('alert', 'There are errors in the form.');
+
+      return redirect('admin');
+
+    } else {
+      App::get('database')->insert('features', [
+        'title' => clean($title),
+        'description' => clean($description)
+      ]);
+
+      Flash::message('success', 'Feature successfully created.');
+
+      return redirect('admin');
+    }
   }
 
   /**
