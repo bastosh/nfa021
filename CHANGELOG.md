@@ -4,6 +4,10 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.9.1 - 2018-11-26
+### Added
+- Ajout d’actions publish/unpublish au niveau du dashboard
+
 ## 0.9.0 - 2018-11-26
 ### Added
 - Validation formulaire côté client
