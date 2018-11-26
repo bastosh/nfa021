@@ -5,7 +5,7 @@ namespace Simple\App\Controllers;
 use Simple\Core\App;
 use Simple\Core\Flash;
 
-class FeaturesController
+class FeaturesController extends Controller
 {
   /**
    * GET /features
@@ -51,19 +51,13 @@ class FeaturesController
   public function store()
   {
 
-    $errors = [];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
 
-    if (empty($_POST["title"])) {
-      $errors[] = "Title is required";
-    } else {
-      $title = clean($_POST["title"]);
-    }
-
-    if (empty($_POST["description"])) {
-      $errors[] = "Description is required";
-    } else {
-      $description = clean($_POST["description"]);
-    }
+    $errors = $this->validate([
+      'title' => $title,
+      'description' => $description]
+    );
 
     if (count($errors)) {
 
@@ -74,6 +68,7 @@ class FeaturesController
       return redirect('admin');
 
     } else {
+
       App::get('database')->insert('features', [
         'title' => clean($title),
         'description' => clean($description)
