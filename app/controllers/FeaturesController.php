@@ -118,15 +118,34 @@ class FeaturesController extends Controller
    */
   public function update($id)
   {
-    App::get('database')
-      ->update('features', [
-        'title' => clean($_POST['title']),
-        'description' => clean($_POST['description'])
-      ], $id);
 
-    Flash::message('success', 'Feature successfully updated.');
+    $title = $_POST['title'];
+    $description = $_POST['description'];
 
-    return redirect('admin');
+    $errors = $this->validate([
+        'title' => $title,
+        'description' => $description]
+    );
+
+    if (count($errors)) {
+
+      $_SESSION['errors'] = $errors;
+
+      return redirect("features/{$id}/edit");
+
+    } else {
+
+      App::get('database')
+        ->update('features', [
+          'title' => clean($_POST['title']),
+          'description' => clean($_POST['description'])
+        ], $id);
+
+      Flash::message('success', 'Feature successfully updated.');
+
+      return redirect('admin');
+
+    }
   }
 
   /**
