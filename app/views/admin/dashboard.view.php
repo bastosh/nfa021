@@ -2,7 +2,6 @@
 
       <!-- CONTENT -->
       <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
-
         <h2 class="text-center">Features</h2>
         <hr>
 
@@ -35,13 +34,32 @@
           </div>
           <div class="cell xlarge-6">
             <h3>New feature</h3>
-            <form action="/features" method="POST">
-              <label>Title
-                <input name="title" type="text" placeholder="Title of the feature">
+            <?php if (isset($_SESSION['errors'])) : ?>
+              <?php $errors = $_SESSION['errors']; unset($_SESSION['errors']);
+              foreach ($errors as $error) : ?>
+                <div class="callout alert-callout-border alert">
+                  <?= $error; ?>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+            <form action="/features" method="POST" novalidate>
+              <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
+                <p><i class="fi-alert"></i> There are some errors in your form.</p>
+              </div>
+              <label>Title&thinsp;*
+                <input name="title" type="text" placeholder="Title of the feature" required>
+                <span class="form-error">
+                  Title is required and must contain between 3 and 50 characters.
+                </span>
               </label>
-              <label>Description
-                <textarea name="description" placeholder="Description of the feature" rows="3"></textarea>
+              <p class="help-text">Required. Between 3 and 50 characters.</p>
+              <label>Description&thinsp;*
+                <textarea name="description" placeholder="Description of the feature" rows="3" required></textarea>
+                <span class="form-error">
+                  Description is required and must contain between 3 and 255 characters.
+                </span>
               </label>
+              <p class="help-text">Required. Between 3 and 255 characters.</p>
               <input type="submit" class="button" value="Add a feature">
             </form>
           </div>
