@@ -4,6 +4,11 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.6 - 2018-11-26
+### Added
+- Validation formulaire côté client
+- Validation formulaire côté serveur
+
 ## 0.1.5 - 2018-11-24
 ### Added
 - Route pour consulter un item depuis le site et route pour consulter un item depuis l’administration
