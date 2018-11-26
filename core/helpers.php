@@ -28,7 +28,10 @@ function redirect($path) {
   header("Location: /{$path}");
 }
 
-
+/**
+ * @param $data
+ * @return string
+ */
 function clean($data) {
   $data = trim($data);
   $data = stripslashes($data);
