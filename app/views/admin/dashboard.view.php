@@ -14,8 +14,8 @@
               <tr>
                 <th class="text-center">id</th>
                 <th class="text-center">Title</th>
-                <th class="text-center show-for-medium">Status</th>
-                <th class="text-center">&nbsp;</th>
+                <th class="text-center show-for-large">Status</th>
+                <th class="text-center show-for-large">&nbsp;</th>
                 <th class="text-center">&nbsp;</th>
               </tr>
               </thead>
@@ -25,16 +25,16 @@
                   <td><?= $feature->id; ?></td>
                   <td><?= $feature->title; ?></td>
                   <?php if ($feature->published === "1") :?>
-                    <td class="show-for-medium">Published</td>
-                    <td class="show-for-medium">
+                    <td class="show-for-large">Published</td>
+                    <td class="show-for-large">
                       <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/unpublish" method="POST">
                         <input type="hidden" name="_method" value="PUT">
                         <button type="submit" class="button tiny warning margin-bottom-0">Unpublish</button>
                       </form>
                     </td>
                   <?php else: ?>
-                    <td class="show-for-medium">Unpublished</td>
-                    <td class="show-for-medium">
+                    <td class="show-for-large">Unpublished</td>
+                    <td class="show-for-large">
                       <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/publish" method="POST">
                         <input type="hidden" name="_method" value="PUT">
                         <button type="submit" class="button tiny margin-bottom-0">Publish</button>
@@ -42,7 +42,7 @@
                     </td>
                   <?php endif; ?>
                   <td>
-                    <a class="button small margin-bottom-0" href="/admin-features/<?= $feature->id; ?>">
+                    <a class="button small margin-bottom-0 show-for-large" href="/admin-features/<?= $feature->id; ?>">
                       <i class="fas fa-eye"></i>
                     </a>
                     <a class="button small warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">
