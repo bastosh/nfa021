@@ -42,19 +42,19 @@
                 </div>
               <?php endforeach; ?>
             <?php endif; ?>
-            <form action="/features" method="POST" novalidate>
+            <form action="/features" method="POST" data-abide novalidate>
               <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
                 <p><i class="fi-alert"></i> There are some errors in your form.</p>
               </div>
               <label>Title&thinsp;*
-                <input name="title" type="text" placeholder="Title of the feature" required>
+                <input name="title" type="text" placeholder="Title of the feature" required pattern="^.{3,50}$">
                 <span class="form-error">
                   Title is required and must contain between 3 and 50 characters.
                 </span>
               </label>
               <p class="help-text">Required. Between 3 and 50 characters.</p>
               <label>Description&thinsp;*
-                <textarea name="description" placeholder="Description of the feature" rows="3" required></textarea>
+                <textarea name="description" placeholder="Description of the feature" rows="3" pattern="^.{3,255}$"></textarea>
                 <span class="form-error">
                   Description is required and must contain between 3 and 255 characters.
                 </span>
