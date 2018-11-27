@@ -17,9 +17,9 @@ class FeaturesController extends Controller
   {
 
     $features = App::get('database')->selectAllPublished('features');
-    $title = 'Features';
+    $page = 'Features';
 
-    return view('features.index', compact('title', 'features'));
+    return view('features.index', compact('page', 'features'));
   }
 
   /**
@@ -33,8 +33,8 @@ class FeaturesController extends Controller
   {
     $feature = App::get('database')->select('features', $id);
     if ($feature) {
-      $title = $feature->title;
-      return view('features.show', compact('title', 'feature'));
+      $page = $feature->title;
+      return view('features.show', compact('page', 'feature'));
     }
 
     return view('pages.error');
@@ -53,13 +53,13 @@ class FeaturesController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to create a new feature
-      $title = 'New Feature';
-      return view('features.create', compact('title'));
+      $page = 'New Feature';
+      return view('features.create', compact('page'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -73,6 +73,7 @@ class FeaturesController extends Controller
 
     $title = $_POST['title'];
     $description = $_POST['description'];
+    $page = 'New features';
 
     $errors = $this->validate([
       'title' => $title,
@@ -85,7 +86,7 @@ class FeaturesController extends Controller
 
       Flash::message('alert', 'There are errors in the form.');
 
-      return redirect('features/create');
+      return view('features.create', compact('title', 'description', 'page'));
 
     } else {
 
@@ -116,13 +117,13 @@ class FeaturesController extends Controller
     {
       // Allow the user to edit the feature
       $feature = App::get('database')->select('features', $id);
-      $title = 'Edit';
-      return view('features.edit', compact('title', 'feature'));
+      $page = 'Edit';
+      return view('features.edit', compact('page', 'feature'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 

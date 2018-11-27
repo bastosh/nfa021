@@ -22,11 +22,11 @@ class AdminController
       && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
 
-      $title = 'Administration';
+      $page = 'Administration';
       $features = App::get('database')->selectAll('features');
       $posts = App::get('database')->selectAll('posts');
 
-      return view('admin.dashboard', compact('title', 'features', 'posts'));
+      return view('admin.dashboard', compact('page', 'features', 'posts'));
 
     }
 
@@ -37,8 +37,8 @@ class AdminController
             OR $_POST['password'] != App::get('config')['admin']['password'])
     {
 
-      $title = 'Login';
-      return view('admin.login', compact('title'));
+      $page = 'Login';
+      return view('admin.login', compact('page'));
 
     }
 
@@ -48,11 +48,11 @@ class AdminController
       $_SESSION['username'] = $_POST['username'];
       $_SESSION['password'] = $_POST['password'];
 
-      $title = 'Administration';
+      $page = 'Administration';
       $features = App::get('database')->selectAll('features');
       $posts = App::get('database')->selectAll('posts');
 
-      return view('admin.dashboard', compact('title', 'features', 'posts'));
+      return view('admin.dashboard', compact('page', 'features', 'posts'));
 
     }
 
@@ -82,14 +82,14 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate features
-      $title = 'Admin Features';
+      $page = 'Admin Features';
       $features = App::get('database')->selectAll('features');
-      return view('admin.features', compact('title', 'features'));
+      return view('admin.features', compact('page', 'features'));
     }
     else {
       // Ask for credentials
-      $title = 'Login';
-      return view('admin.login', compact('title'));
+      $page = 'Login';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -110,15 +110,15 @@ class AdminController
       // Allow the user to see the details of a feature
       $feature = App::get('database')->select('features', $id);
       if ($feature) {
-        $title = 'Admin • '.$feature->title;
-        return view('admin.feature', compact('title', 'feature'));
+        $page = 'Admin • '.$feature->title;
+        return view('admin.feature', compact('page', 'feature'));
       }
       return view('pages.error');
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -135,14 +135,14 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate posts
-      $title = 'Admin Posts';
+      $page = 'Admin Posts';
       $posts = App::get('database')->selectAll('posts');
-      return view('admin.posts', compact('title', 'posts'));
+      return view('admin.posts', compact('page', 'posts'));
     }
     else {
       // If not ask for credentials
-      $title = 'Login';
-      return view('admin.login', compact('title'));
+      $page = 'Login';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -163,15 +163,15 @@ class AdminController
       // Allow the user to see the details of a feature
       $post = App::get('database')->select('posts', $id);
       if ($post) {
-        $title = 'Admin • '.$post->title;
-        return view('admin.post', compact('title', 'post'));
+        $page = 'Admin • '.$post->title;
+        return view('admin.post', compact('page', 'post'));
       }
       return view('pages.error');
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
