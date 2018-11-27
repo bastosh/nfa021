@@ -14,8 +14,14 @@
       <div class="cell medium-10 large-8">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
         <form action="/posts" method="POST" enctype="multipart/form-data" novalidate>
+
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>
+          </div>
+
+          <label for="image">Image</label>
+          <div class="callout margin-bottom-1">
+            <input type="file" name="image" id="image">
           </div>
 
           <label>Title&thinsp;*
@@ -32,10 +38,7 @@
             </span>
           </label>
 
-          <label class="margin-top-1" for="image">Image</label>
-          <input type="file" name="image" id="image">
-
-          <div class="grid-x align-center">
+          <div class="grid-x align-center margin-top-1">
             <input type="submit" class="button" value="Publish">
           </div>
         </form>

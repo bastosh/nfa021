@@ -26,6 +26,7 @@ $router->put('posts/{id}', 'PostsController@update');
 $router->delete('posts/{id}', 'PostsController@destroy');
 $router->put('posts/{id}/publish', 'PostsController@publish');
 $router->put('posts/{id}/unpublish', 'PostsController@unpublish');
+$router->put('posts/{id}/image', 'PostsController@deleteImage');
 
 // Routes for the administration
 $router->get('admin', 'AdminController@dashboard');

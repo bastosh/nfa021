@@ -104,7 +104,7 @@ class PostsController extends Controller
       App::get('database')->insert('posts', [
         'title' => clean($title),
         'content' => $content,
-        'cover' => $_FILES["image"]["name"],
+        'cover' => $_FILES["image"]["name"]
       ]);
 
       Flash::message('success', 'Post successfully created.');
@@ -147,13 +147,26 @@ class PostsController extends Controller
   public function update($id)
   {
 
+    if ($_FILES['image']['size'] > 0) {
+
+      $uploadErrors = upload($_FILES['image']);
+
+      if (count($uploadErrors)) {
+
+        $_SESSION['errors'] = $uploadErrors;
+        Flash::message('alert', 'The image could not be uploaded.');
+        return redirect("posts/{$id}/edit");
+      }
+
+    }
+
     $title = $_POST['title'];
     $content = $_POST['content'];
 
     $errors = $this->validate([
         'title' => $title,
-        'content' => $content]
-    );
+        'content' => $content
+    ]);
 
     if (count($errors)) {
 
@@ -168,7 +181,8 @@ class PostsController extends Controller
       App::get('database')
         ->update('posts', [
           'title' => clean($title),
-          'content' => $content
+          'content' => $content,
+          'cover' => $_FILES["image"]["name"]
         ], $id);
 
       Flash::message('success', 'Post successfully updated.');
@@ -186,6 +200,10 @@ class PostsController extends Controller
    */
   public function destroy($id)
   {
+
+    $post = App::get('database')->select('posts', $id);
+    unlink('../public/img/'.$post->cover);
+
     App::get('database')->delete('posts', $id);
 
     Flash::message('success', 'Post successfully deleted.');
@@ -222,6 +240,20 @@ class PostsController extends Controller
     Flash::message('success', 'Post successfully unpublished.');
 
     return redirect('admin-posts');
+
+  }
+
+  public function deleteImage($id)
+  {
+
+    $post = App::get('database')->select('posts', $id);
+    unlink('../public/img/'.$post->cover);
+
+    App::get('database')->deleteImage('posts', $id);
+
+    Flash::message('success', 'Image successfully deleted.');
+
+    return redirect("posts/{$id}/edit");
 
   }
 

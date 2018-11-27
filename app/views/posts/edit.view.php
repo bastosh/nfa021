@@ -14,26 +14,64 @@
 
     <div class="grid-x margin-top-2 align-center">
       <div class="cell medium-10 large-8">
-        <form action="/posts/<?= $post->id; ?>" method="POST" novalidate>
+
+        <?php if($post->cover) : ?>
+          <div class="grid-x">
+            <div class="small-4">
+              <p>Image associée</p>
+              <figure>
+                <img src="/img/<?= $post->cover; ?>">
+              </figure>
+              <button data-open="deleteImage" class="button small expanded alert margin-bottom-2">
+                <i class="fas fa-trash"></i>
+                Delete this image
+              </button>
+            </div>
+          </div>
+
+          <div class="reveal" id="deleteImage" data-reveal>
+            <p>The image will be permanently deleted.</p>
+            <form class="padding-vertical-1 text-center" action="/posts/<?= $post->id; ?>/image" method="POST">
+              <input type="hidden" name="_method" value="PUT">
+              <button type="submit" class="button alert margin-bottom-0">Don’t worry, I am 100% sure.</button>
+            </form>
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <?php endif; ?>
+
+        <form action="/posts/<?= $post->id; ?>" method="POST" enctype="multipart/form-data" novalidate>
+          <input type="hidden" name="_method" value="PUT">
 
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>
           </div>
 
-          <input type="hidden" name="_method" value="PUT">
+          <?php if(!$post->cover) : ?>
+            <label for="image">Image</label>
+            <div class="callout margin-bottom-1">
+              <input type="file" name="image" id="image">
+            </div>
+          <?php endif; ?>
+
           <label>Title
             <input name="title" type="text" placeholder="Title of the post" value="<?= $post->title; ?>" required pattern="^.{3,50}$">
             <span class="form-error">
               Title is required and must contain between 3 and 50 characters.
             </span>
           </label>
+
           <label>Content
             <textarea name="content" id="editor" placeholder="Content of the post" required><?= $post->content; ?></textarea>
             <span class="form-error">
               Content is required.
             </span>
           </label>
-          <input type="submit" class="button margin-top-1" value="Update">
+
+          <div class="grid-x align-center margin-top-1">
+            <input type="submit" class="button margin-top-1" value="Update">
+          </div>
         </form>
       </div>
     </div>

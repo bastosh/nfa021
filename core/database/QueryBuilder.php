@@ -143,7 +143,7 @@ class QueryBuilder
     $query = "UPDATE {$table} SET published = 1 WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
-      $statement->execute($data);
+      $statement->execute();
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
@@ -156,7 +156,20 @@ class QueryBuilder
     $query = "UPDATE {$table} SET published = 0 WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
-      $statement->execute($data);
+      $statement->execute();
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+
+  }
+
+  public function deleteImage($table, $id)
+  {
+
+    $query = "UPDATE {$table} SET cover = NULL WHERE id = {$id}";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
