@@ -1,7 +1,7 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
   <h1 class="text-center margin-bottom-2">Articles</h1>
-  <div class="grid-x">
-    <div class="cell small-8 small-offset-2 medium-4 medium-offset-4">
+  <div class="grid-x align-center">
+    <div class="small-10 medium-6">
       <?php if (count($posts) > 0) : ?>
         <?php foreach ($posts as $post) : ?>
           <a href="/posts/<?= $post->id; ?>">

@@ -10,11 +10,10 @@
 
     <?php require __DIR__ . '/../partials/message.php'; ?>
 
-    <?php require __DIR__ . '/../partials/errors.php'; ?>
-
-    <div class="grid-x margin-top-2">
-      <div class="cell small-8 small-offset-2 medium-6 medium-offset-3">
-        <form action="/features/<?= $feature->id; ?>" method="POST" data-abide novalidate>
+    <div class="grid-x align-center margin-top-2">
+      <div class="small-8 medium-6">
+        <?php require __DIR__ . '/../partials/errors.php'; ?>
+        <form action="/features/<?= $feature->id; ?>" method="POST" novalidate>
 
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>

@@ -5,10 +5,10 @@
 
   <?php require __DIR__ . '/../partials/message.php'; ?>
 
-  <h2 class="text-center">Posts</h2>
+  <h2 class="text-center">Articles</h2>
   <hr>
 
-  <a class="button" href="/posts/create">New Post</a>
+  <a class="button" href="/posts/create">New Article</a>
 
   <table class="hover text-center">
     <thead>

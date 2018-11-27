@@ -8,9 +8,12 @@
     <h2 class="text-center"><?= $post->title; ?></h2>
     <hr>
 
-    <div class="grid-x margin-top-2">
-      <div class="cell small-10 small-offset-1 medium-6 medium-offset-3">
-        <p class="text-center lead"><?= $post->content; ?></p>
+    <div class="grid-x align-center margin-top-2">
+      <div class="small-10 medium-6">
+        <?php if($post->cover) : ?>
+          <img class="margin-bottom-1" src="/img/<?= $post->cover; ?>" alt="">
+        <?php endif; ?>
+        <div><?= $post->content; ?></div>
       </div>
     </div>
 
