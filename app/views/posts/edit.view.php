@@ -10,21 +10,19 @@
 
     <?php require __DIR__ . '/../partials/message.php'; ?>
 
-    <?php require __DIR__ . '/../partials/errors.php'; ?>
-
     <div class="grid-x margin-top-2 align-center">
       <div class="cell medium-10 large-8">
+      <?php require __DIR__ . '/../partials/errors.php'; ?>
 
         <?php if($post->cover) : ?>
           <div class="grid-x">
             <div class="small-4">
-              <p>Image associée</p>
+              <p class="margin-bottom-0">Cover image (<?= $post->cover; ?>)</p>
               <figure>
                 <img src="/img/<?= $post->cover; ?>">
               </figure>
               <button data-open="deleteImage" class="button small expanded alert margin-bottom-2">
-                <i class="fas fa-trash"></i>
-                Delete this image
+                <i class="fas fa-trash"></i> Delete this image
               </button>
             </div>
           </div>
