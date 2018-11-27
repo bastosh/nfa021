@@ -7,9 +7,11 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## 1.0.0 - 2018-11-26
 ### Added
 - Ajout d’actions publish/unpublish au niveau du dashboard
+- Ajout d’une ressource Post (routes, modèle, vues, contrôleur)
 
 ### Changed
 - Modification des libellés au niveau de la barre de navigation : admin changé pour dashboard si connecté, login sinon)
+- Organisation du dashboard pour la gestion de plusieurs ressources
 
 ## 0.9.0 - 2018-11-26
 ### Added
