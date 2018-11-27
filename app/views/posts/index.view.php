@@ -3,7 +3,7 @@
   <div class="grid-x align-center">
     <div class="small-10 medium-6">
       <?php if (count($posts) > 0) : ?>
-        <?php foreach ($posts as $post) : ?>
+        <?php foreach (array_reverse($posts) as $post) : ?>
           <a href="/posts/<?= $post->id; ?>">
             <p class="callout"><?= $post->title; ?></p>
           </a>
