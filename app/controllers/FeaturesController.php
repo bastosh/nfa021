@@ -47,19 +47,17 @@ class FeaturesController extends Controller
    */
   public function create()
   {
-    // Check if the user is already logged in
+    // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
+      // Allow the user to create a new feature
       $title = 'New Feature';
       return view('features.create', compact('title'));
-
     }
-    // If not ask for credentials
-    else
-    {
+    else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
     }
@@ -111,20 +109,18 @@ class FeaturesController extends Controller
    */
   public function edit($id)
   {
-    // Check if the user is already logged in
+    // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-        && ($_SESSION['username'] === App::get('config')['admin']['username'])
-        && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
+      // Allow the user to edit the feature
       $feature = App::get('database')->select('features', $id);
       $title = 'Edit';
       return view('features.edit', compact('title', 'feature'));
-
     }
-    // If not ask for credentials
-    else
-    {
+    else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
     }

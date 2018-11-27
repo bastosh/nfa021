@@ -47,19 +47,17 @@ class PostsController extends Controller
    */
   public function create()
   {
-    // Check if the user is already logged in
+    // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
+      // Allow the user to create a new post
       $title = 'New Post';
       return view('posts.create', compact('title'));
-
     }
-    // If not ask for credentials
-    else
-    {
+    else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
     }
@@ -113,18 +111,16 @@ class PostsController extends Controller
   {
     // Check if the user is already logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-        && ($_SESSION['username'] === App::get('config')['admin']['username'])
-        && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
+      // Allow the user to edit a post
       $post = App::get('database')->select('posts', $id);
       $title = 'Edit';
       return view('posts.edit', compact('title', 'post'));
-
     }
-    // If not ask for credentials
-    else
-    {
+    else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
     }
