@@ -20,57 +20,54 @@ class QueryBuilder
   }
 
   /**
-   * Select all the items
-   * form a given table
-   *
+   * Select all the items from a given table
    * @param $table
+   * @param $model
    * @return array
    */
-  public function selectAll($table) {
+  public function selectAll($table, $model) {
     $query = "SELECT * FROM {$table}";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute();
-      return $statement->fetchAll(\PDO::FETCH_OBJ);
+      return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
   }
 
-  public function selectAllPublished($table) {
+  public function selectAllPublished($table, $model) {
     $query = "SELECT * FROM {$table} WHERE published = 1";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute();
-      return $statement->fetchAll(\PDO::FETCH_OBJ);
+      return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
   }
 
   /**
-   * Select a given item
-   * from a given table
-   *
+   * Select a given item from a given table
    * @param $table
    * @param $id
+   * @param $model
    * @return mixed
    */
-  public function select($table, $id) {
+  public function select($table, $id, $model) {
     $query = "SELECT * FROM {$table} WHERE id = :id";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute(['id' => $id]);
-      return $statement->fetch(\PDO::FETCH_OBJ);
+      $statement->setFetchMode(\PDO::FETCH_CLASS, $model);
+      return $statement->fetch();
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
   }
 
   /**
-   * Insert a new item
-   * into a given table
-   *
+   * Insert a new item into a given table
    * @param $table
    * @param $parameters
    */
@@ -90,9 +87,7 @@ class QueryBuilder
   }
 
   /**
-   * Update a given item
-   * form a given table
-   *
+   * Update a given item form a given table
    * @param $table
    * @param $params
    * @param $id
@@ -121,9 +116,7 @@ class QueryBuilder
   }
 
   /**
-   * Delete a given item
-   * from a given table
-   *
+   * Delete a given item from a given table
    * @param $table
    * @param $id
    */

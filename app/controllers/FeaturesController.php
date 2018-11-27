@@ -4,6 +4,7 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\Core\Flash;
+use Simple\App\Models\Feature;
 
 class FeaturesController extends Controller
 {
@@ -16,7 +17,7 @@ class FeaturesController extends Controller
   public function index()
   {
 
-    $features = App::get('database')->selectAllPublished('features');
+    $features = App::get('database')->selectAllPublished('features', Feature::class);
     $page = 'Features';
 
     return view('features.index', compact('page', 'features'));
@@ -31,7 +32,7 @@ class FeaturesController extends Controller
    */
   public function show($id)
   {
-    $feature = App::get('database')->select('features', $id);
+    $feature = App::get('database')->select('features', $id, Feature::class);
     if ($feature) {
       $page = $feature->title;
       return view('features.show', compact('page', 'feature'));

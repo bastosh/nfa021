@@ -4,6 +4,7 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\Core\Flash;
+use Simple\App\Models\Post;
 
 class PostsController extends Controller
 {
@@ -16,7 +17,7 @@ class PostsController extends Controller
   public function index()
   {
 
-    $posts = App::get('database')->selectAllPublished('posts');
+    $posts = App::get('database')->selectAllPublished('posts', Post::class);
     $page = 'Articles';
 
     return view('posts.index', compact('page', 'posts'));
@@ -31,7 +32,7 @@ class PostsController extends Controller
    */
   public function show($id)
   {
-    $post = App::get('database')->select('posts', $id);
+    $post = App::get('database')->select('posts', $id, Post::class);
     if ($post) {
       $page = $post->title;
       return view('posts.show', compact('page', 'post'));
