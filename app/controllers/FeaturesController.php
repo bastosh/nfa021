@@ -5,27 +5,26 @@ namespace Simple\App\Controllers;
 use Simple\Core\App;
 use Simple\Core\Flash;
 
-class FeaturesController
+class FeaturesController extends Controller
 {
   /**
-   * GET /features
    * Show all the features
-   *
+   * GET /features
    * @return mixed
    * @throws \Exception
    */
   public function index()
   {
-    $features = App::get('database')->selectAll('features');
+
+    $features = App::get('database')->selectAllPublished('features');
     $title = 'Features';
 
     return view('features.index', compact('title', 'features'));
   }
 
   /**
-   * GET /features/{id}
    * Show a given feature
-   *
+   * GET /features/{id}
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -34,7 +33,7 @@ class FeaturesController
   {
     $feature = App::get('database')->select('features', $id);
     if ($feature) {
-      $title = 'Show feature';
+      $title = $feature->title;
       return view('features.show', compact('title', 'feature'));
     }
 
@@ -42,79 +41,133 @@ class FeaturesController
   }
 
   /**
-   * POST /features
+   * Show the form to create a feature
+   * @return mixed
+   * @throws \Exception
+   */
+  public function create()
+  {
+    // If the user is logged in
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+      // Allow the user to create a new feature
+      $title = 'New Feature';
+      return view('features.create', compact('title'));
+    }
+    else {
+      // Ask for credentials
+      $title = 'Connexion';
+      return view('admin.login', compact('title'));
+    }
+  }
+
+  /**
    * Store a feature into the database
-   *
+   * POST /features
    * @throws \Exception
    */
   public function store()
   {
-    App::get('database')->insert('features', [
-      'title' => $_POST['title'],
-      'description' => $_POST['description']
-    ]);
 
-    Flash::message('success', 'Feature successfully created.');
+    $title = $_POST['title'];
+    $description = $_POST['description'];
 
-    return redirect('admin');
+    $errors = $this->validate([
+        'title' => $title,
+        'description' => $description]
+    );
+
+    if (count($errors)) {
+
+      $_SESSION['errors'] = $errors;
+
+      Flash::message('alert', 'There are errors in the form.');
+
+      return redirect('features/create');
+
+    } else {
+
+      App::get('database')->insert('features', [
+        'title' => clean($title),
+        'description' => clean($description)
+      ]);
+
+      Flash::message('success', 'Feature successfully created.');
+
+      return redirect('admin-features');
+    }
   }
 
   /**
-   * GET /features/{id}/edit
    * Show a form to edit a given feature
-   *
+   * GET /features/{id}/edit
    * @param $id
    * @return mixed
    * @throws \Exception
    */
   public function edit($id)
   {
-    // Check if the user is already logged in
+    // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
       && ($_SESSION['username'] === App::get('config')['admin']['username'])
       && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
+      // Allow the user to edit the feature
       $feature = App::get('database')->select('features', $id);
       $title = 'Edit';
       return view('features.edit', compact('title', 'feature'));
-
     }
-
-    // If not ask for credentials
-    else
-    {
-
+    else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
-
     }
   }
 
   /**
-   * PUT /features/{id}
    * Update a given feature
-   *
    * @param $id
    * @throws \Exception
    */
   public function update($id)
   {
-    App::get('database')
-      ->update('features', [
-        'title' => $_POST['title'],
-        'description' => $_POST['description']
-      ], $id);
 
-    Flash::message('success', 'Feature successfully updated.');
+    $title = $_POST['title'];
+    $description = $_POST['description'];
 
-    return redirect('admin');
+    $errors = $this->validate([
+        'title' => $title,
+        'description' => $description]
+    );
+
+    if (count($errors)) {
+
+      $_SESSION['errors'] = $errors;
+
+      Flash::message('alert', 'There are errors in the form.');
+
+      return redirect("features/{$id}/edit");
+
+    } else {
+
+      App::get('database')
+        ->update('features', [
+          'title' => clean($_POST['title']),
+          'description' => clean($_POST['description'])
+        ], $id);
+
+      Flash::message('success', 'Feature successfully updated.');
+
+      return redirect('admin-features');
+
+    }
   }
 
   /**
-   * DELETE /features/{id}
    * Delete a given feature
-   *
+   * DELETE /features/{id}
    * @param $id
    * @throws \Exception
    */
@@ -124,7 +177,39 @@ class FeaturesController
 
     Flash::message('success', 'Feature successfully deleted.');
 
-    return redirect('admin');
+    return redirect('admin-features');
+  }
+
+  /**
+   * Set the feature as published in the database
+   * @param $id
+   * @throws \Exception
+   */
+  public function publish($id)
+  {
+
+    App::get('database')->publish('features', $id);
+
+    Flash::message('success', 'Feature successfully published.');
+
+    return redirect('admin-features');
+
+  }
+
+  /**
+   * Set the feature as unpublished in the database
+   * @param $id
+   * @throws \Exception
+   */
+  public function unpublish($id)
+  {
+
+    App::get('database')->unpublish('features', $id);
+
+    Flash::message('success', 'Feature successfully unpublished.');
+
+    return redirect('admin-features');
+
   }
 
 }

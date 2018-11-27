@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
   <html lang="en" dir="ltr">
   <head>
@@ -36,25 +37,73 @@
                   <a class="button warning" href="/features/<?= $feature->id; ?>/edit">Edit</a>
                   <button data-open="deleteModal" class="button alert margin-bottom-0">Delete</button>
                 </td>
+=======
+<?php require 'partials/head.php'; ?>
+
+      <!-- CONTENT -->
+      <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <?php require __DIR__ . '/../partials/message.php'; ?>
+
+        <h2 class="text-center">Dashboard</h2>
+        <hr>
+        <div class="grid-x grid-margin-x grid-padding-x margin-top-2">
+          <section class="cell medium-6">
+            <h3>Features</h3>
+            <table class="hover text-center dashboard">
+              <thead>
+              <tr>
+                <th class="text-center">id</th>
+                <th class="text-center">Title</th>
+                <th class="text-center show-for-large">Status</th>
+>>>>>>> 167796b0321234a9b267b0f3f5355d5fa2d712dc
               </tr>
-            <?php endforeach; ?>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+              <?php foreach ($features as $feature) : ?>
+                <tr>
+                  <td><?= $feature->id; ?></td>
+                  <td><a href="/features/<?= $feature->id; ?>/edit"><?= $feature->title; ?></a></td>
+                  <?php if ($feature->published === "1") :?>
+                    <td class="show-for-large">Published</td>
+                  <?php else: ?>
+                    <td class="show-for-large">Unpublished</td>
+                  <?php endif; ?>
+                </tr>
+              <?php endforeach; ?>
+              </tbody>
+            </table>
+          </section>
+          <section class="cell medium-6">
+            <h3>Posts</h3>
+            <table class="hover text-center dashboard">
+              <thead>
+              <tr>
+                <th class="text-center">id</th>
+                <th class="text-center">Title</th>
+                <th class="text-center show-for-large">Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($posts as $post) : ?>
+                <tr>
+                  <td><?= $post->id; ?></td>
+                  <td><a href="/posts/<?= $post->id; ?>/edit"><?= $post->title; ?></a></td>
+                  <?php if ($post->published === "1") :?>
+                    <td class="show-for-large">Published</td>
+                  <?php else: ?>
+                    <td class="show-for-large">Unpublished</td>
+                  <?php endif; ?>
+                </tr>
+              <?php endforeach; ?>
+              </tbody>
+            </table>
+          </section>
         </div>
-        <div class="cell large-6">
-          <h2>Add a feature</h2>
-          <form action="/features" method="POST">
-            <label>Title
-              <input name="title" type="text" placeholder="Title of the feature">
-            </label>
-            <label>Description
-              <textarea name="description" placeholder="Description of the feature" rows="3"></textarea>
-            </label>
-            <input type="submit" class="button" value="Submit">
-          </form>
-        </div>
+
       </div>
 
+<<<<<<< HEAD
       <div class="reveal" id="deleteModal" data-reveal>
         <p>La suppression est définitive</p>
         <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
@@ -68,4 +117,28 @@
 
     <?php require __DIR__.'/../partials/scripts.php'; ?>
   </body>
+=======
+  <?php require __DIR__.'/../partials/scripts.php'; ?>
+  <script>
+      $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
+          e.preventDefault();
+          $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
+      });
+
+      $(document).ready(function() {
+
+          $('table tr').click(function() {
+              let href = $(this).find("a").attr("href");
+              if(href) {
+                  window.location = href;
+              }
+          });
+
+      });
+
+  </script>
+</body>
+>>>>>>> 167796b0321234a9b267b0f3f5355d5fa2d712dc
 </html>
+
+

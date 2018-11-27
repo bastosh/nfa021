@@ -3,7 +3,7 @@
 return [
   'prod' => [
     'dsn' => 'mysql:host={host};dbname={database}',
-    'login' => '{username}',
+    'login' => '{login}',
     'password' => '{password}',
     'options' => []
   ],

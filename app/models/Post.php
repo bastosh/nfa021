@@ -2,11 +2,11 @@
 
 namespace Simple\App\Models;
 
-class Feature
+class Post
 {
 
   public $title;
-  public $description;
+  public $content;
   public $published;
 
 }

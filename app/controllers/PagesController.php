@@ -6,7 +6,6 @@ class PagesController
 {
   /**
    * Show the homepage
-   *
    * @return mixed
    */
   public function home()
@@ -17,7 +16,6 @@ class PagesController
 
   /**
    * Show the about page
-   *
    * @return mixed
    */
   public function about()
@@ -28,7 +26,6 @@ class PagesController
 
   /**
    * Show the contact page
-   *
    * @return mixed
    */
   public function contact()
@@ -38,6 +35,7 @@ class PagesController
   }
 
   /**
+   * Show the 404 page
    * @return mixed
    */
   public function error()
