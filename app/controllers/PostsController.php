@@ -137,7 +137,7 @@ class PostsController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to edit a post
-      $post = App::get('database')->select('posts', $id);
+      $post = App::get('database')->select('posts', $id, Post::class);
       $page = 'Admin • '.$post->title;
       return view('posts.edit', compact('page', 'post'));
     }
@@ -226,7 +226,7 @@ class PostsController extends Controller
       throw new \Exception('Token mismatch!');
     }
 
-    $post = App::get('database')->select('posts', $id);
+    $post = App::get('database')->select('posts', $id, Post::class);
     unlink('../public/img/'.$post->cover);
 
     App::get('database')->delete('posts', $id);
@@ -271,7 +271,7 @@ class PostsController extends Controller
   public function deleteImage($id)
   {
 
-    $post = App::get('database')->select('posts', $id);
+    $post = App::get('database')->select('posts', $id, Post::class);
     unlink('../public/img/'.$post->cover);
 
     App::get('database')->deleteImage('posts', $id);

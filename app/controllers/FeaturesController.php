@@ -125,7 +125,7 @@ class FeaturesController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to edit the feature
-      $feature = App::get('database')->select('features', $id);
+      $feature = App::get('database')->select('features', $id, Feature::class);
       $page = 'Edit';
       return view('features.edit', compact('page', 'feature'));
     }

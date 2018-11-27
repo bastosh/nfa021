@@ -3,6 +3,8 @@
 namespace Simple\App\Controllers;
 
 use Simple\Core\App;
+use Simple\App\Models\Feature;
+use Simple\App\Models\Post;
 
 class AdminController
 {
@@ -23,8 +25,8 @@ class AdminController
     {
 
       $page = 'Administration';
-      $features = App::get('database')->selectAll('features');
-      $posts = App::get('database')->selectAll('posts');
+      $features = App::get('database')->selectAll('features', Feature::class);
+      $posts = App::get('database')->selectAll('posts', Post::class);
 
       return view('admin.dashboard', compact('page', 'features', 'posts'));
 
@@ -52,8 +54,8 @@ class AdminController
       $_SESSION['token'] = $token;
 
       $page = 'Administration';
-      $features = App::get('database')->selectAll('features');
-      $posts = App::get('database')->selectAll('posts');
+      $features = App::get('database')->selectAll('features', Feature::class);
+      $posts = App::get('database')->selectAll('posts', Post::class);
 
       return view('admin.dashboard', compact('page', 'features', 'posts'));
 
@@ -86,7 +88,7 @@ class AdminController
     {
       // Allow the user to administrate features
       $page = 'Admin Features';
-      $features = App::get('database')->selectAll('features');
+      $features = App::get('database')->selectAll('features', Feature::class);
       return view('admin.features', compact('page', 'features'));
     }
     else {
@@ -111,7 +113,7 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to see the details of a feature
-      $feature = App::get('database')->select('features', $id);
+      $feature = App::get('database')->select('features', $id, Feature::class);
       if ($feature) {
         $page = 'Admin • '.$feature->title;
         return view('admin.feature', compact('page', 'feature'));
@@ -139,7 +141,7 @@ class AdminController
     {
       // Allow the user to administrate posts
       $page = 'Admin Posts';
-      $posts = App::get('database')->selectAll('posts');
+      $posts = App::get('database')->selectAll('posts', Post::class);
       return view('admin.posts', compact('page', 'posts'));
     }
     else {
@@ -164,7 +166,7 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to see the details of a feature
-      $post = App::get('database')->select('posts', $id);
+      $post = App::get('database')->select('posts', $id, Post::class);
       if ($post) {
         $page = 'Admin • '.$post->title;
         return view('admin.post', compact('page', 'post'));
