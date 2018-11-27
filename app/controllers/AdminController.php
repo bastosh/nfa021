@@ -6,6 +6,7 @@ use Simple\Core\App;
 
 class AdminController
 {
+
   /**
    * Access to the dashboard if already logged or if the credentials are correct
    *
@@ -30,19 +31,19 @@ class AdminController
     }
 
     // If not ask for credentials
-    elseif (
-      !isset($_POST['username'])
-      OR $_POST['username'] != App::get('config')['admin']['username']
-      OR !isset($_POST['password'])
-      OR $_POST['password'] != App::get('config')['admin']['password']
-    )
+    elseif (!isset($_POST['username'])
+            OR $_POST['username'] != App::get('config')['admin']['username']
+            OR !isset($_POST['password'])
+            OR $_POST['password'] != App::get('config')['admin']['password'])
     {
 
       $title = 'Login';
       return view('admin.login', compact('title'));
 
+    }
+
       // Log the user if the credentials are correct
-    } else {
+     else {
 
       $_SESSION['username'] = $_POST['username'];
       $_SESSION['password'] = $_POST['password'];
@@ -75,22 +76,18 @@ class AdminController
    */
   public function features()
   {
-
-    // Check if the user is already logged in and the credentials are correct
+    // If the user is already logged in and the credentials are correct
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
-      $title = 'Admin Features';
+      // Allow the user to administrate features
+      $title = 'Features administration';
       $features = App::get('database')->selectAll('features');
-
       return view('admin.features', compact('title', 'features'));
-
     }
-
-    // If not ask for credentials
     else {
+      // Ask for credentials
       $title = 'Login';
       return view('admin.login', compact('title'));
     }
@@ -105,25 +102,24 @@ class AdminController
    */
   public function showFeature($id)
   {
-    // Check if the user is already logged in and the credentials are correct
+    // If the user is already logged in and the credentials are correct
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password']))) {
-
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+      // Allow the user to see the details of a feature
       $feature = App::get('database')->select('features', $id);
       if ($feature) {
-        $title = 'Show feature';
+        $title = $feature->title;
         return view('admin.feature', compact('title', 'feature'));
       }
-
       return view('pages.error');
-
-    } // If not ask for credentials
+    }
     else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
     }
-
   }
 
   /**
@@ -133,22 +129,18 @@ class AdminController
    */
   public function posts()
   {
-
-    // Check if the user is already logged in and the credentials are correct
+    // If the user is already logged in and the credentials are correct
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-
-      $title = 'Admin Posts';
+      // Allow the user to administrate posts
+      $title = 'Posts administration';
       $posts = App::get('database')->selectAll('posts');
-
       return view('admin.posts', compact('title', 'posts'));
-
     }
-
-    // If not ask for credentials
     else {
+      // If not ask for credentials
       $title = 'Login';
       return view('admin.login', compact('title'));
     }
@@ -163,24 +155,24 @@ class AdminController
    */
   public function showPost($id)
   {
-    // Check if the user is already logged in and the credentials are correct
+    // If the user is already logged in and the credentials are correct
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password']))) {
-
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+      // Allow the user to see the details of a feature
       $post = App::get('database')->select('posts', $id);
       if ($post) {
-        $title = 'Show post';
+        $title = $post->title;
         return view('admin.post', compact('title', 'post'));
       }
-
       return view('pages.error');
-
-    } // If not ask for credentials
+    }
     else {
+      // Ask for credentials
       $title = 'Connexion';
       return view('admin.login', compact('title'));
     }
-
   }
+
 }
