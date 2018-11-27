@@ -7,8 +7,7 @@ use Simple\Core\App;
 class AdminController
 {
   /**
-   * Access to the dashboard if already logged
-   * or if the credentials are correct
+   * Access to the dashboard if already logged or if the credentials are correct
    *
    * @return mixed
    * @throws \Exception
@@ -58,6 +57,22 @@ class AdminController
 
   }
 
+  /**
+   * Log out the current user
+   */
+  public function logout()
+  {
+    session_unset();
+    session_destroy();
+
+    return redirect('');
+  }
+
+  /**
+   * Admin page for the features
+   * @return mixed
+   * @throws \Exception
+   */
   public function features()
   {
 
@@ -81,45 +96,9 @@ class AdminController
     }
   }
 
-  public function posts()
-  {
-
-    // Check if the user is already logged in and the credentials are correct
-    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
-    {
-
-      $title = 'Admin Posts';
-      $posts = App::get('database')->selectAll('posts');
-
-      return view('admin.posts', compact('title', 'posts'));
-
-    }
-
-    // If not ask for credentials
-    else {
-      $title = 'Login';
-      return view('admin.login', compact('title'));
-    }
-  }
-
   /**
-   * Log out the current user
-   */
-  public function logout()
-  {
-    session_unset();
-    session_destroy();
-
-    return redirect('');
-  }
-
-  /**
+   * Show details of a given feature in the administration
    * GET admin-features/{id}
-   * Show a given feature
-   * in the administration
-   *
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -147,6 +126,41 @@ class AdminController
 
   }
 
+  /**
+   * Admin page for the posts
+   * @return mixed
+   * @throws \Exception
+   */
+  public function posts()
+  {
+
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+
+      $title = 'Admin Posts';
+      $posts = App::get('database')->selectAll('posts');
+
+      return view('admin.posts', compact('title', 'posts'));
+
+    }
+
+    // If not ask for credentials
+    else {
+      $title = 'Login';
+      return view('admin.login', compact('title'));
+    }
+  }
+
+  /**
+   * Show details of a given post in the administration
+   * GET admin-posts/{id}
+   * @param $id
+   * @return mixed
+   * @throws \Exception
+   */
   public function showPost($id)
   {
     // Check if the user is already logged in and the credentials are correct

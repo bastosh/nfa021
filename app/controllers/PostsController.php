@@ -8,9 +8,8 @@ use Simple\Core\Flash;
 class PostsController extends Controller
 {
   /**
-   * GET /posts
    * Show all the posts
-   *
+   * GET /posts
    * @return mixed
    * @throws \Exception
    */
@@ -24,9 +23,8 @@ class PostsController extends Controller
   }
 
   /**
-   * GET /posts/{id}
    * Show a given post
-   *
+   * GET /posts/{id}
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -42,6 +40,11 @@ class PostsController extends Controller
     return view('pages.error');
   }
 
+  /**
+   * Show the form to create a post
+   * @return mixed
+   * @throws \Exception
+   */
   public function create()
   {
     // Check if the user is already logged in
@@ -63,9 +66,8 @@ class PostsController extends Controller
   }
 
   /**
-   * POST /posts
    * Store a post into the database
-   *
+   * POST /posts
    * @throws \Exception
    */
   public function store()
@@ -101,9 +103,8 @@ class PostsController extends Controller
   }
 
   /**
-   * GET /posts/{id}/edit
    * Show a form to edit a given post
-   *
+   * GET /posts/{id}/edit
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -129,6 +130,11 @@ class PostsController extends Controller
     }
   }
 
+  /**
+   * Update a given post
+   * @param $id
+   * @throws \Exception
+   */
   public function update($id)
   {
 
@@ -164,9 +170,8 @@ class PostsController extends Controller
   }
 
   /**
-   * DELETE /posts/{id}
    * Delete a given post
-   *
+   * DELETE /features/{id}
    * @param $id
    * @throws \Exception
    */
@@ -179,6 +184,11 @@ class PostsController extends Controller
     return redirect('admin-posts');
   }
 
+  /**
+   * Set the post as published in the database
+   * @param $id
+   * @throws \Exception
+   */
   public function publish($id)
   {
 
@@ -190,6 +200,11 @@ class PostsController extends Controller
 
   }
 
+  /**
+   * Set the post as unpublished in the database
+   * @param $id
+   * @throws \Exception
+   */
   public function unpublish($id)
   {
 

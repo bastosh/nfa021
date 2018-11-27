@@ -8,9 +8,8 @@ use Simple\Core\Flash;
 class FeaturesController extends Controller
 {
   /**
-   * GET /features
    * Show all the features
-   *
+   * GET /features
    * @return mixed
    * @throws \Exception
    */
@@ -24,9 +23,8 @@ class FeaturesController extends Controller
   }
 
   /**
-   * GET /features/{id}
    * Show a given feature
-   *
+   * GET /features/{id}
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -42,6 +40,11 @@ class FeaturesController extends Controller
     return view('pages.error');
   }
 
+  /**
+   * Show the form to create a feature
+   * @return mixed
+   * @throws \Exception
+   */
   public function create()
   {
     // Check if the user is already logged in
@@ -63,9 +66,8 @@ class FeaturesController extends Controller
   }
 
   /**
-   * POST /features
    * Store a feature into the database
-   *
+   * POST /features
    * @throws \Exception
    */
   public function store()
@@ -101,9 +103,8 @@ class FeaturesController extends Controller
   }
 
   /**
-   * GET /features/{id}/edit
    * Show a form to edit a given feature
-   *
+   * GET /features/{id}/edit
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -129,6 +130,11 @@ class FeaturesController extends Controller
     }
   }
 
+  /**
+   * Update a given feature
+   * @param $id
+   * @throws \Exception
+   */
   public function update($id)
   {
 
@@ -164,9 +170,8 @@ class FeaturesController extends Controller
   }
 
   /**
-   * DELETE /features/{id}
    * Delete a given feature
-   *
+   * DELETE /features/{id}
    * @param $id
    * @throws \Exception
    */
@@ -179,6 +184,11 @@ class FeaturesController extends Controller
     return redirect('admin-features');
   }
 
+  /**
+   * Set the feature as published in the database
+   * @param $id
+   * @throws \Exception
+   */
   public function publish($id)
   {
 
@@ -190,6 +200,11 @@ class FeaturesController extends Controller
 
   }
 
+  /**
+   * Set the feature as unpublished in the database
+   * @param $id
+   * @throws \Exception
+   */
   public function unpublish($id)
   {
 

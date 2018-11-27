@@ -6,6 +6,12 @@ namespace Simple\App\Controllers;
 
 class Controller
 {
+
+  /**
+   * Return an array with errors if the values are empty
+   * @param $values
+   * @return array
+   */
   protected function validate($values)
   {
 
