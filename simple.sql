@@ -7,7 +7,7 @@
 #
 # Hôte: 127.0.0.1 (MySQL 5.5.5-10.3.7-MariaDB)
 # Base de données: simple
-# Temps de génération: 2018-11-27 08:31:02 +0000
+# Temps de génération: 2018-11-27 23:55:21 +0000
 # ************************************************************
 
 
@@ -60,15 +60,19 @@ CREATE TABLE `posts` (
   `title` varchar(100) NOT NULL DEFAULT '',
   `content` text NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT 1,
+  `cover` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 
-INSERT INTO `posts` (`id`, `title`, `content`, `published`)
+INSERT INTO `posts` (`id`, `title`, `content`, `published`, `cover`)
 VALUES
-	(1,'This is my first post','Oh yeah.',1);
+	(1,'This is my first post','Oh yeah.',1,NULL),
+	(2,'CKEditor','<h2>A title</h2>\r\n\r\n<p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </strong></p>\r\n\r\n<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n\r\n<p><em>A modification.</em></p>\r\n',1,NULL),
+	(3,'Article with an image','<h2>This is a title</h2>\r\n\r\n<p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </strong></p>\r\n\r\n<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n',1,'laptop.jpg'),
+	(4,'Another article','<h2>A title</h2>\r\n\r\n<p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </strong></p>\r\n\r\n<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n',1,'laptop2.jpg');
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
