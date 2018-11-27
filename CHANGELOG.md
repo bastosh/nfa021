@@ -4,11 +4,13 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.0.0 - 2018-11-26
+## 1.0.0 - 2018-11-27
 ### Added
 - Ajout d’actions publish/unpublish au niveau du dashboard
 - Ajout d’une ressource Post (routes, modèle, vues, contrôleur)
 - Mise en place CKEditor pour la mise en forme des articles
+- Mise en place de l’upload/suppression d’images
+- Protection csrf
 
 ### Changed
 - Modification des libellés au niveau de la barre de navigation : admin changé pour dashboard si connecté, login sinon)
