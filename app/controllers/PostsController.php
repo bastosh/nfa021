@@ -71,6 +71,14 @@ class PostsController extends Controller
   public function store()
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     $title = $_POST['title'];
     $content = $_POST['content'];
     $page = 'New Post';
@@ -147,6 +155,14 @@ class PostsController extends Controller
   public function update($id)
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     if ($_FILES['image']['size'] > 0) {
 
       $uploadErrors = upload($_FILES['image']);
@@ -200,6 +216,14 @@ class PostsController extends Controller
    */
   public function destroy($id)
   {
+
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
 
     $post = App::get('database')->select('posts', $id);
     unlink('../public/img/'.$post->cover);

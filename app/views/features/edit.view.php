@@ -15,11 +15,13 @@
         <?php require __DIR__ . '/../partials/errors.php'; ?>
         <form action="/features/<?= $feature->id; ?>" method="POST" novalidate>
 
+          <input type="hidden" name="_method" value="PUT">
+          <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>
           </div>
 
-          <input type="hidden" name="_method" value="PUT">
           <label>Title
             <input name="title" type="text" placeholder="Title of the feature" value="<?= $feature->title; ?>" required pattern="^.{3,50}$">
             <span class="form-error">
@@ -27,6 +29,7 @@
             </span>
           </label>
           <p class="help-text">Required. Between 3 and 50 characters.</p>
+
           <label>Description
             <textarea name="description" placeholder="Description of the feature" rows="3" required pattern="^.{3,255}$"><?= $feature->description; ?></textarea>
             <span class="form-error">
@@ -34,7 +37,9 @@
             </span>
           </label>
           <p class="help-text">Required. Between 3 and 255 characters.</p>
+
           <input type="submit" class="button" value="Update">
+
         </form>
       </div>
     </div>

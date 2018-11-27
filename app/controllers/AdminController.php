@@ -48,6 +48,9 @@ class AdminController
       $_SESSION['username'] = $_POST['username'];
       $_SESSION['password'] = $_POST['password'];
 
+      $token = bin2hex(openssl_random_pseudo_bytes(24));
+      $_SESSION['token'] = $token;
+
       $page = 'Administration';
       $features = App::get('database')->selectAll('features');
       $posts = App::get('database')->selectAll('posts');

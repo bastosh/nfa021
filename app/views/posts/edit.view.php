@@ -42,7 +42,9 @@
         <?php endif; ?>
 
         <form action="/posts/<?= $post->id; ?>" method="POST" enctype="multipart/form-data" novalidate>
+
           <input type="hidden" name="_method" value="PUT">
+          <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>

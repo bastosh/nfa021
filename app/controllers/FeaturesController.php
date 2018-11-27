@@ -71,6 +71,14 @@ class FeaturesController extends Controller
   public function store()
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     $title = $_POST['title'];
     $description = $_POST['description'];
     $page = 'New features';
@@ -135,6 +143,14 @@ class FeaturesController extends Controller
   public function update($id)
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     $title = $_POST['title'];
     $description = $_POST['description'];
 
@@ -174,6 +190,15 @@ class FeaturesController extends Controller
    */
   public function destroy($id)
   {
+
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     App::get('database')->delete('features', $id);
 
     Flash::message('success', 'Feature successfully deleted.');

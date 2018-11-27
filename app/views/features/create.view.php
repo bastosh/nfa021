@@ -14,9 +14,13 @@
       <div class="small-8 medium-6">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
         <form action="/features" method="POST" novalidate>
+
+          <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>
           </div>
+
           <label>Title&thinsp;*
             <input name="title" type="text" placeholder="Title of the feature" required pattern="^.{3,50}$" value="<?= isset($title) ? $title : ''; ?>">
             <span class="form-error">
@@ -24,6 +28,7 @@
                   </span>
           </label>
           <p class="help-text">Required. Between 3 and 50 characters.</p>
+
           <label>Description&thinsp;*
             <textarea name="description" placeholder="Description of the feature" rows="3" pattern="^.{3,255}$" required><?= isset($description) ? $description : ''; ?></textarea>
             <span class="form-error">
@@ -31,7 +36,9 @@
                   </span>
           </label>
           <p class="help-text">Required. Between 3 and 255 characters.</p>
+
           <input type="submit" class="button" value="Add a feature">
+
         </form>
       </div>
     </div>

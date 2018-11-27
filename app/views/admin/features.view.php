@@ -62,6 +62,7 @@
           <p>The feature will be permanently deleted.</p>
           <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
             <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
             <button type="submit" class="button alert margin-bottom-0">Don’t worry, I am 100% sure.</button>
           </form>
           <button class="close-button" data-close aria-label="Close modal" type="button">
