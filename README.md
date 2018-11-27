@@ -1,53 +1,28 @@
 # NFA021 • Projet Catclinic
 
-Simple MVC est un micro-framework PHP. Documentation à venir.
+[![Deployment Goals](https://consistently.io/g/bastosh/nfa021/badge.svg)](https://consistently.io/g/bastosh/nfa021/)
 
-<<<<<<< HEAD
 Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
 
 Une démo est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
-=======
-http://simple.bastoche.fr/
->>>>>>> 167796b0321234a9b267b0f3f5355d5fa2d712dc
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
+- Télécharger ou cloner le repository
 
-### 1. Téléchargement
-- Télécharger ou cloner le repository :
-```
-$ git clone https://github.com/simple-mvc/simple.git my-new-project
-$ cd my-new-project
-```
-- Démarrer un nouveau projet Git :
-```
-$ rm -rf .git && git init
-```
-- Installer les dépendances :
+### Base de données
+- Créer une base de données
+- Utiliser le fichier mvc.sql pour alimenter la base avec la table fournie en exemple
+- Adapter le fichier config.php en fonction de sa propre configuration
+
+### Projet
+- Une fois dans le dossier depuis le Terminal, lancer les commandes :
 ```
 $ composer install
 $ npm install
+$ gulp
 ```
-- Compiler le CSS :
-```
-$ gulp sass
-```
-
-### 2. Base de données
-- Créer une base de données
-- Utiliser le fichier simple.sql pour alimenter la base avec la table fournie en exemple
-
-### 3. Configuration
-- Adapter le fichier config.php en fonction de sa propre configuration
-    - Renseigner les champs requis pour l’accès à la base de données
-    - Renseigner identifiant et mot de passe pour l’accès à l’administration (par défaut, entrée libre)
-
-### 4. Browsersync (optionnel)
-- Adapter le script npm du package.json en fonction de sa configuration :
-```
-browser-sync start --proxy 'my-new-project.test' --files 'public'
-```
-- Lancer Browsersync :
+Et dans une autre fenêtre
 ```
 $ npm run serve
 ```
@@ -57,21 +32,17 @@ $ npm run serve
 ```
 $ npm run serve
 ```
-- Compilation CSS principal :
+- Compilation Foundation :
 ```
 $ gulp sass
 ```
-- Surveillance scss et compilation automatique :
+- Surveilance scss et compilation automatique :
 ```
 $ gulp watch
 ```
 - Compilation et surveillance :
 ```
 $ gulp
-```
-- Compilation CSS administration :
-```
-$ gulp sass-admin
 ```
 - Suppression des classes inutilisées :
 ```
@@ -80,6 +51,10 @@ $ gulp purgecss
 - Minification du css :
 ```
 $ gulp nano
+```
+- Déploiement (nécessite dploy installé globalement et un fichier de configuration dploy.yaml – non versionné)
+```
+$ dploy
 ```
 
 ## Changelog
