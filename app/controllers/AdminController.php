@@ -82,7 +82,7 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate features
-      $title = 'Features administration';
+      $title = 'Admin Features';
       $features = App::get('database')->selectAll('features');
       return view('admin.features', compact('title', 'features'));
     }
@@ -110,7 +110,7 @@ class AdminController
       // Allow the user to see the details of a feature
       $feature = App::get('database')->select('features', $id);
       if ($feature) {
-        $title = $feature->title;
+        $title = 'Admin • '.$feature->title;
         return view('admin.feature', compact('title', 'feature'));
       }
       return view('pages.error');
@@ -135,7 +135,7 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate posts
-      $title = 'Posts administration';
+      $title = 'Admin Posts';
       $posts = App::get('database')->selectAll('posts');
       return view('admin.posts', compact('title', 'posts'));
     }
@@ -163,7 +163,7 @@ class AdminController
       // Allow the user to see the details of a feature
       $post = App::get('database')->select('posts', $id);
       if ($post) {
-        $title = $post->title;
+        $title = 'Admin • '.$post->title;
         return view('admin.post', compact('title', 'post'));
       }
       return view('pages.error');

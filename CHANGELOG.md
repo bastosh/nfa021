@@ -8,6 +8,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - Ajout d’actions publish/unpublish au niveau du dashboard
 - Ajout d’une ressource Post (routes, modèle, vues, contrôleur)
+- Mise en place CKEditor pour la mise en forme des articles
 
 ### Changed
 - Modification des libellés au niveau de la barre de navigation : admin changé pour dashboard si connecté, login sinon)

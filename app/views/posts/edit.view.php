@@ -12,8 +12,8 @@
 
     <?php require __DIR__ . '/../partials/errors.php'; ?>
 
-    <div class="grid-x margin-top-2">
-      <div class="cell small-8 small-offset-2 medium-6 medium-offset-3">
+    <div class="grid-x margin-top-2 align-center">
+      <div class="cell medium-10 large-8">
         <form action="/posts/<?= $post->id; ?>" method="POST" data-abide novalidate>
 
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
@@ -27,15 +27,13 @@
               Title is required and must contain between 3 and 50 characters.
             </span>
           </label>
-          <p class="help-text">Required. Between 3 and 50 characters.</p>
-          <label>Description
-            <textarea name="content" placeholder="Content of the post" rows="3" required><?= $post->content; ?></textarea>
+          <label>Content
+            <textarea name="content" id="editor" placeholder="Content of the post" required><?= $post->content; ?></textarea>
             <span class="form-error">
               Content is required.
             </span>
           </label>
-          <p class="help-text">Required.</p>
-          <input type="submit" class="button" value="Update">
+          <input type="submit" class="button margin-top-1" value="Update">
         </form>
       </div>
     </div>
@@ -49,6 +47,13 @@
             $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
         });
     </script>
+
+    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace( 'editor' );
+    </script>
+
   </body>
 </html>
 

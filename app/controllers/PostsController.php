@@ -33,7 +33,7 @@ class PostsController extends Controller
   {
     $post = App::get('database')->select('posts', $id);
     if ($post) {
-      $title = 'Show post';
+      $title = $post->title;
       return view('posts.show', compact('title', 'post'));
     }
 
@@ -91,7 +91,7 @@ class PostsController extends Controller
 
       App::get('database')->insert('posts', [
         'title' => clean($title),
-        'content' => clean($content)
+        'content' => $content
       ]);
 
       Flash::message('success', 'Post successfully created.');
@@ -116,7 +116,7 @@ class PostsController extends Controller
     {
       // Allow the user to edit a post
       $post = App::get('database')->select('posts', $id);
-      $title = 'Edit';
+      $title = 'Admin • '.$post->title;
       return view('posts.edit', compact('title', 'post'));
     }
     else {
@@ -154,8 +154,8 @@ class PostsController extends Controller
 
       App::get('database')
         ->update('posts', [
-          'title' => clean($_POST['title']),
-          'content' => clean($_POST['content'])
+          'title' => clean($title),
+          'content' => $content
         ], $id);
 
       Flash::message('success', 'Post successfully updated.');

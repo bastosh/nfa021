@@ -33,7 +33,7 @@ class FeaturesController extends Controller
   {
     $feature = App::get('database')->select('features', $id);
     if ($feature) {
-      $title = 'Show feature';
+      $title = $feature->title;
       return view('features.show', compact('title', 'feature'));
     }
 
