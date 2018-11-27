@@ -17,9 +17,9 @@ class PostsController extends Controller
   {
 
     $posts = App::get('database')->selectAllPublished('posts');
-    $title = 'posts';
+    $page = 'Articles';
 
-    return view('posts.index', compact('title', 'posts'));
+    return view('posts.index', compact('page', 'posts'));
   }
 
   /**
@@ -33,8 +33,8 @@ class PostsController extends Controller
   {
     $post = App::get('database')->select('posts', $id);
     if ($post) {
-      $title = $post->title;
-      return view('posts.show', compact('title', 'post'));
+      $page = $post->title;
+      return view('posts.show', compact('page', 'post'));
     }
 
     return view('pages.error');
@@ -53,13 +53,13 @@ class PostsController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to create a new post
-      $title = 'New Post';
-      return view('posts.create', compact('title'));
+      $page = 'New Post';
+      return view('posts.create', compact('page'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -73,25 +73,38 @@ class PostsController extends Controller
 
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $page = 'New Post';
+
+    if ($_FILES['image']['size'] > 0) {
+
+      $uploadErrors = upload($_FILES['image']);
+
+      if (count($uploadErrors)) {
+
+        $_SESSION['errors'] = $uploadErrors;
+        Flash::message('alert', 'The image could not be uploaded.');
+        return view('posts.create', compact('page','title', 'content'));
+      }
+
+    }
 
     $errors = $this->validate([
-      'title' => $title,
-      'content' => $content]
-    );
+        'title' => $title,
+        'content' => $content
+      ]);
 
     if (count($errors)) {
 
       $_SESSION['errors'] = $errors;
-
       Flash::message('alert', 'There are errors in the form.');
-
-      return redirect('posts/create');
+      return view('posts.create', compact('page','title', 'content'));
 
     } else {
 
       App::get('database')->insert('posts', [
         'title' => clean($title),
-        'content' => $content
+        'content' => $content,
+        'cover' => $_FILES["image"]["name"],
       ]);
 
       Flash::message('success', 'Post successfully created.');
@@ -116,13 +129,13 @@ class PostsController extends Controller
     {
       // Allow the user to edit a post
       $post = App::get('database')->select('posts', $id);
-      $title = 'Admin • '.$post->title;
-      return view('posts.edit', compact('title', 'post'));
+      $page = 'Admin • '.$post->title;
+      return view('posts.edit', compact('page', 'post'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
