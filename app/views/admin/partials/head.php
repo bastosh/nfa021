@@ -46,11 +46,23 @@
         </div>
       </div>
       <div class="app-dashboard-sidebar-inner">
-        <ul class="menu vertical">
+        <ul class="vertical menu">
           <li>
-            <a href="/admin" class="is-active">
+            <a href="/admin">
+              <i class="large fas fa-cog"></i>
+              <span class="app-dashboard-sidebar-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-features">
               <i class="large fas fa-list"></i>
               <span class="app-dashboard-sidebar-text">Features</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-posts">
+              <i class="large fas fa-pen-nib"></i>
+              <span class="app-dashboard-sidebar-text">Posts</span>
             </a>
           </li>
         </ul>

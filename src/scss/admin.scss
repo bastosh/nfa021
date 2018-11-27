@@ -37,7 +37,7 @@
 @include foundation-reveal;
 // @include foundation-switch;
 @include foundation-table;
-// @include foundation-tabs;
+@include foundation-tabs;
 // @include foundation-thumbnail;
 // @include foundation-title-bar;
 @include foundation-tooltip;
@@ -56,4 +56,11 @@
 
 button.has-tip {
   border-bottom-style: none;
+}
+
+table.dashboard td:hover {
+  cursor: pointer;
+}
+table.dashboard a {
+  color: #0a0a0a;
 }

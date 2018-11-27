@@ -24,8 +24,9 @@ class AdminController
 
       $title = 'Administration';
       $features = App::get('database')->selectAll('features');
+      $posts = App::get('database')->selectAll('posts');
 
-      return view('admin.dashboard', compact('title', 'features'));
+      return view('admin.dashboard', compact('title', 'features', 'posts'));
 
     }
 
@@ -49,11 +50,58 @@ class AdminController
 
       $title = 'Administration';
       $features = App::get('database')->selectAll('features');
+      $posts = App::get('database')->selectAll('posts');
 
-      return view('admin.dashboard', compact('title', 'features'));
+      return view('admin.dashboard', compact('title', 'features', 'posts'));
 
     }
 
+  }
+
+  public function features()
+  {
+
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+
+      $title = 'Admin Features';
+      $features = App::get('database')->selectAll('features');
+
+      return view('admin.features', compact('title', 'features'));
+
+    }
+
+    // If not ask for credentials
+    else {
+      $title = 'Login';
+      return view('admin.login', compact('title'));
+    }
+  }
+
+  public function posts()
+  {
+
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+
+      $title = 'Admin Posts';
+      $posts = App::get('database')->selectAll('posts');
+
+      return view('admin.posts', compact('title', 'posts'));
+
+    }
+
+    // If not ask for credentials
+    else {
+      $title = 'Login';
+      return view('admin.login', compact('title'));
+    }
   }
 
   /**
@@ -99,4 +147,26 @@ class AdminController
 
   }
 
+  public function showPost($id)
+  {
+    // Check if the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password']))) {
+
+      $post = App::get('database')->select('posts', $id);
+      if ($post) {
+        $title = 'Show post';
+        return view('admin.post', compact('title', 'post'));
+      }
+
+      return view('pages.error');
+
+    } // If not ask for credentials
+    else {
+      $title = 'Connexion';
+      return view('admin.login', compact('title'));
+    }
+
+  }
 }

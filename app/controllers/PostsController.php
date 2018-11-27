@@ -5,11 +5,11 @@ namespace Simple\App\Controllers;
 use Simple\Core\App;
 use Simple\Core\Flash;
 
-class FeaturesController extends Controller
+class PostsController extends Controller
 {
   /**
-   * GET /features
-   * Show all the features
+   * GET /posts
+   * Show all the posts
    *
    * @return mixed
    * @throws \Exception
@@ -17,15 +17,15 @@ class FeaturesController extends Controller
   public function index()
   {
 
-    $features = App::get('database')->selectAllPublished('features');
-    $title = 'Features';
+    $posts = App::get('database')->selectAllPublished('posts');
+    $title = 'posts';
 
-    return view('features.index', compact('title', 'features'));
+    return view('posts.index', compact('title', 'posts'));
   }
 
   /**
-   * GET /features/{id}
-   * Show a given feature
+   * GET /posts/{id}
+   * Show a given post
    *
    * @param $id
    * @return mixed
@@ -33,10 +33,10 @@ class FeaturesController extends Controller
    */
   public function show($id)
   {
-    $feature = App::get('database')->select('features', $id);
-    if ($feature) {
-      $title = 'Show feature';
-      return view('features.show', compact('title', 'feature'));
+    $post = App::get('database')->select('posts', $id);
+    if ($post) {
+      $title = 'Show post';
+      return view('posts.show', compact('title', 'post'));
     }
 
     return view('pages.error');
@@ -50,8 +50,8 @@ class FeaturesController extends Controller
       && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
 
-      $title = 'New Feature';
-      return view('features.create', compact('title'));
+      $title = 'New Post';
+      return view('posts.create', compact('title'));
 
     }
     // If not ask for credentials
@@ -63,8 +63,8 @@ class FeaturesController extends Controller
   }
 
   /**
-   * POST /features
-   * Store a feature into the database
+   * POST /posts
+   * Store a post into the database
    *
    * @throws \Exception
    */
@@ -72,11 +72,11 @@ class FeaturesController extends Controller
   {
 
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $content = $_POST['content'];
 
     $errors = $this->validate([
       'title' => $title,
-      'description' => $description]
+      'content' => $content]
     );
 
     if (count($errors)) {
@@ -85,24 +85,24 @@ class FeaturesController extends Controller
 
       Flash::message('alert', 'There are errors in the form.');
 
-      return redirect('features/create');
+      return redirect('posts/create');
 
     } else {
 
-      App::get('database')->insert('features', [
+      App::get('database')->insert('posts', [
         'title' => clean($title),
-        'description' => clean($description)
+        'content' => clean($content)
       ]);
 
-      Flash::message('success', 'Feature successfully created.');
+      Flash::message('success', 'Post successfully created.');
 
-      return redirect('admin-features');
+      return redirect('admin-posts');
     }
   }
 
   /**
-   * GET /features/{id}/edit
-   * Show a form to edit a given feature
+   * GET /posts/{id}/edit
+   * Show a form to edit a given post
    *
    * @param $id
    * @return mixed
@@ -116,9 +116,9 @@ class FeaturesController extends Controller
         && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
 
-      $feature = App::get('database')->select('features', $id);
+      $post = App::get('database')->select('posts', $id);
       $title = 'Edit';
-      return view('features.edit', compact('title', 'feature'));
+      return view('posts.edit', compact('title', 'post'));
 
     }
     // If not ask for credentials
@@ -133,11 +133,11 @@ class FeaturesController extends Controller
   {
 
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $content = $_POST['content'];
 
     $errors = $this->validate([
         'title' => $title,
-        'description' => $description]
+        'content' => $content]
     );
 
     if (count($errors)) {
@@ -146,58 +146,58 @@ class FeaturesController extends Controller
 
       Flash::message('alert', 'There are errors in the form.');
 
-      return redirect("features/{$id}/edit");
+      return redirect("posts/{$id}/edit");
 
     } else {
 
       App::get('database')
-        ->update('features', [
+        ->update('posts', [
           'title' => clean($_POST['title']),
-          'description' => clean($_POST['description'])
+          'content' => clean($_POST['content'])
         ], $id);
 
-      Flash::message('success', 'Feature successfully updated.');
+      Flash::message('success', 'Post successfully updated.');
 
-      return redirect('admin-features');
+      return redirect('admin-posts');
 
     }
   }
 
   /**
-   * DELETE /features/{id}
-   * Delete a given feature
+   * DELETE /posts/{id}
+   * Delete a given post
    *
    * @param $id
    * @throws \Exception
    */
   public function destroy($id)
   {
-    App::get('database')->delete('features', $id);
+    App::get('database')->delete('posts', $id);
 
-    Flash::message('success', 'Feature successfully deleted.');
+    Flash::message('success', 'Post successfully deleted.');
 
-    return redirect('admin-features');
+    return redirect('admin-posts');
   }
 
   public function publish($id)
   {
 
-    App::get('database')->publish('features', $id);
+    App::get('database')->publish('posts', $id);
 
-    Flash::message('success', 'Feature successfully published.');
+    Flash::message('success', 'Post successfully published.');
 
-    return redirect('admin-features');
+    return redirect('admin-posts');
 
   }
 
   public function unpublish($id)
   {
 
-    App::get('database')->unpublish('features', $id);
+    App::get('database')->unpublish('posts', $id);
 
-    Flash::message('success', 'Feature successfully unpublished.');
+    Flash::message('success', 'Post successfully unpublished.');
 
-    return redirect('admin-features');
+    return redirect('admin-posts');
 
   }
 
