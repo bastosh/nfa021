@@ -3,7 +3,16 @@
   <div class="grid-x align-center">
     <article class="small-10 medium-8 large-6">
       <h1 class="margin-top-2" style="line-height: 1"><?= $post->title; ?></h1>
-      <p class="lead font-italic margin-bottom-2"><time>Nov 19, 2018</time></p>
+      <p class="lead font-italic margin-bottom-2">
+        <time>
+          <?php
+            $date = new DateTime('NOW', new DateTimeZone('Europe/Berlin'));
+            $date->modify('-1 day');
+            echo $date->format('M d, Y');
+          ?>
+        </time>
+        by John Doe
+      </p>
       <?php if($post->cover) : ?>
         <picture>
           <source media="(min-width: 768px)"
