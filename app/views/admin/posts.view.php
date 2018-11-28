@@ -15,16 +15,30 @@
     <tr>
       <th class="text-center">id</th>
       <th class="text-center">Title</th>
+      <th class="text-center show-for-large">Created</th>
+      <th class="text-center show-for-large">Last modified</th>
       <th class="text-center show-for-medium">Status</th>
       <th class="text-center show-for-medium">&nbsp;</th>
       <th class="text-center">&nbsp;</th>
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($posts as $post) : ?>
+    <?php foreach (array_reverse($posts) as $post) : ?>
       <tr>
         <td><?= $post->id; ?></td>
         <td><?= $post->title; ?></td>
+        <td class="show-for-large">
+          <?php
+            $date = new DateTime($post->created_at);
+            echo $date->format('y/m/d');
+          ?>
+        </td>
+        <td class="show-for-large">
+          <?php
+            $date = new DateTime($post->updated_at);
+            echo $date->format('y/m/d');
+          ?>
+        </td>
         <?php if ($post->published === "1") :?>
           <td class="show-for-medium">Published</td>
           <td class="show-for-medium">

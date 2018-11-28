@@ -103,14 +103,14 @@ class QueryBuilder
       $columns .= $key. " = :".$key.", "; // 'title = :title, description = :description,'
       $data[":".$key] = $value; // [:title => $value, :description => $value]
     }
-    $columns = rtrim($columns,", "); // Remove the last ,
+    // $columns = rtrim($columns,", "); // Remove the last ,
 
-    $query = "UPDATE {$table} SET {$columns} WHERE id = {$id}";
+    $query = "UPDATE {$table} SET {$columns} updated_at = NOW() WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute($data);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die('Whooops. Something went wrong... '.$e);
     }
 
   }
