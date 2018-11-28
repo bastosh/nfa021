@@ -10,7 +10,9 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Ajout d’une ressource Post (routes, modèle, vues, contrôleur)
 - Mise en place CKEditor pour la mise en forme des articles
 - Mise en place de l’upload/suppression d’images
+- Redimensionnement automatique des images
 - Protection csrf
+- Timestamps
 
 ### Changed
 - Modification des libellés au niveau de la barre de navigation : admin changé pour dashboard si connecté, login sinon)
