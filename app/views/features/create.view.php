@@ -13,7 +13,8 @@
     <div class="grid-x align-center margin-top-2">
       <div class="small-8 medium-6">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
-        <form action="/features" method="POST" novalidate>
+        <form action="/features" method="POST"
+          <?= \Simple\Core\App::get('env') == 'prod' ? 'data-abide' : '' ?> novalidate>
 
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 

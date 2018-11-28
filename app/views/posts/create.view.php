@@ -13,7 +13,8 @@
     <div class="grid-x margin-top-2 align-center">
       <div class="cell medium-10 large-8">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
-        <form action="/posts" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="/posts" method="POST" enctype="multipart/form-data"
+          <?= \Simple\Core\App::get('env') == 'prod' ? 'data-abide' : '' ?> novalidate>
 
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
@@ -27,7 +28,7 @@
           </div>
 
           <label>Title&thinsp;*
-            <input name="title" type="text" placeholder="Title of the post" required value="<?= isset($title) ? $title : ''; ?>">
+            <input name="title" type="text" placeholder="Title of the article" required value="<?= isset($title) ? $title : ''; ?>">
             <span class="form-error">
               An article needs a (good) title.
             </span>

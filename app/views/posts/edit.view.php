@@ -57,7 +57,8 @@
           </div>
         <?php endif; ?>
 
-        <form action="/posts/<?= $post->id; ?>" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="/posts/<?= $post->id; ?>" method="POST" enctype="multipart/form-data"
+          <?= \Simple\Core\App::get('env') == 'prod' ? 'data-abide' : '' ?> novalidate>
 
           <input type="hidden" name="_method" value="PUT">
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">

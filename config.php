@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'env' => 'prod',
   'prod' => [
     'dsn' => 'mysql:host={host};dbname={database}',
     'login' => '{login}',
