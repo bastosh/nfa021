@@ -9,5 +9,7 @@ class Post
   public $content;
   public $published;
   public $cover;
+  public $created_at;
+  public $updated_at;
 
 }

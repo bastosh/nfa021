@@ -6,8 +6,7 @@
       <p class="lead font-italic margin-bottom-2">
         <time>
           <?php
-            $date = new DateTime('NOW', new DateTimeZone('Europe/Berlin'));
-            $date->modify('-1 day');
+            $date = new DateTime($post->created_at);
             echo $date->format('M d, Y');
           ?>
         </time>
