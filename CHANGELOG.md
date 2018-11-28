@@ -13,6 +13,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Redimensionnement automatique des images
 - Protection csrf
 - Timestamps
+- Action delete depuis le formulaire d’édition
 
 ### Changed
 - Modification des libellés au niveau de la barre de navigation : admin changé pour dashboard si connecté, login sinon)
