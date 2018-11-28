@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<?php
+  if (\Simple\Core\App::get('debug') === true) {
+    require '../debug.php';
+  }
+?>
+
 <div class="app-dashboard shrink-medium">
   <!-- TOPBAR -->
   <div class="row expanded app-dashboard-top-nav-bar">

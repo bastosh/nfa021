@@ -2,6 +2,7 @@
 
 return [
   'env' => 'dev',
+  'debug' => true,
   'prod' => [
     'dsn' => 'mysql:host={host};dbname={database}',
     'login' => '{login}',
