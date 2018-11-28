@@ -3,7 +3,25 @@
   <!-- CONTENT -->
   <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
 
-    <a href="/admin-features"><i class="fas fa-long-arrow-alt-left"></i> Features</a>
+    <div class="grid-x align-justify">
+      <a href="/admin-features"><i class="fas fa-long-arrow-alt-left"></i> Features</a>
+      <button data-open="deleteFeature" class="button small alert margin-bottom-0">
+        <i class="fas fa-trash"></i>
+        Delete feature
+      </button>
+    </div>
+
+    <div class="reveal" id="deleteFeature" data-reveal>
+      <p>The feature will be permanently deleted.</p>
+      <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+        <button type="submit" class="button alert margin-bottom-0">Don’t worry, I am 100% sure.</button>
+      </form>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
     <h2 class="text-center">Edit «&thinsp;<?= $feature->title; ?>&thinsp;»</h2>
     <hr>

@@ -116,7 +116,7 @@ class PostsController extends Controller
         'cover' => $_FILES["image"]["name"]
       ]);
 
-      Flash::message('success', 'Post successfully created.');
+      Flash::message('success', 'Article successfully created.');
 
       return redirect('admin-posts');
     }
@@ -202,7 +202,7 @@ class PostsController extends Controller
           'cover' => $_FILES["image"]["name"]
         ], $id);
 
-      Flash::message('success', 'Post successfully updated.');
+      Flash::message('success', 'Article successfully updated.');
 
       return redirect('admin-posts');
 
@@ -231,7 +231,7 @@ class PostsController extends Controller
 
     App::get('database')->delete('posts', $id);
 
-    Flash::message('success', 'Post successfully deleted.');
+    Flash::message('success', 'Article successfully deleted.');
 
     return redirect('admin-posts');
   }
@@ -246,7 +246,7 @@ class PostsController extends Controller
 
     App::get('database')->publish('posts', $id);
 
-    Flash::message('success', 'Post successfully published.');
+    Flash::message('success', 'Article successfully published.');
 
     return redirect('admin-posts');
 
@@ -262,7 +262,7 @@ class PostsController extends Controller
 
     App::get('database')->unpublish('posts', $id);
 
-    Flash::message('success', 'Post successfully unpublished.');
+    Flash::message('success', 'Article successfully unpublished.');
 
     return redirect('admin-posts');
 

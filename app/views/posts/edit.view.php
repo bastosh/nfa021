@@ -3,7 +3,25 @@
   <!-- CONTENT -->
   <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
 
-    <a href="/admin-posts"><i class="fas fa-long-arrow-alt-left"></i> Articles</a>
+    <div class="grid-x align-justify">
+      <a href="/admin-posts"><i class="fas fa-long-arrow-alt-left"></i> Articles</a>
+      <button data-open="deletePost" class="button small alert margin-bottom-0">
+        <i class="fas fa-trash"></i>
+        Delete article
+      </button>
+    </div>
+
+    <div class="reveal" id="deletePost" data-reveal>
+      <p>The article will be permanently deleted.</p>
+      <form class="padding-vertical-1 text-center" action="/posts/<?= $post->id; ?>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+        <button type="submit" class="button alert margin-bottom-0">Don’t worry, I am 100% sure.</button>
+      </form>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
     <h2 class="text-center">Edit «&thinsp;<?= $post->title; ?>&thinsp;»</h2>
     <hr>

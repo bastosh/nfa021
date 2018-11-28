@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach (array_reverse($posts) as $post) : ?>
+    <?php foreach ($posts as $post) : ?>
       <tr>
         <td><?= $post->id; ?></td>
         <td><?= $post->title; ?></td>
@@ -73,7 +73,7 @@
   </table>
 
   <div class="reveal" id="deletePost" data-reveal>
-    <p>The post will be permanently deleted.</p>
+    <p>The article will be permanently deleted.</p>
     <form class="padding-vertical-1 text-center" action="/posts/<?= $post->id; ?>" method="POST">
       <input type="hidden" name="_method" value="DELETE">
       <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">

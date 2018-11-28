@@ -21,7 +21,7 @@
           </tr>
           </thead>
           <tbody>
-          <?php foreach (array_reverse($features) as $feature) : ?>
+          <?php foreach ($features as $feature) : ?>
             <tr>
               <td><?= $feature->id; ?></td>
               <td><?= $feature->title; ?></td>
