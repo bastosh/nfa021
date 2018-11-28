@@ -4,6 +4,7 @@
     "files": ["core/helpers.php"]
   },
   "require": {
-    "symfony/var-dumper": "^4.1"
+    "symfony/var-dumper": "^4.1",
+    "gumlet/php-image-resize": "^1.9"
   }
 }

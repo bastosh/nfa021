@@ -40,6 +40,7 @@ function clean($data) {
 }
 
 function upload($img) {
+
   $target_dir = "../public/img/";
   $target_file = $target_dir . basename($_FILES["image"]["name"]);
   $uploadOk = 1;
@@ -58,8 +59,8 @@ function upload($img) {
     $uploadOk = 0;
   }
 
-  // Check file size
-  if ($_FILES["image"]["size"] > 800000) {
+  // Check input file size
+  if ($_FILES["image"]["size"] > 1000000) {
     $errors[] = "File is too large.";
     $uploadOk = 0;
   }
@@ -70,9 +71,17 @@ function upload($img) {
     $uploadOk = 0;
   }
 
-  // Check if $uploadOk is set to 0 by an error
+  // Check if $uploadOk is set to 0 by any error
   if ($uploadOk) {
-    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+    $image_mobile = new \Gumlet\ImageResize($_FILES["image"]["tmp_name"]);
+    $image_mobile->resizeToWidth(250);
+    $image_mobile->save($target_dir .'sm-'. basename($_FILES["image"]["name"]));
+    $image = new \Gumlet\ImageResize($_FILES["image"]["tmp_name"]);
+    $image->resizeToWidth(500);
+    $image->save($target_file);
+    $image_retina = new \Gumlet\ImageResize($_FILES["image"]["tmp_name"]);
+    $image_retina->resizeToWidth(1000);
+    $image_retina->save($target_dir .'lg-'. basename($_FILES["image"]["name"]));
   }
 
   return $errors;

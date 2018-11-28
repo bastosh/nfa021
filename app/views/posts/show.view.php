@@ -1,11 +1,18 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
 
   <div class="grid-x align-center">
-    <article class="small-10 medium-6">
+    <article class="small-10 medium-8 large-6">
       <h1 class="margin-top-2" style="line-height: 1"><?= $post->title; ?></h1>
       <p class="lead font-italic margin-bottom-2"><time>Nov 19, 2018</time></p>
       <?php if($post->cover) : ?>
-       <img src="/img/<?= $post->cover; ?>" alt="">
+        <picture>
+          <source media="(min-width: 768px)"
+                  srcset="/img/<?= $post->cover; ?> 1x,
+                          /img/lg-<?= $post->cover; ?> 2x">
+          <img src="/img/sm-<?= $post->cover; ?>"
+               srcset="/img/<?= $post->cover; ?> 2x"
+               alt="" style="width: 100%">
+        </picture>
       <?php endif; ?>
       <div class="margin-top-2"><?= $post->content; ?></div>
     </article>
