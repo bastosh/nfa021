@@ -227,7 +227,10 @@ class PostsController extends Controller
     }
 
     $post = App::get('database')->select('posts', $id, Post::class);
+    // Remove the images associated
+    unlink('../public/img/sm-'.$post->cover);
     unlink('../public/img/'.$post->cover);
+    unlink('../public/img/lg-'.$post->cover);
 
     App::get('database')->delete('posts', $id);
 
@@ -272,6 +275,7 @@ class PostsController extends Controller
   {
 
     $post = App::get('database')->select('posts', $id, Post::class);
+    // Remove the images associated
     unlink('../public/img/sm-'.$post->cover);
     unlink('../public/img/'.$post->cover);
     unlink('../public/img/lg-'.$post->cover);
