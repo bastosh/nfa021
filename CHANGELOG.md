@@ -4,11 +4,14 @@ Tous les changements notables apportés à ce projet seront documentés dans ce 
 Le format adopté est celui proposé par [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.1.0 - 2018-11-29
+## 1.0.0 - 2018-11-29
 ### Added
-- Intégration de Twig en alternative pour le rendu des vues.
+- Intégration de Twig en alternative pour le rendu des vues (front-end seulement : pas de gestion des notifications)
 
-## 1.0.0 - 2018-11-27
+### Fixed
+- Toutes les images n’étaient pas supprimées lors de la suppression d’un article
+
+## 1.0.0-beta - 2018-11-27
 ### Added
 - Ajout d’actions publish/unpublish au niveau du dashboard
 - Ajout d’une ressource Post (routes, modèle, vues, contrôleur)
