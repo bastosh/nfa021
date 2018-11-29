@@ -2,7 +2,7 @@
 
 namespace Simple\App\Controllers;
 
-class PagesController
+class PagesController extends Controller
 {
   /**
    * Show the homepage
@@ -11,7 +11,7 @@ class PagesController
   public function home()
   {
     $page = 'Homepage';
-    return view('pages.home', compact('page'));
+    return $this->render('pages.home', compact('page'));
   }
 
   /**
@@ -21,7 +21,7 @@ class PagesController
   public function about()
   {
     $page = 'About';
-    return view('pages.about', compact('page'));
+    return $this->render('pages.about', compact('page'));
   }
 
   /**
@@ -31,7 +31,7 @@ class PagesController
   public function contact()
   {
     $page = 'Contact';
-    return view('pages.contact', compact('page'));
+    return $this->render('pages.contact', compact('page'));
   }
 
   /**

@@ -47,6 +47,17 @@ class QueryBuilder
     }
   }
 
+  public function selectLastPublished($table, $model, $limit) {
+    $query = "SELECT * FROM {$table} WHERE published = 1 ORDER BY created_at DESC LIMIT $limit";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
+      return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+  }
+
   /**
    * Select a given item from a given table
    * @param $table

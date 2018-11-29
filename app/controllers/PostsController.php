@@ -17,7 +17,7 @@ class PostsController extends Controller
   public function index()
   {
 
-    $posts = App::get('database')->selectAllPublished('posts', Post::class);
+    $posts = App::get('database')->selectLastPublished('posts', Post::class, 3);
     $page = 'Articles';
 
     return view('posts.index', compact('page', 'posts'));

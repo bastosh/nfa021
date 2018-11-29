@@ -6,7 +6,7 @@ use Simple\Core\App;
 use Simple\App\Models\Feature;
 use Simple\App\Models\Post;
 
-class AdminController
+class AdminController extends Controller
 {
 
   /**
@@ -28,7 +28,7 @@ class AdminController
       $features = App::get('database')->selectAll('features', Feature::class);
       $posts = App::get('database')->selectAll('posts', Post::class);
 
-      return view('admin.dashboard', compact('page', 'features', 'posts'));
+      return $this->render('admin.dashboard', compact('page', 'features', 'posts'));
 
     }
 
@@ -57,7 +57,7 @@ class AdminController
       $features = App::get('database')->selectAll('features', Feature::class);
       $posts = App::get('database')->selectAll('posts', Post::class);
 
-      return view('admin.dashboard', compact('page', 'features', 'posts'));
+      return $this->render('admin.dashboard', compact('page', 'features', 'posts'));
 
     }
 

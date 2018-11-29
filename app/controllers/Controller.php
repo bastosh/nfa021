@@ -4,7 +4,9 @@
 namespace Simple\App\Controllers;
 
 
-class Controller
+use Simple\Core\App;
+
+abstract class Controller
 {
 
   /**
@@ -27,4 +29,11 @@ class Controller
 
     return $errors;
   }
+
+  protected function render($view, $parameters = [])
+  {
+    $parts = explode('.', $view);
+    echo App::get('twig')->render("{$parts[0]}/{$parts[1]}.html.twig", $parameters);
+  }
+
 }

@@ -20,7 +20,7 @@ class FeaturesController extends Controller
     $features = App::get('database')->selectAllPublished('features', Feature::class);
     $page = 'Features';
 
-    return view('features.index', compact('page', 'features'));
+    return $this->render('features.index', compact('page', 'features'));
   }
 
   /**
@@ -35,7 +35,7 @@ class FeaturesController extends Controller
     $feature = App::get('database')->select('features', $id, Feature::class);
     if ($feature) {
       $page = $feature->title;
-      return view('features.show', compact('page', 'feature'));
+      return $this->render('features.show', compact('page', 'feature'));
     }
 
     return view('pages.error');
@@ -82,7 +82,7 @@ class FeaturesController extends Controller
 
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $page = 'New features';
+    $page = 'New feature';
 
     $errors = $this->validate([
       'title' => $title,
