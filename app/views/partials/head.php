@@ -2,13 +2,26 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title><?php echo $title; ?></title>
+    <title><?= $page; ?></title>
     <link rel="stylesheet" href="/css/app.css">
-  </head>
-  <body class="grid-container grid-y" style="min-height: 100vh;">
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
 
-    <nav class="cell shrink grid-x align-justify">
+      main {
+        flex: 1;
+      }
+    </style>
+  </head>
+
+
+  <body class="grid-container">
+
+    <nav class="grid-x align-justify">
       <?php include('nav.php'); ?>
     </nav>
 
-    <main class="cell auto grid-y align-center">
+    <main class="grid-y align-center">

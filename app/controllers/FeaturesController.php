@@ -4,6 +4,7 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\Core\Flash;
+use Simple\App\Models\Feature;
 
 class FeaturesController extends Controller
 {
@@ -16,10 +17,10 @@ class FeaturesController extends Controller
   public function index()
   {
 
-    $features = App::get('database')->selectAllPublished('features');
-    $title = 'Features';
+    $features = App::get('database')->selectAllPublished('features', Feature::class);
+    $page = 'Features';
 
-    return view('features.index', compact('title', 'features'));
+    return $this->render('features.index', compact('page', 'features'));
   }
 
   /**
@@ -31,10 +32,10 @@ class FeaturesController extends Controller
    */
   public function show($id)
   {
-    $feature = App::get('database')->select('features', $id);
+    $feature = App::get('database')->select('features', $id, Feature::class);
     if ($feature) {
-      $title = $feature->title;
-      return view('features.show', compact('title', 'feature'));
+      $page = $feature->title;
+      return $this->render('features.show', compact('page', 'feature'));
     }
 
     return view('pages.error');
@@ -53,13 +54,13 @@ class FeaturesController extends Controller
       && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to create a new feature
-      $title = 'New Feature';
-      return view('features.create', compact('title'));
+      $page = 'New Feature';
+      return view('features.create', compact('page'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -71,8 +72,17 @@ class FeaturesController extends Controller
   public function store()
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     $title = $_POST['title'];
     $description = $_POST['description'];
+    $page = 'New feature';
 
     $errors = $this->validate([
         'title' => $title,
@@ -85,7 +95,7 @@ class FeaturesController extends Controller
 
       Flash::message('alert', 'There are errors in the form.');
 
-      return redirect('features/create');
+      return view('features.create', compact('title', 'description', 'page'));
 
     } else {
 
@@ -115,14 +125,14 @@ class FeaturesController extends Controller
       && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to edit the feature
-      $feature = App::get('database')->select('features', $id);
-      $title = 'Edit';
-      return view('features.edit', compact('title', 'feature'));
+      $feature = App::get('database')->select('features', $id, Feature::class);
+      $page = 'Edit';
+      return view('features.edit', compact('page', 'feature'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -133,6 +143,14 @@ class FeaturesController extends Controller
    */
   public function update($id)
   {
+
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
 
     $title = $_POST['title'];
     $description = $_POST['description'];
@@ -173,6 +191,15 @@ class FeaturesController extends Controller
    */
   public function destroy($id)
   {
+
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     App::get('database')->delete('features', $id);
 
     Flash::message('success', 'Feature successfully deleted.');

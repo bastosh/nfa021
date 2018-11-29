@@ -2,7 +2,7 @@
 
 namespace Simple\App\Controllers;
 
-class PagesController
+class PagesController extends Controller
 {
   /**
    * Show the homepage
@@ -10,8 +10,8 @@ class PagesController
    */
   public function home()
   {
-    $title = 'Homepage';
-    return view('pages.home', compact('title'));
+    $page = 'Homepage';
+    return $this->render('pages.home', compact('page'));
   }
 
   /**
@@ -20,8 +20,8 @@ class PagesController
    */
   public function about()
   {
-    $title = 'About';
-    return view('pages.about', compact('title'));
+    $page = 'About';
+    return $this->render('pages.about', compact('page'));
   }
 
   /**
@@ -30,8 +30,8 @@ class PagesController
    */
   public function contact()
   {
-    $title = 'Contact';
-    return view('pages.contact', compact('title'));
+    $page = 'Contact';
+    return $this->render('pages.contact', compact('page'));
   }
 
   /**
@@ -40,7 +40,7 @@ class PagesController
    */
   public function error()
   {
-    $title = 'Page not found';
-    return view('pages.error', compact('title'));
+    $page = 'Page not found';
+    return view('pages.error', compact('page'));
   }
 }

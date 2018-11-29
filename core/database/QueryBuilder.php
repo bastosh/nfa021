@@ -20,57 +20,65 @@ class QueryBuilder
   }
 
   /**
-   * Select all the items
-   * form a given table
-   *
+   * Select all the items from a given table
    * @param $table
+   * @param $model
    * @return array
    */
-  public function selectAll($table) {
+  public function selectAll($table, $model) {
     $query = "SELECT * FROM {$table}";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute();
-      return $statement->fetchAll(\PDO::FETCH_OBJ);
+      return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
   }
 
-  public function selectAllPublished($table) {
+  public function selectAllPublished($table, $model) {
     $query = "SELECT * FROM {$table} WHERE published = 1";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute();
-      return $statement->fetchAll(\PDO::FETCH_OBJ);
+      return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+  }
+
+  public function selectLastPublished($table, $model, $limit) {
+    $query = "SELECT * FROM {$table} WHERE published = 1 ORDER BY created_at DESC LIMIT $limit";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
+      return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
   }
 
   /**
-   * Select a given item
-   * from a given table
-   *
+   * Select a given item from a given table
    * @param $table
    * @param $id
+   * @param $model
    * @return mixed
    */
-  public function select($table, $id) {
+  public function select($table, $id, $model) {
     $query = "SELECT * FROM {$table} WHERE id = :id";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute(['id' => $id]);
-      return $statement->fetch(\PDO::FETCH_OBJ);
+      $statement->setFetchMode(\PDO::FETCH_CLASS, $model);
+      return $statement->fetch();
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
   }
 
   /**
-   * Insert a new item
-   * into a given table
-   *
+   * Insert a new item into a given table
    * @param $table
    * @param $parameters
    */
@@ -90,9 +98,7 @@ class QueryBuilder
   }
 
   /**
-   * Update a given item
-   * form a given table
-   *
+   * Update a given item form a given table
    * @param $table
    * @param $params
    * @param $id
@@ -108,22 +114,20 @@ class QueryBuilder
       $columns .= $key. " = :".$key.", "; // 'title = :title, description = :description,'
       $data[":".$key] = $value; // [:title => $value, :description => $value]
     }
-    $columns = rtrim($columns,", "); // Remove the last ,
+    // $columns = rtrim($columns,", "); // Remove the last ,
 
-    $query = "UPDATE {$table} SET {$columns} WHERE id = {$id}";
+    $query = "UPDATE {$table} SET {$columns} updated_at = NOW() WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute($data);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die('Whooops. Something went wrong... '.$e);
     }
 
   }
 
   /**
-   * Delete a given item
-   * from a given table
-   *
+   * Delete a given item from a given table
    * @param $table
    * @param $id
    */
@@ -143,7 +147,7 @@ class QueryBuilder
     $query = "UPDATE {$table} SET published = 1 WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
-      $statement->execute($data);
+      $statement->execute();
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }
@@ -156,7 +160,20 @@ class QueryBuilder
     $query = "UPDATE {$table} SET published = 0 WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
-      $statement->execute($data);
+      $statement->execute();
+    } catch (\Exception $e) {
+      die('Whooops. Something went wrong...');
+    }
+
+  }
+
+  public function deleteImage($table, $id)
+  {
+
+    $query = "UPDATE {$table} SET cover = NULL WHERE id = {$id}";
+    try {
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
     } catch (\Exception $e) {
       die('Whooops. Something went wrong...');
     }

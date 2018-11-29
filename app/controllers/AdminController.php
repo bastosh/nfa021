@@ -3,8 +3,10 @@
 namespace Simple\App\Controllers;
 
 use Simple\Core\App;
+use Simple\App\Models\Feature;
+use Simple\App\Models\Post;
 
-class AdminController
+class AdminController extends Controller
 {
 
   /**
@@ -22,11 +24,11 @@ class AdminController
       && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
 
-      $title = 'Administration';
-      $features = App::get('database')->selectAll('features');
-      $posts = App::get('database')->selectAll('posts');
+      $page = 'Administration';
+      $features = App::get('database')->selectAll('features', Feature::class);
+      $posts = App::get('database')->selectAll('posts', Post::class);
 
-      return view('admin.dashboard', compact('title', 'features', 'posts'));
+      return $this->render('admin.dashboard', compact('page', 'features', 'posts'));
 
     }
 
@@ -37,8 +39,8 @@ class AdminController
             OR $_POST['password'] != App::get('config')['admin']['password'])
     {
 
-      $title = 'Login';
-      return view('admin.login', compact('title'));
+      $page = 'Login';
+      return view('admin.login', compact('page'));
 
     }
 
@@ -48,11 +50,14 @@ class AdminController
       $_SESSION['username'] = $_POST['username'];
       $_SESSION['password'] = $_POST['password'];
 
-      $title = 'Administration';
-      $features = App::get('database')->selectAll('features');
-      $posts = App::get('database')->selectAll('posts');
+      $token = bin2hex(openssl_random_pseudo_bytes(24));
+      $_SESSION['token'] = $token;
 
-      return view('admin.dashboard', compact('title', 'features', 'posts'));
+      $page = 'Administration';
+      $features = App::get('database')->selectAll('features', Feature::class);
+      $posts = App::get('database')->selectAll('posts', Post::class);
+
+      return $this->render('admin.dashboard', compact('page', 'features', 'posts'));
 
     }
 
@@ -82,14 +87,14 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate features
-      $title = 'Admin Features';
-      $features = App::get('database')->selectAll('features');
-      return view('admin.features', compact('title', 'features'));
+      $page = 'Admin Features';
+      $features = App::get('database')->selectAll('features', Feature::class);
+      return view('admin.features', compact('page', 'features'));
     }
     else {
       // Ask for credentials
-      $title = 'Login';
-      return view('admin.login', compact('title'));
+      $page = 'Login';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -108,17 +113,17 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to see the details of a feature
-      $feature = App::get('database')->select('features', $id);
+      $feature = App::get('database')->select('features', $id, Feature::class);
       if ($feature) {
-        $title = 'Admin • '.$feature->title;
-        return view('admin.feature', compact('title', 'feature'));
+        $page = 'Admin • '.$feature->title;
+        return view('admin.feature', compact('page', 'feature'));
       }
       return view('pages.error');
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -135,14 +140,14 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate posts
-      $title = 'Admin Posts';
-      $posts = App::get('database')->selectAll('posts');
-      return view('admin.posts', compact('title', 'posts'));
+      $page = 'Admin Posts';
+      $posts = App::get('database')->selectAll('posts', Post::class);
+      return view('admin.posts', compact('page', 'posts'));
     }
     else {
       // If not ask for credentials
-      $title = 'Login';
-      return view('admin.login', compact('title'));
+      $page = 'Login';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -161,17 +166,17 @@ class AdminController
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to see the details of a feature
-      $post = App::get('database')->select('posts', $id);
+      $post = App::get('database')->select('posts', $id, Post::class);
       if ($post) {
-        $title = 'Admin • '.$post->title;
-        return view('admin.post', compact('title', 'post'));
+        $page = 'Admin • '.$post->title;
+        return view('admin.post', compact('page', 'post'));
       }
       return view('pages.error');
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 

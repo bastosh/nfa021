@@ -4,6 +4,7 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\Core\Flash;
+use Simple\App\Models\Post;
 
 class PostsController extends Controller
 {
@@ -16,10 +17,10 @@ class PostsController extends Controller
   public function index()
   {
 
-    $posts = App::get('database')->selectAllPublished('posts');
-    $title = 'posts';
+    $posts = App::get('database')->selectLastPublished('posts', Post::class, 3);
+    $page = 'Articles';
 
-    return view('posts.index', compact('title', 'posts'));
+    return view('posts.index', compact('page', 'posts'));
   }
 
   /**
@@ -31,10 +32,10 @@ class PostsController extends Controller
    */
   public function show($id)
   {
-    $post = App::get('database')->select('posts', $id);
+    $post = App::get('database')->select('posts', $id, Post::class);
     if ($post) {
-      $title = $post->title;
-      return view('posts.show', compact('title', 'post'));
+      $page = $post->title;
+      return view('posts.show', compact('page', 'post'));
     }
 
     return view('pages.error');
@@ -53,13 +54,13 @@ class PostsController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to create a new post
-      $title = 'New Post';
-      return view('posts.create', compact('title'));
+      $page = 'New Post';
+      return view('posts.create', compact('page'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -71,30 +72,51 @@ class PostsController extends Controller
   public function store()
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $page = 'New Post';
+
+    if ($_FILES['image']['size'] > 0) {
+
+      $uploadErrors = upload($_FILES['image']);
+
+      if (count($uploadErrors)) {
+
+        $_SESSION['errors'] = $uploadErrors;
+        Flash::message('alert', 'The image could not be uploaded.');
+        return view('posts.create', compact('page','title', 'content'));
+      }
+
+    }
 
     $errors = $this->validate([
-      'title' => $title,
-      'content' => $content]
-    );
+        'title' => $title,
+        'content' => $content
+      ]);
 
     if (count($errors)) {
 
       $_SESSION['errors'] = $errors;
-
       Flash::message('alert', 'There are errors in the form.');
-
-      return redirect('posts/create');
+      return view('posts.create', compact('page','title', 'content'));
 
     } else {
 
       App::get('database')->insert('posts', [
         'title' => clean($title),
-        'content' => $content
+        'content' => $content,
+        'cover' => $_FILES["image"]["name"]
       ]);
 
-      Flash::message('success', 'Post successfully created.');
+      Flash::message('success', 'Article successfully created.');
 
       return redirect('admin-posts');
     }
@@ -115,14 +137,14 @@ class PostsController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to edit a post
-      $post = App::get('database')->select('posts', $id);
-      $title = 'Admin • '.$post->title;
-      return view('posts.edit', compact('title', 'post'));
+      $post = App::get('database')->select('posts', $id, Post::class);
+      $page = 'Admin • '.$post->title;
+      return view('posts.edit', compact('page', 'post'));
     }
     else {
       // Ask for credentials
-      $title = 'Connexion';
-      return view('admin.login', compact('title'));
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
     }
   }
 
@@ -134,13 +156,34 @@ class PostsController extends Controller
   public function update($id)
   {
 
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
+    if ($_FILES['image']['size'] > 0) {
+
+      $uploadErrors = upload($_FILES['image']);
+
+      if (count($uploadErrors)) {
+
+        $_SESSION['errors'] = $uploadErrors;
+        Flash::message('alert', 'The image could not be uploaded.');
+        return redirect("posts/{$id}/edit");
+      }
+
+    }
+
     $title = $_POST['title'];
     $content = $_POST['content'];
 
     $errors = $this->validate([
         'title' => $title,
-        'content' => $content]
-    );
+        'content' => $content
+    ]);
 
     if (count($errors)) {
 
@@ -155,10 +198,11 @@ class PostsController extends Controller
       App::get('database')
         ->update('posts', [
           'title' => clean($title),
-          'content' => $content
+          'content' => $content,
+          'cover' => $_FILES["image"]["name"]
         ], $id);
 
-      Flash::message('success', 'Post successfully updated.');
+      Flash::message('success', 'Article successfully updated.');
 
       return redirect('admin-posts');
 
@@ -173,9 +217,24 @@ class PostsController extends Controller
    */
   public function destroy($id)
   {
+
+    if(!isset($_POST['token'])){
+      throw new \Exception('No token found!');
+    }
+
+    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+      throw new \Exception('Token mismatch!');
+    }
+
+    $post = App::get('database')->select('posts', $id, Post::class);
+    // Remove the images associated
+    unlink('../public/img/sm-'.$post->cover);
+    unlink('../public/img/'.$post->cover);
+    unlink('../public/img/lg-'.$post->cover);
+
     App::get('database')->delete('posts', $id);
 
-    Flash::message('success', 'Post successfully deleted.');
+    Flash::message('success', 'Article successfully deleted.');
 
     return redirect('admin-posts');
   }
@@ -190,7 +249,7 @@ class PostsController extends Controller
 
     App::get('database')->publish('posts', $id);
 
-    Flash::message('success', 'Post successfully published.');
+    Flash::message('success', 'Article successfully published.');
 
     return redirect('admin-posts');
 
@@ -206,9 +265,26 @@ class PostsController extends Controller
 
     App::get('database')->unpublish('posts', $id);
 
-    Flash::message('success', 'Post successfully unpublished.');
+    Flash::message('success', 'Article successfully unpublished.');
 
     return redirect('admin-posts');
+
+  }
+
+  public function deleteImage($id)
+  {
+
+    $post = App::get('database')->select('posts', $id, Post::class);
+    // Remove the images associated
+    unlink('../public/img/sm-'.$post->cover);
+    unlink('../public/img/'.$post->cover);
+    unlink('../public/img/lg-'.$post->cover);
+
+    App::get('database')->deleteImage('posts', $id);
+
+    Flash::message('success', 'Image successfully deleted.');
+
+    return redirect("posts/{$id}/edit");
 
   }
 

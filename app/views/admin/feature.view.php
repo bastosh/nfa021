@@ -8,20 +8,13 @@
     <h2 class="text-center"><?= $feature->title; ?></h2>
     <hr>
 
-    <div class="grid-x margin-top-2">
-      <div class="cell small-10 small-offset-1 medium-6 medium-offset-3">
+    <div class="grid-x align-center margin-top-2">
+      <div class="small-10  medium-6">
         <p class="text-center lead"><?= $feature->description; ?></p>
       </div>
     </div>
 
   </div>
-  <?php require __DIR__.'/../partials/scripts.php'; ?>
-  <script>
-      $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
-          e.preventDefault();
-          $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
-      });
-  </script>
+  <!-- END CONTENT -->
 
-</body>
-</html>
+<?php require __DIR__.'/../admin/partials/footer.php'; ?>

@@ -58,7 +58,7 @@ $ dploy
 ```
 
 ## Changelog
-Détails des évolutions dans le fichier [CHANGELOG.md](https://github.com/simple-mvc/simple/blob/master/CHANGELOG.md).
+Détails des évolutions dans le fichier [CHANGELOG.md](https://github.com/simple-mvc/simple-cms/blob/master/CHANGELOG.md).
 
 ## Licence ISC
 Copyright (c) 2018, Sébastien Pereda

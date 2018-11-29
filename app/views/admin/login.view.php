@@ -1,7 +1,7 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
   <h1 class="text-center margin-bottom-2">LOGIN</h1>
-  <div class="grid-x">
-    <div class="cell small-8 small-offset-2 medium-4 medium-offset-4">
+  <div class="grid-x align-center">
+    <div class="small-8 medium-4">
       <form action="/admin" method="POST">
         <label>
           Username

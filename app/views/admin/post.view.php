@@ -4,24 +4,34 @@
   <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
 
     <a href="/admin-posts"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
-
-    <h2 class="text-center"><?= $post->title; ?></h2>
     <hr>
 
-    <div class="grid-x margin-top-2">
-      <div class="cell small-10 small-offset-1 medium-6 medium-offset-3">
-        <p class="text-center lead"><?= $post->content; ?></p>
-      </div>
+    <div class="grid-x align-center">
+      <article class="small-10 medium-8 large-6">
+        <h1 class="margin-top-2" style="line-height: 1"><?= $post->title; ?></h1>
+        <p class="lead font-italic margin-bottom-2">
+          <time>
+            <?php
+            $date = new DateTime($post->created_at);
+            echo $date->format('M d, Y');
+            ?>
+          </time>
+          by John Doe
+        </p>
+        <?php if($post->cover) : ?>
+          <picture>
+            <source media="(min-width: 768px)"
+                    srcset="/img/<?= $post->cover; ?> 1x,
+                            /img/lg-<?= $post->cover; ?> 2x">
+            <img src="/img/sm-<?= $post->cover; ?>"
+                 srcset="/img/<?= $post->cover; ?> 2x"
+                 alt="" style="width: 100%">
+          </picture>
+        <?php endif; ?>
+        <div class="margin-top-2"><?= $post->content; ?></div>
+      </article>
     </div>
-
   </div>
-  <?php require __DIR__.'/../partials/scripts.php'; ?>
-  <script>
-      $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
-          e.preventDefault();
-          $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
-      });
-  </script>
+  <!-- END CONTENT -->
 
-</body>
-</html>
+<?php require __DIR__.'/../admin/partials/footer.php'; ?>

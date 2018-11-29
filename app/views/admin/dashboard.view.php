@@ -34,7 +34,7 @@
       </table>
     </section>
     <section class="cell medium-6">
-      <h3>Posts</h3>
+      <h3>Articles</h3>
       <table class="hover text-center dashboard">
         <thead>
         <tr>
@@ -83,4 +83,3 @@
 </script>
 </body>
 </html>
-
