@@ -50,8 +50,8 @@ class FeaturesController extends Controller
   {
     // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to create a new feature
       $page = 'New Feature';
@@ -85,8 +85,8 @@ class FeaturesController extends Controller
     $page = 'New feature';
 
     $errors = $this->validate([
-        'title' => $title,
-        'description' => $description]
+      'title' => $title,
+      'description' => $description]
     );
 
     if (count($errors)) {
@@ -121,8 +121,8 @@ class FeaturesController extends Controller
   {
     // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-      && ($_SESSION['username'] === App::get('config')['admin']['username'])
-      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to edit the feature
       $feature = App::get('database')->select('features', $id, Feature::class);

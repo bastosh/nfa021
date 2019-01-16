@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Simple\App\Controllers;
-
 
 use Simple\Core\App;
 

@@ -6,7 +6,7 @@ use Simple\Core\App;
 use Simple\Core\Database\QueryBuilder;
 use Simple\Core\Database\Connection;
 
-$loader = new Twig_Loader_Filesystem('../templates');
+$loader = new Twig_Loader_Filesystem('../src/templates');
 $twig = new Twig_Environment($loader, [
   'cache' => false,
   'debug' => true
@@ -19,5 +19,5 @@ App::bind('config', require '../config.php');
 App::bind('env', App::get('config')['env']);
 App::bind('debug', App::get('config')['debug']);
 App::bind('database', new QueryBuilder(
-  Connection::make(App::get('config')['dev'])
+  Connection::make(App::get('config')[App::get('env')])
 ));

@@ -40,7 +40,6 @@ class PagesController extends Controller
    */
   public function error()
   {
-    $page = 'Page not found';
-    return view('pages.error', compact('page'));
+    return view('pages.error');
   }
 }

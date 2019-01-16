@@ -4,7 +4,6 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\App\Models\Feature;
-use Simple\App\Models\Post;
 
 class AdminController extends Controller
 {
@@ -26,9 +25,8 @@ class AdminController extends Controller
 
       $page = 'Administration';
       $features = App::get('database')->selectAll('features', Feature::class);
-      $posts = App::get('database')->selectAll('posts', Post::class);
 
-      return $this->render('admin.dashboard', compact('page', 'features', 'posts'));
+      return $this->render('admin.dashboard', compact('page', 'features'));
 
     }
 
@@ -55,9 +53,8 @@ class AdminController extends Controller
 
       $page = 'Administration';
       $features = App::get('database')->selectAll('features', Feature::class);
-      $posts = App::get('database')->selectAll('posts', Post::class);
 
-      return $this->render('admin.dashboard', compact('page', 'features', 'posts'));
+      return $this->render('admin.dashboard', compact('page', 'features'));
 
     }
 
@@ -126,58 +123,4 @@ class AdminController extends Controller
       return view('admin.login', compact('page'));
     }
   }
-
-  /**
-   * Admin page for the posts
-   * @return mixed
-   * @throws \Exception
-   */
-  public function posts()
-  {
-    // If the user is already logged in and the credentials are correct
-    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-          && ($_SESSION['username'] === App::get('config')['admin']['username'])
-          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
-    {
-      // Allow the user to administrate posts
-      $page = 'Admin Posts';
-      $posts = App::get('database')->selectAll('posts', Post::class);
-      return view('admin.posts', compact('page', 'posts'));
-    }
-    else {
-      // If not ask for credentials
-      $page = 'Login';
-      return view('admin.login', compact('page'));
-    }
-  }
-
-  /**
-   * Show details of a given post in the administration
-   * GET admin-posts/{id}
-   * @param $id
-   * @return mixed
-   * @throws \Exception
-   */
-  public function showPost($id)
-  {
-    // If the user is already logged in and the credentials are correct
-    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-          && ($_SESSION['username'] === App::get('config')['admin']['username'])
-          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
-    {
-      // Allow the user to see the details of a feature
-      $post = App::get('database')->select('posts', $id, Post::class);
-      if ($post) {
-        $page = 'Admin • '.$post->title;
-        return view('admin.post', compact('page', 'post'));
-      }
-      return view('pages.error');
-    }
-    else {
-      // Ask for credentials
-      $page = 'Connexion';
-      return view('admin.login', compact('page'));
-    }
-  }
-
 }

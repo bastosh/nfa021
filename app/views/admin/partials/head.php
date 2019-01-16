@@ -9,7 +9,7 @@
 <body>
 
 <?php
-  if (\Simple\Core\App::get('debug') === true) {
+  if (\Simple\Core\App::get('debug') === true && \Simple\Core\App::get('env') === 'dev') {
     require '../debug.php';
   }
 ?>
@@ -56,19 +56,13 @@
           <li>
             <a href="/admin">
               <i class="large fas fa-cog"></i>
-              <span class="app-dashboard-sidebar-text">Dashboard</span>
+              <span class="app-dashboard-sidebar-text">Overview</span>
             </a>
           </li>
           <li>
             <a href="/admin-features">
               <i class="large fas fa-list"></i>
               <span class="app-dashboard-sidebar-text">Features</span>
-            </a>
-          </li>
-          <li>
-            <a href="/admin-posts">
-              <i class="large fas fa-pen-nib"></i>
-              <span class="app-dashboard-sidebar-text">Articles</span>
             </a>
           </li>
         </ul>

@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title><?= $title; ?></title>
+    <title>Page non trouvée</title>
     <link rel="stylesheet" href="/css/app.css">
   </head>
   <body class="grid-container grid-y align-center-middle" style="min-height: 100vh;">
