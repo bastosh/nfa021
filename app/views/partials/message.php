@@ -5,7 +5,7 @@
   unset($_SESSION['flash_message']);
   ?>
   <div data-closable class="callout alert-callout-border <?= $level; ?>">
-    <strong><?= ucfirst($level); ?>!</strong> - <?= $error[$level]; ?>
+    <?= $error[$level]; ?>
     <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
       <span aria-hidden="true">&times;</span>
     </button>

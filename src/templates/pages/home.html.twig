@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Simple MVC</h1>
-    <p class="lead text-center">Let’s start a project!</p>
+    {% include 'blocks/header.html.twig' %}
+    {% include 'blocks/section-features.html.twig' %}
+    {% include 'blocks/emergency.html.twig' %}
+    {% include 'partials/footer.html.twig' %}
 {% endblock %}

@@ -32,7 +32,7 @@ class QueryBuilder
       $statement->execute();
       return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -43,7 +43,7 @@ class QueryBuilder
       $statement->execute();
       return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -54,7 +54,7 @@ class QueryBuilder
       $statement->execute();
       return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -73,7 +73,7 @@ class QueryBuilder
       $statement->setFetchMode(\PDO::FETCH_CLASS, $model);
       return $statement->fetch();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -93,7 +93,7 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute($parameters);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -121,7 +121,7 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute($data);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong... '.$e);
+      die($e->getMessage());
     }
 
   }
@@ -137,7 +137,7 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute(['id' => $id]);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -149,7 +149,7 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
 
   }
@@ -162,7 +162,7 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
 
   }
@@ -170,12 +170,12 @@ class QueryBuilder
   public function deleteImage($table, $id)
   {
 
-    $query = "UPDATE {$table} SET cover = NULL WHERE id = {$id}";
+    $query = "UPDATE {$table} SET image = NULL WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
 
   }

@@ -81,30 +81,23 @@ class FeaturesController extends Controller
     }
 
     $title = $_POST['title'];
-    $description = $_POST['description'];
-    $page = 'New feature';
+    $page = 'Nouvelle spécialité';
 
-    $errors = $this->validate([
-      'title' => $title,
-      'description' => $description]
-    );
+    $errors = $this->validate(['title' => $title]);
 
     if (count($errors)) {
 
       $_SESSION['errors'] = $errors;
 
-      Flash::message('alert', 'There are errors in the form.');
+      Flash::message('alert', 'Le formulaire comporte des erreurs.');
 
-      return view('features.create', compact('title', 'description', 'page'));
+      return view('features.create', compact('title','page'));
 
     } else {
 
-      App::get('database')->insert('features', [
-        'title' => clean($title),
-        'description' => clean($description)
-      ]);
+      App::get('database')->insert('features', ['title' => clean($title)]);
 
-      Flash::message('success', 'Feature successfully created.');
+      Flash::message('success', 'La spécialité a été ajoutée.');
 
       return redirect('admin-features');
     }
@@ -153,30 +146,27 @@ class FeaturesController extends Controller
     }
 
     $title = $_POST['title'];
-    $description = $_POST['description'];
 
     $errors = $this->validate([
-        'title' => $title,
-        'description' => $description]
+        'title' => $title
+      ]
     );
 
     if (count($errors)) {
 
       $_SESSION['errors'] = $errors;
 
-      Flash::message('alert', 'There are errors in the form.');
+      Flash::message('alert', 'Le formulaire comporte des erreurs.');
 
       return redirect("features/{$id}/edit");
 
     } else {
 
       App::get('database')
-        ->update('features', [
-          'title' => clean($_POST['title']),
-          'description' => clean($_POST['description'])
+        ->update('features', ['title' => clean($_POST['title'])
         ], $id);
 
-      Flash::message('success', 'Feature successfully updated.');
+      Flash::message('success', 'La spécialité a été mise à jour.');
 
       return redirect('admin-features');
 
@@ -202,7 +192,7 @@ class FeaturesController extends Controller
 
     App::get('database')->delete('features', $id);
 
-    Flash::message('success', 'Feature successfully deleted.');
+    Flash::message('success', 'La spécialité a été supprimée.');
 
     return redirect('admin-features');
   }
@@ -217,7 +207,7 @@ class FeaturesController extends Controller
 
     App::get('database')->publish('features', $id);
 
-    Flash::message('success', 'Feature successfully published.');
+    Flash::message('success', 'La spécialité a été publiée.');
 
     return redirect('admin-features');
 
@@ -233,7 +223,7 @@ class FeaturesController extends Controller
 
     App::get('database')->unpublish('features', $id);
 
-    Flash::message('success', 'Feature successfully unpublished.');
+    Flash::message('success', 'La spécialité n’est plus publiée.');
 
     return redirect('admin-features');
 

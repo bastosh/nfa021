@@ -17,11 +17,8 @@
     </style>
   </head>
 
+  <body>
 
-  <body class="grid-container">
-
-    <nav class="grid-x align-justify">
-      <?php include('nav.php'); ?>
-    </nav>
+    <?php include('nav.php'); ?>
 
     <main class="grid-y align-center">

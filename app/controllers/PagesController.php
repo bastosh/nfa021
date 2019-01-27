@@ -2,32 +2,40 @@
 
 namespace Simple\App\Controllers;
 
+use Simple\Core\App;
+use Simple\App\Models\Guide;
+use Simple\App\Models\Feature;
+use Simple\App\Models\Image;
+
 class PagesController extends Controller
 {
-  /**
-   * Show the homepage
-   * @return mixed
-   */
   public function home()
   {
-    $page = 'Homepage';
-    return $this->render('pages.home', compact('page'));
+    $guides = App::get('database')->selectLastPublished('guides', Guide::class, 3);
+    $features = App::get('database')->selectAllPublished('features', Feature::class);
+    $page = 'Accueil';
+    return $this->render('pages.home', compact('page', 'guides', 'features'));
   }
 
-  /**
-   * Show the about page
-   * @return mixed
-   */
   public function about()
   {
-    $page = 'About';
+    $page = 'Notre clinique';
     return $this->render('pages.about', compact('page'));
   }
 
-  /**
-   * Show the contact page
-   * @return mixed
-   */
+  public function team()
+  {
+    $page = 'Notre équipe';
+    return $this->render('pages.team', compact('page'));
+  }
+
+  public function gallery()
+  {
+    $page = 'Gallerie';
+    $images = App::get('database')->selectAllPublished('images', Image::class);
+    return $this->render('pages.gallery', compact('page', 'images'));
+  }
+
   public function contact()
   {
     $page = 'Contact';

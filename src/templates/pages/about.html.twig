@@ -5,13 +5,15 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center margin-bottom-2">About</h1>
-    <div class="grid-x align-center">
-        <div class="small-10 medium-8">
-            <p class="lead">Simple MVC is a light PHP framework for educational purpose or small projects, when you don’t need the Laravel or Symfony cavalery.</p>
-            <p class="lead"><strong>simple-skeleton</strong> includes only the core features.</p>
-            <p class="lead"><strong>simple-mvc</strong> provides an admin area to CRUD basic items.</p>
-            <p class="lead"><strong>simple-cms</strong> adds a simple blog management.</p>
+
+    <header class="header">
+        {% include 'partials/nav.html.twig' %}
+        <div class="content content-sm text-center">
+            <h1>Notre clinique</h1>
         </div>
-    </div>
+    </header>
+
+    <main class="text-container lead">
+        {% include 'blocks/about.html.twig' %}
+    </main>
 {% endblock %}

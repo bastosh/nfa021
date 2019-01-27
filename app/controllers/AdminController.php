@@ -3,6 +3,7 @@
 namespace Simple\App\Controllers;
 
 use Simple\Core\App;
+use Simple\App\Models\Guide;
 use Simple\App\Models\Feature;
 
 class AdminController extends Controller
@@ -24,9 +25,9 @@ class AdminController extends Controller
     {
 
       $page = 'Administration';
+      $guides = App::get('database')->selectAll('guides', Guide::class);
       $features = App::get('database')->selectAll('features', Feature::class);
-
-      return $this->render('admin.dashboard', compact('page', 'features'));
+      return $this->render('admin.dashboard', compact('page', 'guides', 'features'));
 
     }
 
@@ -52,12 +53,11 @@ class AdminController extends Controller
       $_SESSION['token'] = $token;
 
       $page = 'Administration';
+      $guides = App::get('database')->selectAll('guides', Guide::class);
       $features = App::get('database')->selectAll('features', Feature::class);
-
-      return $this->render('admin.dashboard', compact('page', 'features'));
+      return $this->render('admin.dashboard', compact('page', 'guides', 'features'));
 
     }
-
   }
 
   /**
@@ -72,6 +72,60 @@ class AdminController extends Controller
   }
 
   /**
+   * Admin page for the guides
+   * @return mixed
+   * @throws \Exception
+   */
+  public function guides()
+  {
+    // If the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+      // Allow the user to administrate guides
+      $page = 'Admin Guides';
+      $guides = App::get('database')->selectAll('guides', Guide::class);
+      return view('admin.guides', compact('page', 'guides'));
+    }
+    else {
+      // Ask for credentials
+      $page = 'Login';
+      return view('admin.login', compact('page'));
+    }
+  }
+
+  /**
+   * Show details of a given guide in the administration
+   * GET admin-guides/{id}
+   * @param $id
+   * @return mixed
+   * @throws \Exception
+   */
+  public function showGuide($id)
+  {
+    // If the user is already logged in and the credentials are correct
+    if ((isset($_SESSION['username']) && isset($_SESSION['password']))
+          && ($_SESSION['username'] === App::get('config')['admin']['username'])
+          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+    {
+      // Allow the user to see the details of a guide
+      $guide = App::get('database')->select('guides', $id, Guide::class);
+      if ($guide) {
+        $page = 'Admin • '.$guide->title;
+        return view('admin.guide', compact('page', 'guide'));
+      }
+      return view('pages.error');
+    }
+    else {
+      // Ask for credentials
+      $page = 'Connexion';
+      return view('admin.login', compact('page'));
+    }
+  }
+
+
+  /**
    * Admin page for the features
    * @return mixed
    * @throws \Exception
@@ -80,8 +134,8 @@ class AdminController extends Controller
   {
     // If the user is already logged in and the credentials are correct
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-          && ($_SESSION['username'] === App::get('config')['admin']['username'])
-          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to administrate features
       $page = 'Admin Features';
@@ -106,8 +160,8 @@ class AdminController extends Controller
   {
     // If the user is already logged in and the credentials are correct
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
-          && ($_SESSION['username'] === App::get('config')['admin']['username'])
-          && (($_SESSION['password'] === App::get('config')['admin']['password'])))
+      && ($_SESSION['username'] === App::get('config')['admin']['username'])
+      && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to see the details of a feature
       $feature = App::get('database')->select('features', $id, Feature::class);
