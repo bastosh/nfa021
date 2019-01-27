@@ -8,28 +8,22 @@
 </head>
 <body>
 
-<?php
-  if (\Simple\Core\App::get('debug') === true && \Simple\Core\App::get('env') === 'dev') {
-    require '../debug.php';
-  }
-?>
-
 <div class="app-dashboard shrink-medium">
   <!-- TOPBAR -->
   <div class="row expanded app-dashboard-top-nav-bar">
     <div class="columns medium-2">
       <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
-      <a href="/" class="app-dashboard-logo">Simple</a>
+      <a href="/" class="app-dashboard-logo">Cat Clinic</a>
     </div>
     <div class="columns show-for-medium">
       <div class="app-dashboard-search-bar-container">
-        <input class="app-dashboard-search" type="search" placeholder="Search">
+        <input class="app-dashboard-search" type="search" placeholder="Rechercher">
         <i class="app-dashboard-search-icon fa fa-search"></i>
       </div>
     </div>
     <div class="columns shrink app-dashboard-top-bar-actions">
-      <a href="/logout" class="button hollow">Logout</a>
-      <button data-tooltip tabindex="1" title="Whatever you need to say." data-position="bottom" data-alignment="center"><i class="fas fa-info-circle"></i></button>
+      <a href="/logout" class="button hollow">Déconnexion</a>
+      <button data-tooltip tabindex="1" title="Never trust user input." data-position="bottom" data-alignment="center"><i class="fas fa-info-circle"></i></button>
     </div>
   </div>
 
@@ -39,7 +33,7 @@
     <div id="app-dashboard-sidebar" class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>
       <div class="app-dashboard-sidebar-title-area">
         <div class="app-dashboard-close-sidebar">
-          <h3 class="app-dashboard-sidebar-block-title">Items</h3>
+          <h3 class="app-dashboard-sidebar-block-title">Menu</h3>
           <!-- Close button -->
           <button id="close-sidebar" data-app-dashboard-toggle-shrink class="app-dashboard-sidebar-close-button show-for-medium" aria-label="Close menu" type="button">
             <span aria-hidden="true"><a href="#"><i class="large fas fa-angle-double-left"></i></a></span>
@@ -56,13 +50,19 @@
           <li>
             <a href="/admin">
               <i class="large fas fa-cog"></i>
-              <span class="app-dashboard-sidebar-text">Overview</span>
+              <span class="app-dashboard-sidebar-text">Vue d’ensemble</span>
             </a>
           </li>
           <li>
             <a href="/admin-features">
               <i class="large fas fa-list"></i>
-              <span class="app-dashboard-sidebar-text">Features</span>
+              <span class="app-dashboard-sidebar-text">Spécialités</span>
+            </a>
+          </li>
+          <li>
+            <a href="/admin-guides">
+              <i class="large fas fa-sticky-note"></i>
+              <span class="app-dashboard-sidebar-text">Fiches conseils</span>
             </a>
           </li>
         </ul>

@@ -5,10 +5,10 @@
 
       <?php require __DIR__ . '/../partials/message.php'; ?>
 
-      <h2 class="text-center">Spécialités</h2>
+      <h2 class="text-center">Fiches conseils</h2>
       <hr>
 
-      <a class="button" href="/features/create">Ajouter une spécialité</a>
+      <a class="button" href="/guides/create">Créer une fiche conseil</a>
 
       <table class="hover text-center">
         <thead>
@@ -21,14 +21,14 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($features as $feature) : ?>
+        <?php foreach ($guides as $guide) : ?>
           <tr>
-            <td><?= $feature->id; ?></td>
-            <td><?= $feature->title; ?></td>
-            <?php if ($feature->published === "1") :?>
+            <td><?= $guide->id; ?></td>
+            <td><?= $guide->title; ?></td>
+            <?php if ($guide->published === "1") :?>
               <td class="show-for-medium">Publié</td>
               <td class="show-for-medium">
-                <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/unpublish" method="POST">
+                <form class="display-inline margin-left-1" action="/guides/<?= $guide->id; ?>/unpublish" method="POST">
                   <input type="hidden" name="_method" value="PUT">
                   <button type="submit" class="button small warning margin-bottom-0">Dépublier</button>
                 </form>
@@ -36,20 +36,20 @@
             <?php else: ?>
               <td class="show-for-medium">Non publié</td>
               <td class="show-for-medium">
-                <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/publish" method="POST">
+                <form class="display-inline margin-left-1" action="/guides/<?= $guide->id; ?>/publish" method="POST">
                   <input type="hidden" name="_method" value="PUT">
                   <button type="submit" class="button small margin-bottom-0">Publier</button>
                 </form>
               </td>
             <?php endif; ?>
             <td>
-              <a class="button small margin-bottom-0 show-for-large" href="/admin-features/<?= $feature->id; ?>">
+              <a class="button small margin-bottom-0 show-for-large" href="/admin-guides/<?= $guide->id; ?>">
                 <i class="fas fa-eye"></i>
               </a>
-              <a class="button small warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">
+              <a class="button small warning margin-bottom-0" href="/guides/<?= $guide->id; ?>/edit">
                 <i class="fas fa-edit"></i>
               </a>
-              <button data-open="deleteFeature" class="button small alert margin-bottom-0">
+              <button data-open="deleteGuide" class="button small alert margin-bottom-0">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -58,12 +58,12 @@
         </tbody>
       </table>
 
-      <div class="reveal" id="deleteFeature" data-reveal>
-        <p>La spécialité sera définitivement supprimée.</p>
-        <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
+      <div class="reveal" id="deleteGuide" data-reveal>
+        <p>La fiche sera supprimée définitivement.</p>
+        <form class="padding-vertical-1 text-center" action="/guides/<?= $guide->id; ?>" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-          <button type="submit" class="button alert margin-bottom-0">Je sais ce que je fais.</button>
+          <button type="submit" class="button alert margin-bottom-0">Oui, je sais ce que je fais.</button>
         </form>
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>
