@@ -4,45 +4,44 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\Core\Flash;
-use Simple\App\Models\Feature;
+use Simple\App\Models\Guide;
 
-class FeaturesController extends Controller
+class GuidesController extends Controller
 {
   /**
-   * Show all the features
-   * GET /features
+   * Show all the guides
+   * GET /guides
    * @return mixed
    * @throws \Exception
    */
   public function index()
   {
+    $guides = App::get('database')->selectAllPublished('guides', Guide::class);
+    $page = 'Guides';
 
-    $features = App::get('database')->selectAllPublished('features', Feature::class);
-    $page = 'Features';
-
-    return $this->render('features.index', compact('page', 'features'));
+    return $this->render('guides.index', compact('page', 'guides'));
   }
 
   /**
-   * Show a given feature
-   * GET /features/{id}
+   * Show a given guide
+   * GET /guides/{id}
    * @param $id
    * @return mixed
    * @throws \Exception
    */
   public function show($id)
   {
-    $feature = App::get('database')->select('features', $id, Feature::class);
-    if ($feature) {
-      $page = $feature->title;
-      return $this->render('features.show', compact('page', 'feature'));
+    $guide = App::get('database')->select('guides', $id, Guide::class);
+    if ($guide) {
+      $page = $guide->title;
+      return $this->render('guides.show', compact('page', 'guide'));
     }
 
     return view('pages.error');
   }
 
   /**
-   * Show the form to create a feature
+   * Show the form to create a guide
    * @return mixed
    * @throws \Exception
    */
@@ -53,9 +52,9 @@ class FeaturesController extends Controller
           && ($_SESSION['username'] === App::get('config')['admin']['username'])
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-      // Allow the user to create a new feature
-      $page = 'New Feature';
-      return view('features.create', compact('page'));
+      // Allow the user to create a new guide
+      $page = 'New Guide';
+      return view('guides.create', compact('page'));
     }
     else {
       // Ask for credentials
@@ -65,8 +64,8 @@ class FeaturesController extends Controller
   }
 
   /**
-   * Store a feature into the database
-   * POST /features
+   * Store a guide into the database
+   * POST /guides
    * @throws \Exception
    */
   public function store()
@@ -81,9 +80,13 @@ class FeaturesController extends Controller
     }
 
     $title = $_POST['title'];
-    $page = 'Nouvelle spécialité';
+    $description = $_POST['description'];
+    $page = 'New guide';
 
-    $errors = $this->validate(['title' => $title]);
+    $errors = $this->validate([
+      'title' => $title,
+      'description' => $description]
+    );
 
     if (count($errors)) {
 
@@ -91,21 +94,24 @@ class FeaturesController extends Controller
 
       Flash::message('alert', 'Le formulaire comporte des erreurs.');
 
-      return view('features.create', compact('title','page'));
+      return view('guides.create', compact('title', 'description', 'page'));
 
     } else {
 
-      App::get('database')->insert('features', ['title' => clean($title)]);
+      App::get('database')->insert('guides', [
+        'title' => clean($title),
+        'description' => clean($description)
+      ]);
 
-      Flash::message('success', 'La spécialité a été ajoutée.');
+      Flash::message('success', 'La fiche a été publiée.');
 
-      return redirect('admin-features');
+      return redirect('admin-guides');
     }
   }
 
   /**
-   * Show a form to edit a given feature
-   * GET /features/{id}/edit
+   * Show a form to edit a given guide
+   * GET /guides/{id}/edit
    * @param $id
    * @return mixed
    * @throws \Exception
@@ -117,10 +123,10 @@ class FeaturesController extends Controller
           && ($_SESSION['username'] === App::get('config')['admin']['username'])
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
-      // Allow the user to edit the feature
-      $feature = App::get('database')->select('features', $id, Feature::class);
+      // Allow the user to edit the guide
+      $guide = App::get('database')->select('guides', $id, Guide::class);
       $page = 'Edit';
-      return view('features.edit', compact('page', 'feature'));
+      return view('guides.edit', compact('page', 'guide'));
     }
     else {
       // Ask for credentials
@@ -130,7 +136,7 @@ class FeaturesController extends Controller
   }
 
   /**
-   * Update a given feature
+   * Update a given guide
    * @param $id
    * @throws \Exception
    */
@@ -146,10 +152,11 @@ class FeaturesController extends Controller
     }
 
     $title = $_POST['title'];
+    $description = $_POST['description'];
 
     $errors = $this->validate([
-        'title' => $title
-      ]
+        'title' => $title,
+        'description' => $description]
     );
 
     if (count($errors)) {
@@ -158,24 +165,26 @@ class FeaturesController extends Controller
 
       Flash::message('alert', 'Le formulaire comporte des erreurs.');
 
-      return redirect("features/{$id}/edit");
+      return redirect("guides/{$id}/edit");
 
     } else {
 
       App::get('database')
-        ->update('features', ['title' => clean($_POST['title'])
+        ->update('guides', [
+          'title' => clean($_POST['title']),
+          'description' => clean($_POST['description'])
         ], $id);
 
-      Flash::message('success', 'La spécialité a été mise à jour.');
+      Flash::message('success', 'La fiche a été mise à jour.');
 
-      return redirect('admin-features');
+      return redirect('admin-guides');
 
     }
   }
 
   /**
-   * Delete a given feature
-   * DELETE /features/{id}
+   * Delete a given guide
+   * DELETE /guides/{id}
    * @param $id
    * @throws \Exception
    */
@@ -190,42 +199,42 @@ class FeaturesController extends Controller
       throw new \Exception('Token mismatch!');
     }
 
-    App::get('database')->delete('features', $id);
+    App::get('database')->delete('guides', $id);
 
-    Flash::message('success', 'La spécialité a été supprimée.');
+    Flash::message('success', 'La fiche a été supprimée.');
 
-    return redirect('admin-features');
+    return redirect('admin-guides');
   }
 
   /**
-   * Set the feature as published in the database
+   * Set the guide as published in the database
    * @param $id
    * @throws \Exception
    */
   public function publish($id)
   {
 
-    App::get('database')->publish('features', $id);
+    App::get('database')->publish('guides', $id);
 
-    Flash::message('success', 'La spécialité a été publiée.');
+    Flash::message('success', 'La fiche a été publiée.');
 
-    return redirect('admin-features');
+    return redirect('admin-guides');
 
   }
 
   /**
-   * Set the feature as unpublished in the database
+   * Set the guide as unpublished in the database
    * @param $id
    * @throws \Exception
    */
   public function unpublish($id)
   {
 
-    App::get('database')->unpublish('features', $id);
+    App::get('database')->unpublish('guides', $id);
 
-    Flash::message('success', 'La spécialité n’est plus publiée.');
+    Flash::message('success', 'La fiche n’est plus en ligne.');
 
-    return redirect('admin-features');
+    return redirect('admin-guides');
 
   }
 
