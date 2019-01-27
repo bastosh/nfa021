@@ -4,26 +4,26 @@
   <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
 
     <div class="grid-x align-justify">
-      <a href="/admin-features"><i class="fas fa-long-arrow-alt-left"></i> Retour aux spécialités</a>
+      <a href="/admin-features"><i class="fas fa-long-arrow-alt-left"></i> Features</a>
       <button data-open="deleteFeature" class="button small alert margin-bottom-0">
         <i class="fas fa-trash"></i>
-        Supprimer la spécialité
+        Delete feature
       </button>
     </div>
 
     <div class="reveal" id="deleteFeature" data-reveal>
-      <p>La spécialité sera supprimée définitivement.</p>
+      <p>The feature will be permanently deleted.</p>
       <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-        <button type="submit" class="button alert margin-bottom-0">Je sais ce que je fais.</button>
+        <button type="submit" class="button alert margin-bottom-0">Don’t worry, I am 100% sure.</button>
       </form>
       <button class="close-button" data-close aria-label="Close modal" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
 
-    <h2 class="text-center">Modifier «&thinsp;<?= $feature->title; ?>&thinsp;»</h2>
+    <h2 class="text-center">Edit «&thinsp;<?= $feature->title; ?>&thinsp;»</h2>
     <hr>
 
     <?php require __DIR__ . '/../partials/message.php'; ?>
@@ -32,24 +32,32 @@
       <div class="small-8 medium-6">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
         <form action="/features/<?= $feature->id; ?>" method="POST"
-          <?= \Simple\Core\App::get('data-abide') == true ? 'data-abide' : '' ?> novalidate>
+          <?= \Simple\Core\App::get('env') == 'prod' ? 'data-abide' : '' ?> novalidate>
 
           <input type="hidden" name="_method" value="PUT">
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
-            <p><i class="fi-alert"></i> Le formulaire comporte des erreurs.</p>
+            <p><i class="fi-alert"></i> There are some errors in your form.</p>
           </div>
 
-          <label>Spécialité
-            <input name="title" type="text" placeholder="Nom de la spécialité" value="<?= $feature->title; ?>" required pattern="^.{3,50}$">
+          <label>Title
+            <input name="title" type="text" placeholder="Title of the feature" value="<?= $feature->title; ?>" required pattern="^.{3,50}$">
             <span class="form-error">
-              Un nom est requis (entre 3 et 50 caractères).
+              Title is required and must contain between 3 and 50 characters.
             </span>
           </label>
-          <p class="help-text">Requis. Entre 3 et 50 caractères.</p>
+          <p class="help-text">Required. Between 3 and 50 characters.</p>
 
-          <input type="submit" class="button" value="Mettre à jour">
+          <label>Description
+            <textarea name="description" placeholder="Description of the feature" rows="3" required pattern="^.{3,255}$"><?= $feature->description; ?></textarea>
+            <span class="form-error">
+              Description is required and must contain between 3 and 255 characters.
+            </span>
+          </label>
+          <p class="help-text">Required. Between 3 and 255 characters.</p>
+
+          <input type="submit" class="button" value="Update">
 
         </form>
       </div>

@@ -51,8 +51,9 @@
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
 
-@import 'admin/dashboard';
-@import 'admin/alert';
+@import 'dashboard';
+@import 'alert';
+@import 'code';
 
 button.has-tip {
   border-bottom-style: none;

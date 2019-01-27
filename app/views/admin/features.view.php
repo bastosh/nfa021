@@ -5,17 +5,17 @@
 
       <?php require __DIR__ . '/../partials/message.php'; ?>
 
-      <h2 class="text-center">Spécialités</h2>
+      <h2 class="text-center">Features</h2>
       <hr>
 
-      <a class="button" href="/features/create">Ajouter une spécialité</a>
+      <a class="button" href="/features/create">New Feature</a>
 
       <table class="hover text-center">
         <thead>
         <tr>
           <th class="text-center">id</th>
-          <th class="text-center">Titre</th>
-          <th class="text-center show-for-medium">Statut</th>
+          <th class="text-center">Title</th>
+          <th class="text-center show-for-medium">Status</th>
           <th class="text-center show-for-medium">&nbsp;</th>
           <th class="text-center">&nbsp;</th>
         </tr>
@@ -26,19 +26,19 @@
             <td><?= $feature->id; ?></td>
             <td><?= $feature->title; ?></td>
             <?php if ($feature->published === "1") :?>
-              <td class="show-for-medium">Publié</td>
+              <td class="show-for-medium">Published</td>
               <td class="show-for-medium">
                 <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/unpublish" method="POST">
                   <input type="hidden" name="_method" value="PUT">
-                  <button type="submit" class="button small warning margin-bottom-0">Dépublier</button>
+                  <button type="submit" class="button tiny warning margin-bottom-0">Unpublish</button>
                 </form>
               </td>
             <?php else: ?>
-              <td class="show-for-medium">Non publié</td>
+              <td class="show-for-medium">Unpublished</td>
               <td class="show-for-medium">
                 <form class="display-inline margin-left-1" action="/features/<?= $feature->id; ?>/publish" method="POST">
                   <input type="hidden" name="_method" value="PUT">
-                  <button type="submit" class="button small margin-bottom-0">Publier</button>
+                  <button type="submit" class="button tiny margin-bottom-0">Publish</button>
                 </form>
               </td>
             <?php endif; ?>
@@ -59,11 +59,11 @@
       </table>
 
       <div class="reveal" id="deleteFeature" data-reveal>
-        <p>La spécialité sera définitivement supprimée.</p>
+        <p>The feature will be permanently deleted.</p>
         <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-          <button type="submit" class="button alert margin-bottom-0">Je sais ce que je fais.</button>
+          <button type="submit" class="button alert margin-bottom-0">Don’t worry, I am 100% sure.</button>
         </form>
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>

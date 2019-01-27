@@ -8,7 +8,7 @@ use Simple\Core\Database\Connection;
 
 $loader = new Twig_Loader_Filesystem('../src/templates');
 $twig = new Twig_Environment($loader, [
-  'cache' => false, //'../cache',
+  'cache' => false,
   'debug' => true
 ]);
 $twig->addExtension(new Twig_Extension_Debug());
@@ -17,7 +17,7 @@ $twig->addGlobal('session', $_SESSION);
 App::bind('twig', $twig);
 App::bind('config', require '../config.php');
 App::bind('env', App::get('config')['env']);
-App::bind('data-abide', App::get('config')['data-abide']);
+App::bind('debug', App::get('config')['debug']);
 App::bind('database', new QueryBuilder(
   Connection::make(App::get('config')[App::get('env')])
 ));

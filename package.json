@@ -1,21 +1,20 @@
 {
-  "name": "simple-demo",
+  "name": "nfa021",
   "version": "1.0.0",
   "scripts": {
-    "serve": "browser-sync start --proxy 'simple-demo.test' --files 'public'"
+    "serve": "browser-sync start --proxy 'catclinic.test' --files 'public'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bastosh/simple-demo.git"
+    "url": "git+https://github.com/bastosh/nfa021.git"
   },
   "author": "Sébastien Pereda",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bastosh/simple-demo/issues"
+    "url": "https://github.com/bastosh/nfa021/issues"
   },
-  "homepage": "https://github.com/bastosh/simple-demo#readme",
+  "homepage": "https://github.com/bastosh/nfa021#readme",
   "devDependencies": {
-    "aos": "^2.3.4",
     "autoprefixer": "^9.3.1",
     "foundation-sites": "^6.5.1",
     "gulp": "^3.9.1",
@@ -24,8 +23,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-purgecss": "^1.1.1",
     "gulp-sass": "^4.0.2",
-    "motion-ui": "^2.0.3",
-    "run-sequence": "^2.2.1"
+    "motion-ui": "^2.0.3"
   },
   "dependencies": {
     "jquery": "^3.3.1"
