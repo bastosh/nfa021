@@ -9,11 +9,13 @@
     <header class="header">
         {% include 'partials/nav.html.twig' %}
         <div class="content content-sm text-center">
-            <h1>Notre clinique</h1>
+            <h1>Notre équipe</h1>
         </div>
     </header>
 
-    <main class="text-container lead">
-        {% include 'blocks/about.html.twig' %}
+    <main class="grid-container margin-vertical-3">
+        {% include 'blocks/team.html.twig' %}
     </main>
+
+    {% include 'partials/footer.html.twig' %}
 {% endblock %}

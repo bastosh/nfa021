@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Contact</h1>
-    <p class="lead text-center"><a href="https://www.linkedin.com/in/s%C3%A9bastien-pereda-ab4165a2/">Sébastien Pereda</a></p>
+    <header class="header">
+        {% include 'partials/nav.html.twig' %}
+        <div class="content content-sm text-center">
+            <h1>Nous contacter</h1>
+        </div>
+    </header>
+
+    <main class="text-container lead text-center">
+        {% include 'blocks/contact.html.twig' %}
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
 {% endblock %}
