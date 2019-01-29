@@ -13,8 +13,8 @@
         </div>
     </header>
 
-    <main class="text-container lead">
-        {{ guide.description }}
+    <main class="guides text-container lead padding-vertical-3">
+        {{ guide.description|raw }}
     </main>
 
     {% include 'partials/footer.html.twig' %}

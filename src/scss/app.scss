@@ -86,3 +86,11 @@ a[href^="tel:"]::before {
   content: "\260e";
   margin-right: 0.5em;
 }
+
+.guides {
+  h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+}
