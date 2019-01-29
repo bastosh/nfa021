@@ -44,10 +44,10 @@
           <label>Titre
             <input name="title" type="text" placeholder="Titre de la fiche" value="<?= $guide->title; ?>" required pattern="^.{3,50}$">
             <span class="form-error">
-              Un titre est requis (entre 3 et 100 caractères).
+              Un titre est requis (minimum 3 caractères).
             </span>
           </label>
-          <p class="help-text">Requis. Entre 3 et 100 caractères.</p>
+          <p class="help-text">Obligatoire. Minimum 3 caractères.</p>
 
           <label>Contenu
             <textarea name="description" id="editor" required><?= $guide->description; ?></textarea>

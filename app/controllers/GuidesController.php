@@ -83,9 +83,9 @@ class GuidesController extends Controller
     $description = $_POST['description'];
     $page = 'New guide';
 
-    $errors = $this->validate([
+    $errors = $this->validateGuide([
       'title' => $title,
-      'description' => $description]
+      ]
     );
 
     if (count($errors)) {
@@ -154,9 +154,9 @@ class GuidesController extends Controller
     $title = $_POST['title'];
     $description = $_POST['description'];
 
-    $errors = $this->validate([
+    $errors = $this->validateGuide([
         'title' => $title,
-        'description' => $description]
+      ]
     );
 
     if (count($errors)) {
@@ -171,8 +171,8 @@ class GuidesController extends Controller
 
       App::get('database')
         ->update('guides', [
-          'title' => clean($_POST['title']),
-          'description' => $_POST['description']
+          'title' => clean($title),
+          'description' => $description
         ], $id);
 
       Flash::message('success', 'La fiche a été mise à jour.');

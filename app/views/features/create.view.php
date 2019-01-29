@@ -25,10 +25,10 @@
           <label>Spécialité&thinsp;*
             <input name="title" type="text" placeholder="Nom de la spécialité" required pattern="^.{3,50}$" value="<?= isset($title) ? $title : ''; ?>">
             <span class="form-error">
-              Un titre est requis (entre 3 et 50 caractères).
+              Un titre est requis (minimum 3 caractères).
             </span>
           </label>
-          <p class="help-text">Requis. Entre 3 et 50 caractères.</p>
+          <p class="help-text">Obligatoire. Minimum 3 caractères.</p>
 
           <input type="submit" class="button" value="Ajouter la spécialité">
 

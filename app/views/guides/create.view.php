@@ -25,10 +25,10 @@
           <label>Titre
             <input name="title" type="text" placeholder="Titre de la fiche conseil" required pattern="^.{3,50}$" value="<?= isset($title) ? $title : ''; ?>">
             <span class="form-error">
-              Le titre est requis et doit comporter entre 3 et 100 caractères.
+              Un titre est requis (minimum 3 caractères).
             </span>
           </label>
-          <p class="help-text">Obligatoire. Entre 3 et 100 caractères.</p>
+          <p class="help-text">Obligatoire. Minimum 3 caractères.</p>
 
           <label>Contenu
             <textarea name="description" id="editor" required><?= isset($description) ? $description : ''; ?></textarea>

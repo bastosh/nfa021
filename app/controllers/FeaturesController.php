@@ -83,7 +83,7 @@ class FeaturesController extends Controller
     $title = $_POST['title'];
     $page = 'Nouvelle spécialité';
 
-    $errors = $this->validate(['title' => $title]);
+    $errors = $this->validateFeature(['title' => $title]);
 
     if (count($errors)) {
 
@@ -147,7 +147,7 @@ class FeaturesController extends Controller
 
     $title = $_POST['title'];
 
-    $errors = $this->validate([
+    $errors = $this->validateFeature([
         'title' => $title
       ]
     );

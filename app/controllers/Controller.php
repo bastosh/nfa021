@@ -12,7 +12,7 @@ abstract class Controller
    * @param $values
    * @return array
    */
-  protected function validate($values)
+  protected function validateFeature($values)
   {
 
     $errors = [];
@@ -20,9 +20,28 @@ abstract class Controller
     foreach ($values as $key => $value) {
 
       if (empty($value)) {
-        $errors[] = ucfirst($key)." is required";
+        $errors[] = 'Vous devez renseigner une spécialité';
+      } elseif (strlen($value) < 3) {
+        $errors[] = 'La spécialité doit comporter au moins 3 caractères.';
       }
+    }
+    return $errors;
+  }
 
+  protected function validateGuide($values)
+  {
+
+    //var_dump($values);die;
+
+    $errors = [];
+
+    foreach ($values as $key => $value) {
+
+      if (empty($value)) {
+        $errors[] = 'Vous devez renseigner un titre';
+      } elseif (strlen($value) < 3) {
+        $errors[] = 'Le titre doit comporter au moins 3 caractères.';
+      }
     }
 
     return $errors;

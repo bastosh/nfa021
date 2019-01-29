@@ -44,10 +44,10 @@
           <label>Spécialité
             <input name="title" type="text" placeholder="Nom de la spécialité" value="<?= $feature->title; ?>" required pattern="^.{3,50}$">
             <span class="form-error">
-              Un nom est requis (entre 3 et 50 caractères).
+              Un nom est requis (minimum 3 caractères).
             </span>
           </label>
-          <p class="help-text">Requis. Entre 3 et 50 caractères.</p>
+          <p class="help-text">Obligatoire. Minimum 3 caractères.</p>
 
           <input type="submit" class="button" value="Mettre à jour">
 
