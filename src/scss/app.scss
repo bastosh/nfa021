@@ -79,7 +79,15 @@
 }
 
 .card {
-  border-color: $primary-color;
+  &.primary {
+    color: $primary-color;
+    border-color: $primary-color;
+    border-width: 2px;
+  }
+  &.secondary {
+    background-color: $secondary-color;
+    color: #fff;
+  }
 }
 
 a[href^="tel:"]::before {
