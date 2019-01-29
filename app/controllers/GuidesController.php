@@ -100,7 +100,7 @@ class GuidesController extends Controller
 
       App::get('database')->insert('guides', [
         'title' => clean($title),
-        'description' => clean($description)
+        'description' => $description
       ]);
 
       Flash::message('success', 'La fiche a été publiée.');
@@ -172,7 +172,7 @@ class GuidesController extends Controller
       App::get('database')
         ->update('guides', [
           'title' => clean($_POST['title']),
-          'description' => clean($_POST['description'])
+          'description' => $_POST['description']
         ], $id);
 
       Flash::message('success', 'La fiche a été mise à jour.');
