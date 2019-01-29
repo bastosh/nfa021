@@ -49,27 +49,25 @@
               <a class="button small warning margin-bottom-0" href="/features/<?= $feature->id; ?>/edit">
                 <i class="fas fa-edit"></i>
               </a>
-              <button data-open="deleteFeature" class="button small alert margin-bottom-0">
+              <button data-open="deleteFeature<?= $feature->id; ?>" class="button small alert margin-bottom-0">
                 <i class="fas fa-trash"></i>
               </button>
+              <div class="reveal" id="deleteFeature<?= $feature->id; ?>" data-reveal>
+                <p>La spécialité <strong><?= $feature->title; ?></strong> sera définitivement supprimée.</p>
+                <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                  <button type="submit" class="button alert margin-bottom-0">Je sais ce que je fais.</button>
+                </form>
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </td>
           </tr>
         <?php endforeach; ?>
         </tbody>
       </table>
-
-      <div class="reveal" id="deleteFeature" data-reveal>
-        <p>La spécialité sera définitivement supprimée.</p>
-        <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-          <button type="submit" class="button alert margin-bottom-0">Je sais ce que je fais.</button>
-        </form>
-        <button class="close-button" data-close aria-label="Close modal" type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
     </div>
     <!-- END CONTENT -->
 

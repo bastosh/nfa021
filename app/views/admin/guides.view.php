@@ -49,27 +49,25 @@
               <a class="button small warning margin-bottom-0" href="/guides/<?= $guide->id; ?>/edit">
                 <i class="fas fa-edit"></i>
               </a>
-              <button data-open="deleteGuide" class="button small alert margin-bottom-0">
+              <button data-open="deleteGuide<?= $guide->id; ?>" class="button small alert margin-bottom-0">
                 <i class="fas fa-trash"></i>
               </button>
+              <div class="reveal" id="deleteGuide<?= $guide->id; ?>" data-reveal>
+                <p>La fiche <strong><?= $guide->title; ?></strong> sera supprimée définitivement.</p>
+                <form class="padding-vertical-1 text-center" action="/guides/<?= $guide->id; ?>" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                  <button type="submit" class="button alert margin-bottom-0">Oui, je sais ce que je fais.</button>
+                </form>
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </td>
           </tr>
         <?php endforeach; ?>
         </tbody>
       </table>
-
-      <div class="reveal" id="deleteGuide" data-reveal>
-        <p>La fiche sera supprimée définitivement.</p>
-        <form class="padding-vertical-1 text-center" action="/guides/<?= $guide->id; ?>" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-          <button type="submit" class="button alert margin-bottom-0">Oui, je sais ce que je fais.</button>
-        </form>
-        <button class="close-button" data-close aria-label="Close modal" type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
     </div>
     <!-- END CONTENT -->
 
