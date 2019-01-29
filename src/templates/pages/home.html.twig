@@ -5,9 +5,15 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'blocks/header.html.twig' %}
-    {% include 'blocks/section-features.html.twig' %}
-    {% include 'blocks/emergency.html.twig' %}
-    {% include 'partials/footer.html.twig' %}
+    <header class="header">
+        {% include 'blocks/header.html.twig' %}
+    </header>
+    <main>
+        {% include 'blocks/section-features.html.twig' %}
+        {% include 'blocks/emergency.html.twig' %}
+    </main>
+    <footer>
+        {% include 'partials/footer.html.twig' %}
+    </footer>
     {% include 'partials/carousel.html.twig' %}
 {% endblock %}
