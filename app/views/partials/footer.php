@@ -1,8 +1,11 @@
     </main>
 
-    <footer class="text-center padding-vertical-1">
-      <p>© 2018 • This project is on <a href="https://github.com/bastosh/simple-demo">GitHub</a></p>
+    <footer>
+      <p class="text-center padding-vertical-2 margin-bottom-0">
+        Cat Clinic • Route des chats noirs • 38270 Jarcieu
+      </p>
     </footer>
+
     <?php include('scripts.php'); ?>
   </body>
 </html>
