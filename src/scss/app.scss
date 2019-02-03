@@ -57,7 +57,9 @@
 
 .button {
   border-radius: 30px;
-  font-weight: 400;
+  font-weight: 500;
+  background-color: #fff;
+  color: darken($primary-color, 5);
   &:hover {
     color: $primary-color;
   }
