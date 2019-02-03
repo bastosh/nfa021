@@ -4,7 +4,7 @@
             <button class="menu-icon" type="button" data-toggle="menu"></button>
             <div class="title-bar-title">Menu</div>
         </div>
-        <nav class="top-bar" id="menu">
+        <nav class="top-bar transparent" id="menu">
             <div class="top-bar-left">
                 <ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
                     <li><a href="/">Accueil</a></li>
@@ -14,8 +14,8 @@
                     <li><a href="/nous-contacter">Nous contacter</a></li>
                 </ul>
             </div>
-            <div class="top-bar-right show-for-large">
-                <ul class="menu padding-right-1">
+            <div class="top-bar-right">
+                <ul class="menu">
                     {%  if session.username is defined  %}
                         <li><a href="/admin">Administration</a></li>
                         <li><a class="button hollow" href="/logout">Déconnexion</a></li>

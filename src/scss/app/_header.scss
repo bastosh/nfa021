@@ -1,5 +1,5 @@
 .header {
-  background-color: $primary-color;
+  position: relative;
   li {
     display: flex;
     flex-direction: column;
@@ -25,7 +25,6 @@
   }
   .dropdown.menu > li > a,
   .is-accordion-submenu {
-    background: $primary-color;
     color: $white;
   }
   .accordion-menu > li > a {
@@ -51,7 +50,6 @@
   }
   .content {
     color: $white;
-    text-align: center;
     font-weight: 300;
     padding-top: rem-calc(120);
     padding-bottom: rem-calc(180);
