@@ -53,6 +53,20 @@
 
 @import "helpers";
 @import "app/header";
+@import "app/cat";
+
+.button {
+  border-radius: 30px;
+  font-weight: 400;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+hr {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0;
+}
 
 .text-container {
   max-width: 35rem;
@@ -90,10 +104,10 @@
     }
   }
   &.secondary {
+      box-shadow: 0 0 12px #F4F4F4;
       &:hover {
-        background-color: $secondary-color;
-        color: #fff;
-        transition: background-color .3s ease-in-out;
+        box-shadow: 0 10px 22px 10px rgba(27, 38, 49, 0.1);
+        transition: box-shadow .3s ease-in-out;
       }
   }
 }
