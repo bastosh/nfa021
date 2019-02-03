@@ -1,0 +1,36 @@
+#cat {
+  display: none;
+  @include breakpoint(medium up) {
+    display: block;
+  }
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  bottom: -22px;
+  right: 3rem;
+  background: transparent url('../../img/cat_sprite.png') 0 0 no-repeat;
+  animation:
+    walkCycleOne 1s steps(12) 5,
+    walkCycleThree 1s 5s steps(12) 1,
+    walkCycleFour .7s 6s steps(13) infinite;
+}
+
+@keyframes walkCycleOne {
+  0% {background-position: 0 0 }
+  100% {background-position: 0 -2400px}
+}
+
+@keyframes walkCycleTwo {
+  0% {background-position: -400px 0 }
+  100% {background-position: -400px -1200px}
+}
+
+@keyframes walkCycleThree {
+  0% {background-position: -800px 0 }
+  100% {background-position: -800px -2400px}
+}
+
+@keyframes walkCycleFour {
+  0% {background-position: -1200px 0}
+  100% {background-position: -1200px -2600px}
+}
