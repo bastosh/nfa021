@@ -5,12 +5,15 @@
 {% endblock %}
 
 {% block content %}
-    <header class="header">
+    <header class="header section-primary">
         {% include 'blocks/header.html.twig' %}
     </header>
     <main>
         {% include 'blocks/presentation.html.twig' %}
         {% include 'blocks/emergency.html.twig' %}
+        <div class="lead text-center padding-vertical-3">
+            {% include 'blocks/contact.html.twig' %}
+        </div>
     </main>
     <footer>
         {% include 'partials/footer.html.twig' %}
