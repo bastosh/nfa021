@@ -18,9 +18,16 @@
             <p class="h2 text-center">Il n’y a aucune fiche conseil pour le moment.</p>
         </main>
     {% else %}
-        <main class="grid-container padding-vertical-3">
+        <main>
             {% include 'blocks/guides.html.twig' %}
         </main>
+        <div class="section bg-primary">
+            <div class="illustration">
+                <div class="window">
+                    <div class="tail"></div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
     {% include 'partials/footer.html.twig' %}
