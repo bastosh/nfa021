@@ -1,7 +1,9 @@
-<div class="grid-x grid-margin-x grid-margin-y medium-up-2 large-up-3 align-center">
+<div class="grid-x">
     {% for guide in guides %}
-        <a class="cell card primary padding-2 align-center-middle" href="/fiches-conseils/{{ guide.id }}">
-            <h2 class="h3">{{ guide.title }}</h2>
+        <a class="guide cell padding-vertical-3" href="/fiches-conseils/{{ guide.id }}">
+            <div class="grid-container padding-horizontal-2">
+                <h2 class="title">{{ guide.title }}</h2>
+            </div>
         </a>
     {% endfor %}
 </div>

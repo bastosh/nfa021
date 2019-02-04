@@ -1,0 +1,24 @@
+.guide {
+  border-bottom: 1px solid #eee;
+  transition: transform .3s ease-in-out;
+  transform: translateX(0);
+  .title {
+    color: $body-font-color;
+    font-size: 1.2rem;
+    @include breakpoint(medium up) {
+      font-size: 1.5rem;
+    }
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+  &:hover {
+    background-color: #FAFAFA;
+    transition: transform .3s ease-in-out;
+    transform: translateX(10px);
+    .title {
+      color: $primary-color;
+    }
+  }
+}
+
+
