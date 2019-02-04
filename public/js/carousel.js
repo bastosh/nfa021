@@ -25,3 +25,11 @@ function changeImage() {
 }
 
 let interval = setInterval(changeImage, 3000);
+
+img.onmouseover = function() {
+    clearInterval(interval);
+}
+
+img.onmouseout = function() {
+    interval = setInterval(changeImage, 3000);
+}
