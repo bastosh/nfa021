@@ -15,12 +15,10 @@
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="menu">
+                <ul class="vertical medium-horizontal menu">
                     {%  if session.username is defined  %}
                         <li><a href="/admin">Administration</a></li>
                         <li><a class="button hollow" href="/logout">Déconnexion</a></li>
-                    {% else %}
-                        <li><a class="button hollow" href="/admin">Connexion</a></li>
                     {% endif %}
                 </ul>
             </div>
