@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Page non trouvée</title>
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/assets//css/app.css">
   </head>
   <body class="grid-container grid-y align-center-middle" style="min-height: 100vh;">
     <h1>Sorry... Can’t find page “<?= trim($_SERVER['REQUEST_URI'], '/'); ?>”.</h1>
