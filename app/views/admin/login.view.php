@@ -20,10 +20,6 @@
 
 <body>
 
-<header class="header">
-  <?php require __DIR__.'/../partials/nav.php'; ?>
-</header>
-
 <main class="grid-y align-center">
   <h1 class="text-center margin-bottom-2">LOGIN</h1>
   <div class="grid-x align-center">
@@ -37,7 +33,7 @@
           Password
           <input type="password" name="password">
         </label>
-        <button type="submit" class="button expanded">Connexion</button>
+        <button type="submit" class="button primary expanded margin-top-2">Connexion</button>
       </form>
     </div>
   </div>
