@@ -30,7 +30,7 @@
           </label>
           <p class="help-text">Obligatoire. Minimum 3 caractères.</p>
 
-          <input type="submit" class="button" value="Ajouter la spécialité">
+          <input type="submit" class="button primary" value="Ajouter la spécialité">
 
         </form>
       </div>

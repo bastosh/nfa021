@@ -1,6 +1,6 @@
 @charset 'utf-8';
 
-@import 'settings';
+@import 'app/settings';
 @import 'foundation';
 @import 'motion-ui';
 
@@ -98,9 +98,10 @@ hr {
 
 .card {
   box-shadow: 0 0 12px #F4F4F4;
+  transition: box-shadow .3s ease-in-out;
   &:hover {
     box-shadow: 0 10px 22px 10px rgba(27, 38, 49, 0.1);
-    transition: box-shadow .3s ease-in-out;
+
   }
 }
 

@@ -31,7 +31,33 @@
     <div class="grid-x align-center margin-top-2">
       <div class="small-8 medium-6">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
-        <form action="/guides/<?= $guide->id; ?>" method="POST"
+
+		    <?php if($guide->image) : ?>
+            <div class="grid-x">
+              <div class="small-4">
+                <p class="margin-bottom-0"><?= $guide->image_alt; ?></p>
+                <figure>
+                  <img src="/img/<?= $guide->image; ?>">
+                </figure>
+                <button data-open="deleteImage" class="button small expanded alert margin-bottom-2">
+                  <i class="fas fa-trash"></i> Delete this image
+                </button>
+              </div>
+            </div>
+
+            <div class="reveal" id="deleteImage" data-reveal>
+              <p>L’image sera définitivement supprimée.</p>
+              <form class="padding-vertical-1 text-center" action="/guides/<?= $guide->id; ?>/image" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <button type="submit" class="button alert margin-bottom-0">Je sais ce que je fais.</button>
+              </form>
+              <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+		  <?php endif; ?>
+
+        <form action="/guides/<?= $guide->id; ?>" method="POST" enctype="multipart/form-data"
           <?= \Simple\Core\App::get('data-abide') == true ? 'data-abide' : '' ?> novalidate>
 
           <input type="hidden" name="_method" value="PUT">
@@ -40,6 +66,19 @@
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> Le formulaire comporte des erreurs.</p>
           </div>
+
+          <?php if(!$guide->image) : ?>
+            <label for="image">Image</label>
+            <div class="callout margin-bottom-1">
+              <input type="file" name="image" id="image">
+              <label>Texte alternatif
+                <input name="image_alt" type="text" placeholder="Texte alternatif de l’image" required pattern="^.{10,200}$" value="<?= isset($image_alt) ? $image_alt : ''; ?>">
+                <span class="form-error">
+              Un texte alternatif est requis (minimum 10 caractères).
+            </span>
+              </label>
+            </div>
+			    <?php endif; ?>
 
           <label>Titre
             <input name="title" type="text" placeholder="Titre de la fiche" value="<?= $guide->title; ?>" required pattern="^.{3,50}$">
@@ -57,7 +96,7 @@
           </label>
 
           <div class="grid-x align-center margin-top-2">
-            <input type="submit" class="button" value="Mettre à jour">
+            <input type="submit" class="button primary" value="Mettre à jour">
           </div>
 
         </form>

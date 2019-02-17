@@ -83,10 +83,43 @@ class GuidesController extends Controller
     $description = $_POST['description'];
     $page = 'New guide';
 
-    $errors = $this->validateGuide([
-      'title' => $title,
-      ]
-    );
+    // Upload the image on the server if the file is OK
+		// and there is an alternative text
+		if ($_FILES['image']['size'] > 0) {
+
+				$alt = $_POST['image_alt'];
+				$errors = $this->validateImage([
+					'image_alt' => $alt,
+				]);
+
+				if (count($errors)) {
+
+						$_SESSION['errors'] = $errors;
+						Flash::message('alert', 'Le formulaire comporte des erreurs.');
+						return view('guides.create', compact('title', 'description', 'page'));
+
+				} else {
+
+						$uploadErrors = resize(250, 500, 1000);
+
+						if (count($uploadErrors)) {
+
+								$_SESSION['errors'] = $uploadErrors;
+								Flash::message('alert', 'L’image n’a pas pu être envoyée sur le serveur.');
+								return view('guides.create', compact('page','title', 'content'));
+						}
+				}
+
+		}
+
+		// If there is no image, only check for the title
+		else {
+
+				$errors = $this->validateGuide([
+					'title' => $title,
+				]);
+
+		}
 
     if (count($errors)) {
 
@@ -98,10 +131,20 @@ class GuidesController extends Controller
 
     } else {
 
-      App::get('database')->insert('guides', [
-        'title' => clean($title),
-        'description' => $description
-      ]);
+    		if ($_FILES['image']['size'] > 0) {
+						App::get('database')->insert('guides', [
+							'title' => clean($title),
+							'description' => $description,
+							'image' => $_FILES["image"]["name"],
+							'image_alt' => $_POST['image_alt']
+						]);
+
+				} else {
+						App::get('database')->insert('guides', [
+							'title' => clean($title),
+							'description' => $description,
+						]);
+				}
 
       Flash::message('success', 'La fiche a été publiée.');
 
@@ -151,6 +194,21 @@ class GuidesController extends Controller
       throw new \Exception('Token mismatch!');
     }
 
+
+
+	if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+
+	  $uploadErrors = resize(250, 500, 1000);
+
+	  if (count($uploadErrors)) {
+
+		  $_SESSION['errors'] = $uploadErrors;
+		  Flash::message('alert', 'L’image n’a pas pu être envoyée sur le serveur.');
+		  return redirect("guides/{$id}/edit");
+	  }
+
+	}
+
     $title = $_POST['title'];
     $description = $_POST['description'];
 
@@ -174,6 +232,14 @@ class GuidesController extends Controller
           'title' => clean($title),
           'description' => $description
         ], $id);
+
+		if (isset($_FILES['image'])) {
+			App::get('database')
+			  ->update('guides', [
+				'image' => $_FILES["image"]["name"],
+				'image_alt' => $_POST['image_alt']
+			  ], $id);
+		}
 
       Flash::message('success', 'La fiche a été mise à jour.');
 
@@ -199,9 +265,24 @@ class GuidesController extends Controller
       throw new \Exception('Token mismatch!');
     }
 
-    App::get('database')->delete('guides', $id);
+    $guide = App::get('database')->select('guides', $id, Guide::class);
 
-    Flash::message('success', 'La fiche a été supprimée.');
+		if ($guide->image) {
+				App::get('database')
+					->update('guides', [
+						'image_alt' => ''
+					], $id);
+				// Remove the images associated
+				unlink('../public/img/sm-'.$guide->image);
+				unlink('../public/img/'.$guide->image);
+				unlink('../public/img/lg-'.$guide->image);
+
+				App::get('database')->deleteImage('guides', $id);
+		}
+
+		App::get('database')->delete('guides', $id);
+
+		Flash::message('success', 'La fiche a été supprimée.');
 
     return redirect('admin-guides');
   }
@@ -237,5 +318,26 @@ class GuidesController extends Controller
     return redirect('admin-guides');
 
   }
+
+	public function deleteImage($id)
+	{
+
+		$guide = App::get('database')->select('guides', $id, Guide::class);
+		App::get('database')
+		  ->update('guides', [
+			'image_alt' => ''
+		  ], $id);
+		// Remove the images associated
+		unlink('../public/img/sm-'.$guide->image);
+		unlink('../public/img/'.$guide->image);
+		unlink('../public/img/lg-'.$guide->image);
+
+		App::get('database')->deleteImage('guides', $id);
+
+		Flash::message('success', 'L’image a été supprimée.');
+
+		return redirect("guides/{$id}/edit");
+
+	}
 
 }

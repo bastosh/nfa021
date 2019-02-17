@@ -14,6 +14,7 @@ $router->post('guides', 'GuidesController@store');
 $router->get('guides/{id}/edit', 'GuidesController@edit');
 $router->put('guides/{id}', 'GuidesController@update');
 $router->delete('guides/{id}', 'GuidesController@destroy');
+$router->put('guides/{id}/image', 'GuidesController@deleteImage');
 $router->put('guides/{id}/publish', 'GuidesController@publish');
 $router->put('guides/{id}/unpublish', 'GuidesController@unpublish');
 

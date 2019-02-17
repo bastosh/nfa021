@@ -8,7 +8,7 @@
       <h2 class="text-center">Fiches conseils</h2>
       <hr>
 
-      <a class="button" href="/guides/create">Créer une fiche conseil</a>
+      <a class="button primary" href="/guides/create">Créer une fiche conseil</a>
 
       <table class="hover text-center">
         <thead>
@@ -38,12 +38,12 @@
               <td class="show-for-medium">
                 <form class="display-inline margin-left-1" action="/guides/<?= $guide->id; ?>/publish" method="POST">
                   <input type="hidden" name="_method" value="PUT">
-                  <button type="submit" class="button small margin-bottom-0">Publier</button>
+                  <button type="submit" class="button primary small margin-bottom-0">Publier</button>
                 </form>
               </td>
             <?php endif; ?>
             <td>
-              <a class="button small margin-bottom-0 show-for-large" href="/admin-guides/<?= $guide->id; ?>">
+              <a class="button primary small margin-bottom-0 show-for-large" href="/admin-guides/<?= $guide->id; ?>">
                 <i class="fas fa-eye"></i>
               </a>
               <a class="button small warning margin-bottom-0" href="/guides/<?= $guide->id; ?>/edit">

@@ -28,24 +28,40 @@ abstract class Controller
     return $errors;
   }
 
+		protected function validateImage($values)
+		{
+
+				$errors = [];
+
+				foreach ($values as $key => $value) {
+
+						if (empty($value)) {
+								$errors[] = 'Vous devez renseigner un texte alternatif';
+						} elseif (strlen($value) < 10) {
+								$errors[] = 'Le texte alternatif doit comporter au moins 10 caractères.';
+						}
+				}
+
+				return $errors;
+		}
+
   protected function validateGuide($values)
   {
-
-    //var_dump($values);die;
 
     $errors = [];
 
     foreach ($values as $key => $value) {
 
-      if (empty($value)) {
-        $errors[] = 'Vous devez renseigner un titre';
-      } elseif (strlen($value) < 3) {
-        $errors[] = 'Le titre doit comporter au moins 3 caractères.';
-      }
+				if (empty($value) && $key === 'title') {
+					$errors[] = 'Vous devez renseigner un titre';
+				} elseif (strlen($value) < 3) {
+					$errors[] = 'Le titre doit comporter au moins 3 caractères.';
+				}
     }
 
     return $errors;
   }
+
 
   /**
    * @param $view

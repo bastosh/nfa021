@@ -49,7 +49,7 @@
           </label>
           <p class="help-text">Obligatoire. Minimum 3 caractères.</p>
 
-          <input type="submit" class="button" value="Mettre à jour">
+          <input type="submit" class="button primary" value="Mettre à jour">
 
         </form>
       </div>

@@ -13,13 +13,24 @@
     <div class="grid-x align-center margin-top-2">
       <div class="small-8 medium-6">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
-        <form action="/guides" method="POST"
+        <form action="/guides" method="POST" enctype="multipart/form-data"
           <?= \Simple\Core\App::get('data-abide') == true ? 'data-abide' : '' ?> novalidate>
 
           <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
           <div data-abide-error class="callout alert-callout-border alert" style="display: none;">
             <p><i class="fi-alert"></i> Le formulaire comporte des erreurs.</p>
+          </div>
+
+          <label for="image">Image</label>
+          <div class="callout margin-bottom-1">
+            <input type="file" name="image" id="image">
+            <label>Texte alternatif
+              <input name="image_alt" type="text" placeholder="Texte alternatif de l’image" required pattern="^.{10,200}$" value="<?= isset($image_alt) ? $image_alt : ''; ?>">
+              <span class="form-error">
+              Un texte alternatif est requis (minimum 10 caractères).
+            </span>
+            </label>
           </div>
 
           <label>Titre
@@ -38,7 +49,7 @@
           </label>
 
           <div class="grid-x align-center margin-top-2">
-            <input type="submit" class="button" value="Publier la fiche">
+            <input type="submit" class="button primary" value="Publier la fiche">
           </div>
 
         </form>

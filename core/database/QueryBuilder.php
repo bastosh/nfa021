@@ -170,7 +170,7 @@ class QueryBuilder
   public function deleteImage($table, $id)
   {
 
-    $query = "UPDATE {$table} SET cover = NULL WHERE id = {$id}";
+    $query = "UPDATE {$table} SET image = NULL WHERE id = {$id}";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute();

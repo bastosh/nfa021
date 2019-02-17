@@ -1,8 +1,12 @@
 <div class="grid-x">
     {% for guide in guides %}
-        <a class="guide cell padding-vertical-3" href="/fiches-conseils/{{ guide.id }}">
-            <div class="grid-container padding-horizontal-2">
-                <h2 class="title">{{ guide.title }}</h2>
+        <a class="guide cell" href="/fiches-conseils/{{ guide.id }}">
+
+            <div class="grid-x align-middle">
+                {% if guide.image %}
+                    <img src="/img/sm-{{ guide.image }}" alt="{{ guide.image_alt }}">
+                {% endif %}
+                <h2 class="title padding-left-3">{{ guide.title }}</h2>
             </div>
         </a>
     {% endfor %}
