@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description" content="Cat Clinic, site réalisé dans le cadre de la formation “Programmation de sites web” du CNAM.">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="assets/css/app.css">
     <title>{% block title %}Cat Clinic{% endblock %}</title>
 </head>
 <body>
 
 {% block content %}{% endblock %}
 
-{% include 'partials/scripts.html.twig' %}
-
+<script src="assets/js/app.js"></script>
 </body>
 </html>

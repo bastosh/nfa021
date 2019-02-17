@@ -1,6 +1,6 @@
-@charset 'utf-8';
+@charset "utf-8";
 
-@import 'app/settings';
+@import 'front/settings';
 @import 'foundation';
 @import 'motion-ui';
 
@@ -52,10 +52,10 @@
 // @include motion-ui-animations;
 
 @import "helpers";
-@import "app/header";
-@import "app/cat";
-@import "app/window";
-@import "app/guide";
+@import "front/header";
+@import "front/cat";
+@import "front/window";
+@import "front/guide";
 
 .button {
   border-radius: 30px;

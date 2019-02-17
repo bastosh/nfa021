@@ -1,0 +1,14 @@
+PORT: 8000
+
+COMPATIBILITY: "last 2 versions"
+
+UNCSS:
+  twig: "src/templates/**/*.twig"
+  php: "app/views/**/*.php"
+
+PATHS:
+  dist: "public"
+  entries: "src/assets/js/app.js"
+  sass:
+    - "node_modules/foundation-sites/scss"
+    - "node_modules/motion-ui/src"

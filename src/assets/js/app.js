@@ -1,3 +1,16 @@
+import $ from 'jquery';
+import 'what-input';
+
+window.jQuery = $;
+require('foundation-sites');
+
+$(document).foundation();
+
+let cat = document.getElementById('cat');
+cat.addEventListener('click', function() {
+    cat.classList.toggle('moving');
+});
+
 let images = [
     ["img/carousel/cat2.webp", "img/carousel/cat2.jpeg", 'Lion qui marche sur une route'],
     ["img/carousel/cat3.webp", "img/carousel/cat3.jpeg", 'Chat couché sur le côté'],
@@ -28,8 +41,8 @@ let interval = setInterval(changeImage, 3000);
 
 img.onmouseover = function() {
     clearInterval(interval);
-}
+};
 
 img.onmouseout = function() {
     interval = setInterval(changeImage, 3000);
-}
+};

@@ -1,6 +1,6 @@
 @charset 'utf-8';
 
-@import 'admin/settings';
+@import 'back/settings';
 @import 'foundation';
 @import 'motion-ui';
 
@@ -51,8 +51,8 @@
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
 
-@import 'admin/dashboard';
-@import 'admin/alert';
+@import 'back/dashboard';
+@import 'back/alert';
 
 button.has-tip {
   border-bottom-style: none;
