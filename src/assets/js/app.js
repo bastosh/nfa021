@@ -1,11 +1,3 @@
-import $ from 'jquery';
-import 'what-input';
-
-window.jQuery = $;
-require('foundation-sites');
-
-$(document).foundation();
-
 let cat = document.getElementById('cat');
 cat.addEventListener('click', function() {
     cat.classList.toggle('moving');

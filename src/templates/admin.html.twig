@@ -15,7 +15,6 @@
             <!-- TOPBAR -->
             <div class="row expanded app-dashboard-top-nav-bar">
                 <div class="columns medium-2">
-                    <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
                     <a href="/" class="app-dashboard-logo">Cat Clinic</a>
                 </div>
                 <div class="columns show-for-medium">
@@ -81,16 +80,15 @@
         </div>
 
         {% block scripts %}
-
-            <script src="/assets/js/app.js"></script>
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.js"></script>
             <script>
-                $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
-                    e.preventDefault();
-                    $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
-                });
-
                 $(document).ready(function() {
+
+                    $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
+                        e.preventDefault();
+                        $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
+                    });
 
                     $('table tr').click(function() {
                         let href = $(this).find("a").attr("href");
@@ -98,11 +96,8 @@
                             window.location = href;
                         }
                     });
-
                 });
-
             </script>
-
         {% endblock %}
     </body>
 </html>

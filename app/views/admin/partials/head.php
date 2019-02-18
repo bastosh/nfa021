@@ -12,7 +12,6 @@
   <!-- TOPBAR -->
   <div class="row expanded app-dashboard-top-nav-bar">
     <div class="columns medium-2">
-      <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
       <a href="/" class="app-dashboard-logo">Cat Clinic</a>
     </div>
     <div class="columns show-for-medium">
