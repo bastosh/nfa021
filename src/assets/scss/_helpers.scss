@@ -47,6 +47,14 @@
   color: $white;
 }
 
+.bg-primary {
+  background-color: $primary-color;
+}
+
+.bg-secondary {
+  background-color: $secondary-color;
+}
+
 .normal { font-weight: 400; }
 
 .text-white { color: $white!important; }

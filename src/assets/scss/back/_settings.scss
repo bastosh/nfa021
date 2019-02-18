@@ -60,7 +60,8 @@
 //  55. Top Bar
 //  56. Xy Grid
 
-@import 'util/util';
+@import '../../../../node_modules/foundation-sites/scss/util/util';
+
 
 // 1. Global
 // ---------
@@ -68,12 +69,21 @@
 $global-font-size: 110%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
-
-@import 'palette';
-
 $base-transition : .3s;
+$foundation-palette: (
+        primary: #1779ba,
+        secondary: #767676,
+        success: #3adb76,
+        warning: #ffae00,
+        alert: #cc4b37,
+);
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$dark-gray: #8a8a8a;
+$black: #0a0a0a;
+$white: #fefefe;
 $body-background: $white;
-$body-font-color: $text-primary;
+$body-font-color: $black;
 $body-font-family: Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -92,6 +102,8 @@ $global-color-pick-contrast-tolerance: 0;
 $print-transparent-backgrounds: true;
 
 @include add-foundation-colors;
+$print-hrefs: true;
+
 
 // 2. Breakpoints
 // --------------

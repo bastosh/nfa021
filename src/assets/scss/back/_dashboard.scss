@@ -139,6 +139,7 @@ $app-dashboard-top-nav-height: 55px;
   flex: 1 1 0;
   padding: 20px;
   background-color: $white;
+  border-left: 1px solid rgb(202, 202, 202);
 }
 
 @mixin shrunk-sidebar() {
