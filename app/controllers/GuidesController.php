@@ -8,21 +8,33 @@ use Simple\Core\Flash;
 class GuidesController extends Controller
 {
 
-  public function index()
+		/**
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function index()
   {
     $guides = App::get('database')->selectAllPublishedGuides();
     $page = 'Guides';
-    //var_dump($guides);die;
     return $this->render('guides.index', compact('page', 'guides'));
   }
 
-  public function show($id)
+		/**
+		 * @param $id
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function show($id)
   {
     $guide = App::get('database')->selectGuide($id);
     return $this->render('guides.show', compact('page', 'guide'));
   }
 
-  public function create()
+		/**
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function create()
   {
     // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
@@ -40,7 +52,11 @@ class GuidesController extends Controller
     }
   }
 
-  public function store()
+		/**
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function store()
   {
 
     if(!isset($_POST['token'])){
@@ -120,7 +136,12 @@ class GuidesController extends Controller
 
   }
 
-  public function edit($id)
+		/**
+		 * @param $id
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function edit($id)
   {
     // If the user is logged in
     if ((isset($_SESSION['username']) && isset($_SESSION['password']))
@@ -139,7 +160,12 @@ class GuidesController extends Controller
     }
   }
 
-  public function update($id)
+		/**
+		 * @param $id
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function update($id)
   {
 
 			if(!isset($_POST['token'])){
@@ -216,7 +242,11 @@ class GuidesController extends Controller
 
     }
 
-  public function destroy($id)
+		/**
+		 * @param $id
+		 * @throws \Exception
+		 */
+		public function destroy($id)
   {
 
     if(!isset($_POST['token'])){
@@ -239,7 +269,11 @@ class GuidesController extends Controller
     return redirect('admin-guides');
   }
 
-  public function publish($id)
+		/**
+		 * @param $id
+		 * @throws \Exception
+		 */
+		public function publish($id)
   {
 
     App::get('database')->publish('guides', $id);
@@ -250,7 +284,11 @@ class GuidesController extends Controller
 
   }
 
-  public function unpublish($id)
+		/**
+		 * @param $id
+		 * @throws \Exception
+		 */
+		public function unpublish($id)
   {
 
     App::get('database')->unpublish('guides', $id);
@@ -261,7 +299,11 @@ class GuidesController extends Controller
 
   }
 
-	public function deleteImage($id)
+		/**
+		 * @param $id
+		 * @throws \Exception
+		 */
+		public function deleteImage($id)
 	{
 
 		$guide = App::get('database')->selectGuide($id);

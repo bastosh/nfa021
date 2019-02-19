@@ -19,7 +19,12 @@ class QueryBuilder
     $this->pdo = $pdo;
   }
 
-  public function selectAll($table, $model) {
+		/**
+		 * @param $table
+		 * @param $model
+		 * @return array
+		 */
+		public function selectAll($table, $model) {
     $query = "SELECT * FROM {$table}";
     try {
       $statement = $this->pdo->prepare($query);
@@ -30,7 +35,12 @@ class QueryBuilder
     }
   }
 
-  public function selectAllPublished($table, $model) {
+		/**
+		 * @param $table
+		 * @param $model
+		 * @return array
+		 */
+		public function selectAllPublished($table, $model) {
     $query = "SELECT * FROM {$table} WHERE published = 1";
     try {
       $statement = $this->pdo->prepare($query);
@@ -41,7 +51,13 @@ class QueryBuilder
     }
   }
 
-  public function selectLastPublished($table, $model, $limit) {
+		/**
+		 * @param $table
+		 * @param $model
+		 * @param $limit
+		 * @return array
+		 */
+		public function selectLastPublished($table, $model, $limit) {
     $query = "SELECT * FROM {$table} WHERE published = 1 ORDER BY created_at DESC LIMIT $limit";
     try {
       $statement = $this->pdo->prepare($query);
@@ -52,7 +68,13 @@ class QueryBuilder
     }
   }
 
- 	public function select($table, $id, $model) {
+		/**
+		 * @param $table
+		 * @param $id
+		 * @param $model
+		 * @return mixed
+		 */
+		public function select($table, $id, $model) {
     $query = "SELECT * FROM {$table} WHERE id = :id";
     try {
       $statement = $this->pdo->prepare($query);
@@ -64,7 +86,12 @@ class QueryBuilder
     }
   }
 
-  public function insert($table, $parameters) {
+		/**
+		 * @param $table
+		 * @param $parameters
+		 * @return string
+		 */
+		public function insert($table, $parameters) {
     $query = sprintf(
       "INSERT INTO %s (%s) VALUES (%s)",
       $table,
@@ -82,7 +109,12 @@ class QueryBuilder
 
   }
 
-  public function update($table, $params, $id)
+		/**
+		 * @param $table
+		 * @param $params
+		 * @param $id
+		 */
+		public function update($table, $params, $id)
   {
 
     $data = []; // Initialize an array with values
@@ -105,7 +137,11 @@ class QueryBuilder
 
   }
 
-  public function delete($table, $id) {
+		/**
+		 * @param $table
+		 * @param $id
+		 */
+		public function delete($table, $id) {
     $query = "DELETE FROM {$table} WHERE id = :id";
     try {
       $statement = $this->pdo->prepare($query);
@@ -115,7 +151,11 @@ class QueryBuilder
     }
   }
 
-  public function publish($table, $id)
+		/**
+		 * @param $table
+		 * @param $id
+		 */
+		public function publish($table, $id)
   {
 
     $query = "UPDATE {$table} SET published = 1 WHERE id = {$id}";
@@ -128,7 +168,11 @@ class QueryBuilder
 
   }
 
-  public function unpublish($table, $id)
+		/**
+		 * @param $table
+		 * @param $id
+		 */
+		public function unpublish($table, $id)
   {
 
     $query = "UPDATE {$table} SET published = 0 WHERE id = {$id}";
@@ -140,7 +184,11 @@ class QueryBuilder
     }
   }
 
-	public function selectGuide($id) {
+		/**
+		 * @param $id
+		 * @return mixed
+		 */
+		public function selectGuide($id) {
 				$query = "SELECT id, title, description, image_id, image_name, text_alt 
 									FROM guides 
 									LEFT JOIN images ON guides.id = images.guide_id  
@@ -154,7 +202,10 @@ class QueryBuilder
 				}
 		}
 
-	public function selectAllGuides() {
+		/**
+		 * @return array
+		 */
+		public function selectAllGuides() {
 				$query = "SELECT id, title, description, published FROM guides";
 				try {
 						$statement = $this->pdo->prepare($query);
@@ -165,7 +216,10 @@ class QueryBuilder
 				}
 		}
 
-	public function selectAllPublishedGuides() {
+		/**
+		 * @return array
+		 */
+		public function selectAllPublishedGuides() {
 		$query = "SELECT id, title, description, image_name, text_alt FROM guides LEFT JOIN images ON guides.id = images.guide_id WHERE published = 1";
 			try {
 					$statement = $this->pdo->prepare($query);
@@ -176,7 +230,11 @@ class QueryBuilder
 			}
 		}
 
-	public function updateImage($image_id, $guide_id) {
+		/**
+		 * @param $image_id
+		 * @param $guide_id
+		 */
+		public function updateImage($image_id, $guide_id) {
 		$query = "UPDATE images SET guide_id = :guide_id, updated_at = NOW() WHERE image_id = {$image_id}";
 		try {
 				$statement = $this->pdo->prepare($query);
@@ -186,6 +244,9 @@ class QueryBuilder
 		}
 	}
 
+		/**
+		 * @param $id
+		 */
 		public function deleteImage($id) {
 				$query = "DELETE FROM images WHERE image_id = :id";
 				try {
