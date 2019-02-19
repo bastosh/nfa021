@@ -4,7 +4,7 @@
 
 Projet réalisé dans le cadre de la formation Programmation de sites web du CNAM (Aix-en-Provence).
 
-Une démo est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
+Une démo est consultable à l’adresse suivante : http://catclinic.bastoche.fr/
 
 ## Installation
 - Prérequis : avoir [Composer](https://getcomposer.org/doc/00-intro.md) installé globalement sur sa machine
@@ -12,7 +12,7 @@ Une démo est consultable à l’adresse suivante : http://nfa021.bastoche.fr/
 
 ### Base de données
 - Créer une base de données
-- Utiliser le fichier mvc.sql pour alimenter la base avec la table fournie en exemple
+- Utiliser le fichier seeding.sql pour alimenter la base avec la table fournie en exemple
 - Adapter le fichier config.php en fonction de sa propre configuration
 
 ### Projet
@@ -61,7 +61,7 @@ $ dploy
 Détails des évolutions dans le fichier [CHANGELOG.md](https://github.com/simple-mvc/simple-cms/blob/master/CHANGELOG.md).
 
 ## Licence ISC
-Copyright (c) 2018, Sébastien Pereda
+Copyright (c) 2019, Sébastien Pereda
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
