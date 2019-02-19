@@ -32,12 +32,12 @@
       <div class="small-8 medium-6">
         <?php require __DIR__ . '/../partials/errors.php'; ?>
 
-		    <?php if($guide->image) : ?>
+		    <?php if($guide->image_name) : ?>
             <div class="grid-x">
               <div class="small-4">
-                <p class="margin-bottom-0"><?= $guide->image_alt; ?></p>
+                <p class="margin-bottom-0"><?= $guide->image_name; ?></p>
                 <figure>
-                  <img src="/img/<?= $guide->image; ?>">
+                  <img src="/img/<?= $guide->image_name; ?>">
                 </figure>
                 <button data-open="deleteImage" class="button small expanded alert margin-bottom-2">
                   <i class="fas fa-trash"></i> Delete this image
@@ -67,12 +67,12 @@
             <p><i class="fi-alert"></i> Le formulaire comporte des erreurs.</p>
           </div>
 
-          <?php if(!$guide->image) : ?>
+          <?php if(!$guide->image_name) : ?>
             <label for="image">Image</label>
             <div class="callout margin-bottom-1">
               <input type="file" name="image" id="image">
               <label>Texte alternatif
-                <input name="image_alt" type="text" placeholder="Texte alternatif de l’image" required pattern="^.{10,200}$" value="<?= isset($image_alt) ? $image_alt : ''; ?>">
+                <input name="image_alt" type="text" placeholder="Texte alternatif de l’image" required pattern="^.{10,200}$" value="<?= isset($guide->text_alt) ? $guide->text_alt : ''; ?>">
                 <span class="form-error">
               Un texte alternatif est requis (minimum 10 caractères).
             </span>

@@ -10,14 +10,14 @@
 
     <div class="grid-x align-center margin-top-2">
       <div class="small-10  medium-6">
-        <?php if($guide->image) : ?>
+        <?php if($guide->image_name) : ?>
               <picture>
                 <source media="(min-width: 768px)"
-                        srcset="/img/<?= $guide->image; ?> 1x,
-                              /img/lg-<?= $guide->image; ?> 2x">
-                <img src="/img/sm-<?= $guide->image; ?>"
-                     srcset="/img/<?= $guide->image; ?> 2x"
-                     alt="<?= $guide->image_alt; ?>" style="width: 100%">
+                        srcset="/img/<?= $guide->image_name; ?> 1x,
+                              /img/lg-<?= $guide->image_name; ?> 2x">
+                <img src="/img/sm-<?= $guide->image_name; ?>"
+                     srcset="/img/<?= $guide->image_name; ?> 2x"
+                     alt="<?= $guide->text_alt; ?>" style="width: 100%">
               </picture>
         <?php endif; ?>
         <p class="text-center lead"><?= $guide->description; ?></p>

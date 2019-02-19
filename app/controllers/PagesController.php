@@ -11,10 +11,9 @@ class PagesController extends Controller
 {
   public function home()
   {
-    $guides = App::get('database')->selectLastPublished('guides', Guide::class, 3);
     $features = App::get('database')->selectAllPublished('features', Feature::class);
     $page = 'Accueil';
-    return $this->render('pages.home', compact('page', 'guides', 'features'));
+    return $this->render('pages.home', compact('page','features'));
   }
 
   public function about()

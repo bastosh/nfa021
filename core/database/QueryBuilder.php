@@ -19,12 +19,6 @@ class QueryBuilder
     $this->pdo = $pdo;
   }
 
-  /**
-   * Select all the items from a given table
-   * @param $table
-   * @param $model
-   * @return array
-   */
   public function selectAll($table, $model) {
     $query = "SELECT * FROM {$table}";
     try {
@@ -32,7 +26,7 @@ class QueryBuilder
       $statement->execute();
       return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -43,7 +37,7 @@ class QueryBuilder
       $statement->execute();
       return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -54,18 +48,11 @@ class QueryBuilder
       $statement->execute();
       return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
-  /**
-   * Select a given item from a given table
-   * @param $table
-   * @param $id
-   * @param $model
-   * @return mixed
-   */
-  public function select($table, $id, $model) {
+ 	public function select($table, $id, $model) {
     $query = "SELECT * FROM {$table} WHERE id = :id";
     try {
       $statement = $this->pdo->prepare($query);
@@ -73,15 +60,10 @@ class QueryBuilder
       $statement->setFetchMode(\PDO::FETCH_CLASS, $model);
       return $statement->fetch();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
-  /**
-   * Insert a new item into a given table
-   * @param $table
-   * @param $parameters
-   */
   public function insert($table, $parameters) {
     $query = sprintf(
       "INSERT INTO %s (%s) VALUES (%s)",
@@ -93,16 +75,13 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute($parameters);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
+
+    return $this->pdo->lastInsertId();
+
   }
 
-  /**
-   * Update a given item form a given table
-   * @param $table
-   * @param $params
-   * @param $id
-   */
   public function update($table, $params, $id)
   {
 
@@ -121,23 +100,18 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute($data);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong... '.$e);
+      die($e->getMessage());
     }
 
   }
 
-  /**
-   * Delete a given item from a given table
-   * @param $table
-   * @param $id
-   */
   public function delete($table, $id) {
     $query = "DELETE FROM {$table} WHERE id = :id";
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute(['id' => $id]);
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
   }
 
@@ -149,7 +123,7 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
 
   }
@@ -162,22 +136,64 @@ class QueryBuilder
       $statement = $this->pdo->prepare($query);
       $statement->execute();
     } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
+      die($e->getMessage());
     }
-
   }
 
-  public function deleteImage($table, $id)
-  {
+	public function selectGuide($id) {
+				$query = "SELECT id, title, description, image_id, image_name, text_alt 
+									FROM guides 
+									LEFT JOIN images ON guides.id = images.guide_id  
+									WHERE id = :id";
+				try {
+						$statement = $this->pdo->prepare($query);
+						$statement->execute(['id' => $id]);
+						return $statement->fetch(\PDO::FETCH_OBJ);
+				} catch (\Exception $e) {
+						die($e->getMessage());
+				}
+		}
 
-    $query = "UPDATE {$table} SET image = NULL WHERE id = {$id}";
-    try {
-      $statement = $this->pdo->prepare($query);
-      $statement->execute();
-    } catch (\Exception $e) {
-      die('Whooops. Something went wrong...');
-    }
+	public function selectAllGuides() {
+				$query = "SELECT id, title, description, published FROM guides";
+				try {
+						$statement = $this->pdo->prepare($query);
+						$statement->execute();
+						return $statement->fetchAll(\PDO::FETCH_OBJ);
+				} catch (\Exception $e) {
+						die($e->getMessage());
+				}
+		}
 
-  }
+	public function selectAllPublishedGuides() {
+		$query = "SELECT id, title, description, image_name, text_alt FROM guides LEFT JOIN images ON guides.id = images.guide_id WHERE published = 1";
+			try {
+					$statement = $this->pdo->prepare($query);
+					$statement->execute();
+					return $statement->fetchAll(\PDO::FETCH_OBJ);
+			} catch (\Exception $e) {
+					die($e->getMessage());
+			}
+		}
+
+	public function updateImage($image_id, $guide_id) {
+		$query = "UPDATE images SET guide_id = :guide_id, updated_at = NOW() WHERE image_id = {$image_id}";
+		try {
+				$statement = $this->pdo->prepare($query);
+				$statement->execute(['guide_id' => $guide_id]);
+		} catch (\Exception $e) {
+				die($e->getMessage());
+		}
+	}
+
+		public function deleteImage($id) {
+				$query = "DELETE FROM images WHERE image_id = :id";
+				try {
+						$statement = $this->pdo->prepare($query);
+						$statement->execute(['id' => $id]);
+				} catch (\Exception $e) {
+						die($e->getMessage());
+				}
+		}
 
 }

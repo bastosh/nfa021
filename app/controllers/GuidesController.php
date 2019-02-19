@@ -4,47 +4,24 @@ namespace Simple\App\Controllers;
 
 use Simple\Core\App;
 use Simple\Core\Flash;
-use Simple\App\Models\Guide;
 
 class GuidesController extends Controller
 {
-  /**
-   * Show all the guides
-   * GET /guides
-   * @return mixed
-   * @throws \Exception
-   */
+
   public function index()
   {
-    $guides = App::get('database')->selectAllPublished('guides', Guide::class);
+    $guides = App::get('database')->selectAllPublishedGuides();
     $page = 'Guides';
-
+    //var_dump($guides);die;
     return $this->render('guides.index', compact('page', 'guides'));
   }
 
-  /**
-   * Show a given guide
-   * GET /guides/{id}
-   * @param $id
-   * @return mixed
-   * @throws \Exception
-   */
   public function show($id)
   {
-    $guide = App::get('database')->select('guides', $id, Guide::class);
-    if ($guide) {
-      $page = $guide->title;
-      return $this->render('guides.show', compact('page', 'guide'));
-    }
-
-    return view('pages.error');
+    $guide = App::get('database')->selectGuide($id);
+    return $this->render('guides.show', compact('page', 'guide'));
   }
 
-  /**
-   * Show the form to create a guide
-   * @return mixed
-   * @throws \Exception
-   */
   public function create()
   {
     // If the user is logged in
@@ -63,11 +40,6 @@ class GuidesController extends Controller
     }
   }
 
-  /**
-   * Store a guide into the database
-   * POST /guides
-   * @throws \Exception
-   */
   public function store()
   {
 
@@ -83,43 +55,43 @@ class GuidesController extends Controller
     $description = $_POST['description'];
     $page = 'New guide';
 
-    // Upload the image on the server if the file is OK
+		// Upload the image on the server if the file is OK
 		// and there is an alternative text
 		if ($_FILES['image']['size'] > 0) {
 
-				$alt = $_POST['image_alt'];
-				$errors = $this->validateImage([
-					'image_alt' => $alt,
-				]);
+			$alt = $_POST['image_alt'];
+			$errors = $this->validateImage([
+				'image_alt' => $alt,
+			]);
 
-				if (count($errors)) {
+			if (count($errors)) {
 
-						$_SESSION['errors'] = $errors;
-						Flash::message('alert', 'Le formulaire comporte des erreurs.');
-						return view('guides.create', compact('title', 'description', 'page'));
+					$_SESSION['errors'] = $errors;
+					Flash::message('alert', 'Le formulaire comporte des erreurs.');
+					return view('guides.create', compact('title', 'description', 'page'));
 
-				} else {
+			} else {
 
-						$uploadErrors = resize(250, 500, 1000);
+					$uploadErrors = resize(250, 500, 1000);
 
-						if (count($uploadErrors)) {
+					if (count($uploadErrors)) {
 
-								$_SESSION['errors'] = $uploadErrors;
-								Flash::message('alert', 'L’image n’a pas pu être envoyée sur le serveur.');
-								return view('guides.create', compact('page','title', 'content'));
-						}
-				}
+							$_SESSION['errors'] = $uploadErrors;
+							Flash::message('alert', 'L’image n’a pas pu être envoyée sur le serveur.');
+							return view('guides.create', compact('page', 'title', 'content'));
 
+					} else {
+								$imageUploaded = App::get('database')->insert('images', [
+								'image_name' => $_FILES["image"]["name"],
+								'text_alt' => $_POST['image_alt']
+							]);
+					}
+			}
 		}
 
-		// If there is no image, only check for the title
-		else {
-
-				$errors = $this->validateGuide([
-					'title' => $title,
-				]);
-
-		}
+		$errors = $this->validateGuide([
+			'title' => $title,
+		]);
 
     if (count($errors)) {
 
@@ -131,34 +103,23 @@ class GuidesController extends Controller
 
     } else {
 
-    		if ($_FILES['image']['size'] > 0) {
-						App::get('database')->insert('guides', [
-							'title' => clean($title),
-							'description' => $description,
-							'image' => $_FILES["image"]["name"],
-							'image_alt' => $_POST['image_alt']
-						]);
+			$guide = App::get('database')->insert('guides', [
+			'title' => clean($title),
+			'description' => $description,
+		]);
 
-				} else {
-						App::get('database')->insert('guides', [
-							'title' => clean($title),
-							'description' => $description,
-						]);
-				}
+			if ($imageUploaded) {
+					App::get('database')->updateImage($imageUploaded, $guide);
+			}
 
-      Flash::message('success', 'La fiche a été publiée.');
+	}
 
-      return redirect('admin-guides');
-    }
+		Flash::message('success', 'La fiche a été publiée.');
+
+		return redirect('admin-guides');
+
   }
 
-  /**
-   * Show a form to edit a given guide
-   * GET /guides/{id}/edit
-   * @param $id
-   * @return mixed
-   * @throws \Exception
-   */
   public function edit($id)
   {
     // If the user is logged in
@@ -167,7 +128,7 @@ class GuidesController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to edit the guide
-      $guide = App::get('database')->select('guides', $id, Guide::class);
+			$guide = App::get('database')->selectGuide($id);
       $page = 'Edit';
       return view('guides.edit', compact('page', 'guide'));
     }
@@ -178,82 +139,83 @@ class GuidesController extends Controller
     }
   }
 
-  /**
-   * Update a given guide
-   * @param $id
-   * @throws \Exception
-   */
   public function update($id)
   {
 
-    if(!isset($_POST['token'])){
-      throw new \Exception('No token found!');
+			if(!isset($_POST['token'])){
+					throw new \Exception('No token found!');
+			}
+
+			if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+					throw new \Exception('Token mismatch!');
+			}
+
+			$title = $_POST['title'];
+			$description = $_POST['description'];
+			$page = 'Modifier '.$_POST['title'];
+
+			$errors = $this->validateGuide([
+				'title' => $title,
+			]);
+
+			if (count($errors)) {
+
+					$_SESSION['errors'] = $errors;
+
+					Flash::message('alert', 'Le formulaire comporte des erreurs.');
+
+					return view('guides.create', compact('title', 'description', 'page'));
+
+			} else {
+
+					App::get('database')->update('guides', [
+						'title' => clean($title),
+						'description' => $description,
+					], $id);
+			}
+
+			$guide = App::get('database')->selectGuide($id);
+
+			if (!$guide->image_name) {
+					if ($_FILES['image']['size'] > 0) {
+
+							$alt = $_POST['image_alt'];
+							$errors = $this->validateImage([
+								'image_alt' => $alt,
+							]);
+
+							if (count($errors)) {
+
+									$_SESSION['errors'] = $errors;
+									Flash::message('alert', 'Le formulaire comporte des erreurs.');
+									return view('guides.create', compact('title', 'description', 'page'));
+
+							} else {
+
+									$uploadErrors = resize(250, 500, 1000);
+
+									if (count($uploadErrors)) {
+
+											$_SESSION['errors'] = $uploadErrors;
+											Flash::message('alert', 'L’image n’a pas pu être envoyée sur le serveur.');
+											return view('guides.create', compact('page', 'title', 'content'));
+									} else {
+											App::get('database')->insert('images', [
+												'guide_id' => $guide->id,
+												'image_name' => $_FILES["image"]["name"],
+												'text_alt' => $_POST['image_alt']
+											]);
+									}
+							}
+					}
+			}
+
+			Flash::message('success', 'La fiche a été mise à jour.');
+
+			return redirect('admin-guides');
+
     }
 
-    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
-      throw new \Exception('Token mismatch!');
-    }
-
-
-
-	if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-
-	  $uploadErrors = resize(250, 500, 1000);
-
-	  if (count($uploadErrors)) {
-
-		  $_SESSION['errors'] = $uploadErrors;
-		  Flash::message('alert', 'L’image n’a pas pu être envoyée sur le serveur.');
-		  return redirect("guides/{$id}/edit");
-	  }
-
-	}
-
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-
-    $errors = $this->validateGuide([
-        'title' => $title,
-      ]
-    );
-
-    if (count($errors)) {
-
-      $_SESSION['errors'] = $errors;
-
-      Flash::message('alert', 'Le formulaire comporte des erreurs.');
-
-      return redirect("guides/{$id}/edit");
-
-    } else {
-
-      App::get('database')
-        ->update('guides', [
-          'title' => clean($title),
-          'description' => $description
-        ], $id);
-
-		if (isset($_FILES['image'])) {
-			App::get('database')
-			  ->update('guides', [
-				'image' => $_FILES["image"]["name"],
-				'image_alt' => $_POST['image_alt']
-			  ], $id);
-		}
-
-      Flash::message('success', 'La fiche a été mise à jour.');
-
-      return redirect('admin-guides');
-
-    }
-  }
-
-  /**
-   * Delete a given guide
-   * DELETE /guides/{id}
-   * @param $id
-   * @throws \Exception
-   */
   public function destroy($id)
   {
 
@@ -265,19 +227,9 @@ class GuidesController extends Controller
       throw new \Exception('Token mismatch!');
     }
 
-    $guide = App::get('database')->select('guides', $id, Guide::class);
-
-		if ($guide->image) {
-				App::get('database')
-					->update('guides', [
-						'image_alt' => ''
-					], $id);
-				// Remove the images associated
-				unlink('../public/img/sm-'.$guide->image);
-				unlink('../public/img/'.$guide->image);
-				unlink('../public/img/lg-'.$guide->image);
-
-				App::get('database')->deleteImage('guides', $id);
+    $guide = App::get('database')->selectGuide($id);
+    if ($guide->image_name) {
+    	$this->deleteImage($id);
 		}
 
 		App::get('database')->delete('guides', $id);
@@ -287,11 +239,6 @@ class GuidesController extends Controller
     return redirect('admin-guides');
   }
 
-  /**
-   * Set the guide as published in the database
-   * @param $id
-   * @throws \Exception
-   */
   public function publish($id)
   {
 
@@ -303,11 +250,6 @@ class GuidesController extends Controller
 
   }
 
-  /**
-   * Set the guide as unpublished in the database
-   * @param $id
-   * @throws \Exception
-   */
   public function unpublish($id)
   {
 
@@ -322,17 +264,16 @@ class GuidesController extends Controller
 	public function deleteImage($id)
 	{
 
-		$guide = App::get('database')->select('guides', $id, Guide::class);
-		App::get('database')
-		  ->update('guides', [
-			'image_alt' => ''
-		  ], $id);
-		// Remove the images associated
-		unlink('../public/img/sm-'.$guide->image);
-		unlink('../public/img/'.$guide->image);
-		unlink('../public/img/lg-'.$guide->image);
+		$guide = App::get('database')->selectGuide($id);
+		$image_id = $guide->image_id;
 
-		App::get('database')->deleteImage('guides', $id);
+		// Remove the files from the public folder
+		unlink('../public/img/sm-'.$guide->image_name);
+		unlink('../public/img/'.$guide->image_name);
+		unlink('../public/img/lg-'.$guide->image_name);
+
+		// Remove the image from the database
+		App::get('database')->deleteImage($image_id);
 
 		Flash::message('success', 'L’image a été supprimée.');
 

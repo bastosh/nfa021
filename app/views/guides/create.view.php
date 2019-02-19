@@ -26,10 +26,7 @@
           <div class="callout margin-bottom-1">
             <input type="file" name="image" id="image">
             <label>Texte alternatif
-              <input name="image_alt" type="text" placeholder="Texte alternatif de l’image" required pattern="^.{10,200}$" value="<?= isset($image_alt) ? $image_alt : ''; ?>">
-              <span class="form-error">
-              Un texte alternatif est requis (minimum 10 caractères).
-            </span>
+              <input name="image_alt" type="text" placeholder="Texte alternatif de l’image" value="<?= isset($image_alt) ? $image_alt : ''; ?>">
             </label>
           </div>
 

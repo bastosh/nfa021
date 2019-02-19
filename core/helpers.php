@@ -50,25 +50,25 @@ function resize($sm, $md, $lg) {
 
 	// Check if image file is a actual image or fake image
 	if(!getimagesize($_FILES["image"]["tmp_name"])) {
-		$errors[] = "File is not an image.";
+		$errors[] = "Hum... le fichier ne semble pas être une image.";
 		$uploadOk = 0;
 	}
 
 	// Check if file already exists
 	if (file_exists($target_file)) {
-		$errors[] = "File already exists.";
+		$errors[] = "Désolé, une image avec ce nom-là existe déjà.";
 		$uploadOk = 0;
 	}
 
 	// Check input file size
 	if ($_FILES["image"]["size"] > 1000000) {
-		$errors[] = "File is too large.";
+		$errors[] = "L’image est trop grosse: 1mo maximum.";
 		$uploadOk = 0;
 	}
 
 	// Allow certain file formats
 	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-		$errors[] = "Only JPG, JPEG, & PNG files are allowed.";
+		$errors[] = "Seuls les formats JPG, JPEG, & PNG sont acceptés.";
 		$uploadOk = 0;
 	}
 

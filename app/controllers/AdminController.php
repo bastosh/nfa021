@@ -25,7 +25,7 @@ class AdminController extends Controller
     {
 
       $page = 'Administration';
-      $guides = App::get('database')->selectAll('guides', Guide::class);
+      $guides = App::get('database')->selectAllGuides();
       $features = App::get('database')->selectAll('features', Feature::class);
       return $this->render('admin.dashboard', compact('page', 'guides', 'features'));
 
@@ -53,7 +53,7 @@ class AdminController extends Controller
       $_SESSION['token'] = $token;
 
       $page = 'Administration';
-      $guides = App::get('database')->selectAll('guides', Guide::class);
+      $guides = App::get('database')->selectAllGuides();
       $features = App::get('database')->selectAll('features', Feature::class);
       return $this->render('admin.dashboard', compact('page', 'guides', 'features'));
 
@@ -85,7 +85,7 @@ class AdminController extends Controller
     {
       // Allow the user to administrate guides
       $page = 'Admin Guides';
-      $guides = App::get('database')->selectAll('guides', Guide::class);
+      $guides = App::get('database')->selectAllGuides();
       return view('admin.guides', compact('page', 'guides'));
     }
     else {
@@ -110,7 +110,7 @@ class AdminController extends Controller
           && (($_SESSION['password'] === App::get('config')['admin']['password'])))
     {
       // Allow the user to see the details of a guide
-      $guide = App::get('database')->select('guides', $id, Guide::class);
+			$guide = App::get('database')->selectGuide($id);
       if ($guide) {
         $page = 'Admin • '.$guide->title;
         return view('admin.guide', compact('page', 'guide'));

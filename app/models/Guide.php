@@ -2,7 +2,9 @@
 
 namespace Simple\App\Models;
 
-class Guide
+use Simple\Core\Database\QueryBuilder;
+
+class Guide extends QueryBuilder
 {
 
   public $title;
