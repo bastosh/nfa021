@@ -93,6 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(document).foundation();
 var cat = document.getElementById('cat');
 cat.addEventListener('click', function () {
   cat.classList.toggle('moving');

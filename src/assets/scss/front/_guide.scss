@@ -21,12 +21,15 @@
   transform: translateX(0);
   .title {
     color: $body-font-color;
-    font-size: 1rem;
+    font-size: .9rem;
+    padding-left: 1rem;
     @include breakpoint(medium up) {
       font-size: 1.2rem;
+      padding-left: 2rem;
     }
     @include breakpoint(large up) {
       font-size: 1.5rem;
+      padding-left: 3rem;
     }
     font-weight: 500;
     margin-bottom: 0;
