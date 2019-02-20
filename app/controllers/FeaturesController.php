@@ -73,11 +73,11 @@ class FeaturesController extends Controller
   {
 
     if(!isset($_POST['token'])){
-      throw new \Exception('No token found!');
+				return view('pages.error419');
     }
 
     if(hash_equals($_POST['token'], $_SESSION['token']) === false){
-      throw new \Exception('Token mismatch!');
+				return view('pages.error419');
     }
 
     $title = $_POST['title'];
@@ -128,22 +128,17 @@ class FeaturesController extends Controller
       return view('admin.login', compact('page'));
     }
   }
-
-  /**
-   * Update a given feature
-   * @param $id
-   * @throws \Exception
-   */
+  
   public function update($id)
   {
 
-    if(!isset($_POST['token'])){
-      throw new \Exception('No token found!');
-    }
+		if(!isset($_POST['token'])){
+			return view('pages.error419');
+		}
 
-    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
-      throw new \Exception('Token mismatch!');
-    }
+		if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+			return view('pages.error419');
+		}
 
     $title = $_POST['title'];
 
@@ -173,22 +168,16 @@ class FeaturesController extends Controller
     }
   }
 
-  /**
-   * Delete a given feature
-   * DELETE /features/{id}
-   * @param $id
-   * @throws \Exception
-   */
   public function destroy($id)
   {
 
-    if(!isset($_POST['token'])){
-      throw new \Exception('No token found!');
-    }
+			if(!isset($_POST['token'])){
+					return view('pages.error419');
+			}
 
-    if(hash_equals($_POST['token'], $_SESSION['token']) === false){
-      throw new \Exception('Token mismatch!');
-    }
+			if(hash_equals($_POST['token'], $_SESSION['token']) === false){
+					return view('pages.error419');
+			}
 
     App::get('database')->delete('features', $id);
 
