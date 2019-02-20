@@ -3,7 +3,6 @@
 namespace Simple\App\Controllers;
 
 use Simple\Core\App;
-use Simple\App\Models\Guide;
 use Simple\App\Models\Feature;
 
 class AdminController extends Controller
