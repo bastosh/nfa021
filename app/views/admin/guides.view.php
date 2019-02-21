@@ -53,7 +53,7 @@
                 <i class="fas fa-trash"></i>
               </button>
               <div class="reveal" id="deleteGuide<?= $guide->id; ?>" data-reveal>
-                <p>La fiche <strong><?= $guide->title; ?></strong> sera supprimée définitivement.</p>
+                <p class="padding-right-1">La fiche <strong><?= $guide->title; ?></strong> sera supprimée définitivement.</p>
                 <form class="padding-vertical-1 text-center" action="/guides/<?= $guide->id; ?>" method="POST">
                   <input type="hidden" name="_method" value="DELETE">
                   <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">

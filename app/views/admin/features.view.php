@@ -53,7 +53,7 @@
                 <i class="fas fa-trash"></i>
               </button>
               <div class="reveal" id="deleteFeature<?= $feature->id; ?>" data-reveal>
-                <p>La spécialité <strong><?= $feature->title; ?></strong> sera définitivement supprimée.</p>
+                <p class="padding-right-1">La spécialité <strong><?= $feature->title; ?></strong> sera définitivement supprimée.</p>
                 <form class="padding-vertical-1 text-center" action="/features/<?= $feature->id; ?>" method="POST">
                   <input type="hidden" name="_method" value="DELETE">
                   <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
