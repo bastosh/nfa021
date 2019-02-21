@@ -28,13 +28,6 @@ class PagesController extends Controller
     return $this->render('pages.team', compact('page'));
   }
 
-  public function gallery()
-  {
-    $page = 'Gallerie';
-    $images = App::get('database')->selectAllPublished('images', Image::class);
-    return $this->render('pages.gallery', compact('page', 'images'));
-  }
-
   public function contact()
   {
     $page = 'Contact';
