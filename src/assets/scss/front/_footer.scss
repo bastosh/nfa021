@@ -1,13 +1,25 @@
 footer {
   background-color: $secondary-color;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  @include breakpoint(medium up) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
   .footer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    @include breakpoint(medium up) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
     p {
-      margin-bottom: 0;
+      margin-bottom: 1rem;
+      @include breakpoint(medium up) {
+        margin-bottom: 0;
+      }
     }
     a, p {
       color: #fff;
