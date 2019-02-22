@@ -34,7 +34,7 @@
 
 		    <?php if($guide->image_name) : ?>
             <div class="grid-x">
-              <div class="small-4">
+              <div class="small-8">
                 <p class="margin-bottom-0"><?= $guide->image_name; ?></p>
                 <figure>
                   <img src="/img/<?= $guide->image_name; ?>">
