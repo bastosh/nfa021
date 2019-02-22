@@ -69,7 +69,7 @@ class GuidesController extends Controller
 
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $page = 'New guide';
+    $page = 'Nouvelle fiche conseil';
 
 		// Upload the image on the server if the file is OK
 		// and there is an alternative text
