@@ -13,8 +13,8 @@
         </div>
     </header>
 
-    {% if guide.image_name %}
-        <div class="text-container margin-top-3">
+    <div class="text-container margin-top-3">
+        {% if guide.image_name %}
             <picture>
                 <source media="(min-width: 768px)"
                         srcset="/img/{{ guide.image_name }} 1x, /img/lg-{{ guide.image_name }} 2x">
@@ -22,11 +22,16 @@
                      srcset="/img/{{ guide.image_name }} 2x"
                      alt="{{ guide.text_alt }}" style="width: 100%">
             </picture>
-        </div>
-    {% endif %}
+        {% else %}
+            <img src="/img/placeholder.jpg" alt="">
+        {% endif %}
+    </div>
+
     <main class="guides text-container lead padding-vertical-3">
         {{ guide.description|raw }}
     </main>
 
-    {% include 'partials/footer.html.twig' %}
+    <footer>
+        {% include 'partials/footer.html.twig' %}
+    </footer>
 {% endblock %}
