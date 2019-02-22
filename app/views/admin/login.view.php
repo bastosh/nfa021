@@ -21,19 +21,19 @@
 <body>
 
 <main class="grid-y align-center">
-  <h1 class="text-center margin-bottom-2">LOGIN</h1>
+  <h1 class="text-center margin-bottom-2">CONNEXION</h1>
   <div class="grid-x align-center">
     <div class="small-8 medium-4">
       <form action="/admin" method="POST">
         <label>
-          Username
+          Identifiant
           <input type="text" name="username">
         </label>
         <label>
-          Password
+          Mot de passe
           <input type="password" name="password">
         </label>
-        <button type="submit" class="button primary expanded margin-top-2">Connexion</button>
+        <button type="submit" class="button primary expanded margin-top-2">Se connecter</button>
       </form>
     </div>
   </div>
