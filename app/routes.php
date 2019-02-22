@@ -5,6 +5,7 @@ $router->get('', 'PagesController@home');
 $router->get('notre-clinique', 'PagesController@about');
 $router->get('notre-equipe', 'PagesController@team');
 $router->get('nous-contacter', 'PagesController@contact');
+$router->get('mentions', 'PagesController@mentions');
 
 // Routes for the resource Guide
 $router->get('fiches-conseils', 'GuidesController@index');

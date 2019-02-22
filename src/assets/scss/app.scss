@@ -52,60 +52,9 @@
 // @include motion-ui-animations;
 
 @import "helpers";
+@import "front/global";
 @import "front/header";
+@import "front/footer";
 @import "front/cat";
 @import "front/window";
 @import "front/guide";
-
-.button {
-  border-radius: 30px;
-  font-weight: 500;
-  background-color: #fff;
-  color: darken($primary-color, 5);
-  &:hover {
-    color: $primary-color;
-  }
-}
-
-hr {
-  border-bottom: 1px solid #eee;
-  margin-bottom: 0;
-}
-
-.text-container {
-  max-width: 35rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-@media screen and (min-width: 600px) {
-  .text-container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.bada {
-  position: absolute;
-  right: 0;
-}
-
-@media screen and (max-width: 600px) {
-  .bada > img {
-    width: 200px;
-  }
-}
-
-.card {
-  box-shadow: 0 0 12px #F4F4F4;
-  transition: box-shadow .3s ease-in-out;
-  &:hover {
-    box-shadow: 0 10px 22px 10px rgba(27, 38, 49, 0.1);
-
-  }
-}
-
-a[href^="tel:"]::before {
-  content: "\260e";
-  margin-right: 0.5em;
-}

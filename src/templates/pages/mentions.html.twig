@@ -8,12 +8,15 @@
     <header class="header section-primary">
         {% include 'partials/nav.html.twig' %}
         <div class="content content-sm text-center">
-            <h1>Notre clinique</h1>
+            <h1>Mentions légales</h1>
         </div>
     </header>
 
-    <main class="text-container lead padding-vertical-3">
-        {% include 'blocks/about.html.twig' %}
+    <main class="text-container padding-vertical-3">
+        {% include 'blocks/mentions.html.twig' %}
     </main>
 
+    <footer>
+        {% include 'partials/footer.html.twig' %}
+    </footer>
 {% endblock %}

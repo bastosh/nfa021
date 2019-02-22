@@ -34,6 +34,12 @@ class PagesController extends Controller
     return $this->render('pages.contact', compact('page'));
   }
 
+  public function mentions()
+  {
+    $page = 'Mentions légales';
+    return $this->render('pages.mentions', compact('page'));
+  }
+
   /**
    * Show the 404 page
    * @return mixed
