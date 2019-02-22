@@ -88,3 +88,8 @@ function resize($sm, $md, $lg) {
 	return $errors;
 
 }
+
+function slugify($string) {
+		$slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+		return strtolower($slug);
+}
